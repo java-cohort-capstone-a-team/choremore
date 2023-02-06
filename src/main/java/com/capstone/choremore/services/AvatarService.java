@@ -1,6 +1,6 @@
 package com.capstone.choremore.services;
 
-import com.capstone.financialleveling.models.Avatar;
+import com.capstone.choremore.models.Avatar;
 
 import java.util.List;
 
