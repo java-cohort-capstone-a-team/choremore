@@ -31,6 +31,9 @@ public class AvatarController {
     AvatarRepo avatarDao;
 
     @Autowired
+    UserService userServ;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/create-avatar")
@@ -39,6 +42,16 @@ public class AvatarController {
         model.addAttribute("user", new User());
 
         return "users/avatar-register";
+
+    }
+
+    @GetMapping("/avatar-manager")
+    public String avatarManager(Model model, Model model2) {
+
+        model2.addAttribute("users", userServ.getUsersByChildRole());
+        model.addAttribute("user", new User());
+
+        return "avatars/index";
 
     }
 
@@ -64,7 +77,7 @@ public class AvatarController {
         avatarDao.save(avatar);
 //        userDao.save(me);
 
-        return "redirect:/";
+        return "redirect:/avatar-manager";
 
     }
 

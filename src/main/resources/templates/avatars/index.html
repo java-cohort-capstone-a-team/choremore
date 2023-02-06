@@ -9,12 +9,9 @@
 <th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>
 
 <div class="container mt-4">
-    <div th:each="item : ${chores}" class="card mb-2">
+    <div th:each="item : ${users}" class="card mb-2">
         <div class="card-header">
-            <p th:text="${item.title}" />
-        </div>
-        <div class="card-body">
-            <p th:text="${item.body}" />
+            <p th:text="${item.username}" />
         </div>
         <form th:action="@{/messages}" th:method="POST">
             <div class="card-footer">
@@ -27,13 +24,13 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    create a new chore
+    create a new avatar account
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form th:action="@{/createchore}" th:method="POST" th:object="${chore}">
+        <form th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
             <div class="modal-content">
                 <div class="modal-header">
                     <p class="fw-bold">Create a message</p>
@@ -43,29 +40,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Enter a title for your post</label>
-                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title">
+                        <label for="username" class="form-label">Enter a title for your post</label>
+                        <input type="text" placeholder="username" name="username" class="form-control" id="username" th:field="*{username}" />
                     </div>
                     <div class="mb-3">
-                        <label for="body" class="form-label">Enter post here</label>
-                        <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5"></textarea>
+                        <label for="password" class="form-label">Enter post here</label>
+                        <input type="password" placeholder="password" class="form-control" name="password" id="password" th:field="*{password}" />
                     </div>
 
-                    <div class="mb-3">
+<!--                    <div class="mb-3">-->
 
 
-                        <label class="fw-bold">Select a users to assign a chore to:</label>
-                        <select class="form-select" name="option" aria-label="Disabled select example">
-                            <option selected disabled>Select user</option>
-                            <div th:each="item : ${avatars}">
+<!--                        <label class="fw-bold">Select a users to assign a chore to:</label>-->
+<!--                        <select class="form-select" name="guess" aria-label="Disabled select example">-->
+<!--                            <option selected disabled>Select user</option>-->
+<!--                            <div th:each="item : ${users}">-->
 
-                                <option th:value="${item.child.id}" th:text="${item.child.getUsername()}" />
+<!--                                <option name="option" th:value="${item.id}" th:text="${item.username}" />-->
 
-                            </div>
-                        </select>
+<!--                            </div>-->
+<!--                        </select>-->
 
 
-                    </div>
+<!--                    </div>-->
 
                 </div>
                 <div class="modal-footer">
