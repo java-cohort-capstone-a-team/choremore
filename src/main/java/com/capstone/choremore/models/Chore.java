@@ -21,8 +21,14 @@ public class Chore {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String body;
+
+    @Column(length = 100)
+    private String status = "incomplete";
+
+    @Column(nullable = false, length = 100)
+    private long value;
 
     @ManyToOne
     private User parent;
@@ -34,6 +40,8 @@ public class Chore {
         id = copy.id;
         title = copy.title;
         body = copy.body;
+        status = copy.status;
+        value = copy.value;
         parent = copy.parent;
         child = copy.child;
     }
