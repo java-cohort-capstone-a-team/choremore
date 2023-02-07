@@ -86,6 +86,28 @@ public class UserController {
 
     }
 
+    @GetMapping("/skill-builder")
+    public String showChildProfile(Model model) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        long userId = user.getId();
+
+        Avatar avatar = avatarDao.findAvatarByChildId(userId);
+
+//        List<Chore> myChores = choreDao.findAllByChildId(user.getId());
+//        List<Message> messages = messageDao.findAll();
+//
+//        model3.addAttribute("messages", messages);
+//
+//        model2.addAttribute("chores", myChores);
+
+        model.addAttribute("avatar", avatar);
+
+        return "avatars/skill-builder";
+
+    }
+
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
 
