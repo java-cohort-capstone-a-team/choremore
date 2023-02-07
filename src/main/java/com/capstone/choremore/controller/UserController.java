@@ -1,7 +1,12 @@
 package com.capstone.choremore.controller;
 
 import com.capstone.choremore.models.Avatar;
+import com.capstone.choremore.models.Chore;
+import com.capstone.choremore.models.Message;
 import com.capstone.choremore.models.User;
+import com.capstone.choremore.repositories.AvatarRepo;
+import com.capstone.choremore.repositories.ChoreRepo;
+import com.capstone.choremore.repositories.MessageRepo;
 import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
@@ -23,6 +28,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @NoArgsConstructor
 public class UserController {
@@ -31,14 +38,30 @@ public class UserController {
     private UserRepo userDao;
 
     @Autowired
+    private AvatarRepo avatarDao;
+
+    @Autowired
+    private ChoreRepo choreDao;
+
+    @Autowired
+    private MessageRepo messageDao;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/profile")
-    public String showProfile(Model model) {
+    public String showProfile(Model model, Model model2, Model model3, Model model4) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        List<Avatar> myAvatars = avatarDao.findAvatarByParentId(user.getId());
+        List<Chore> myChores = choreDao.findChoreByParentId(user.getId());
+        List<Message> childMessages = messageDao.findAll();
+
         model.addAttribute("user", user);
+        model2.addAttribute("avatars", myAvatars);
+        model3.addAttribute("chores", myChores);
+        model4.addAttribute("messages", childMessages);
 
         return "users/profile";
 
