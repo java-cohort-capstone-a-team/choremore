@@ -5,6 +5,7 @@ import com.capstone.choremore.models.Chore;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.models.UserWithRoles;
 import com.capstone.choremore.repositories.AvatarRepo;
+import com.capstone.choremore.repositories.ChoreRepo;
 import com.capstone.choremore.services.ChoreService;
 import com.capstone.choremore.services.UserService;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,9 @@ import java.util.List;
 @Controller
 @NoArgsConstructor
 public class ChoreController {
+
+    @Autowired
+    private ChoreRepo choreDao;
 
     @Autowired
     private ChoreService choreServ;
@@ -72,7 +76,11 @@ public class ChoreController {
     @GetMapping("/chores-view")
     public String showAllChores(Model model) {
 
-        model.addAttribute("chores", choreServ.showAllChores());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Chore> myChores = choreDao.findAllByChildId(user.getId());
+
+        model.addAttribute("chores", myChores);
 
         return "chores/choresview";
 

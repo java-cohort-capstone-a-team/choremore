@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -68,9 +69,16 @@ public class UserController {
     }
 
     @GetMapping("/child-profile")
-    public String showChildProfile(Model model) {
+    public String showChildProfile(Model model, Model model2, Model model3) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Chore> myChores = choreDao.findAllByChildId(user.getId());
+        List<Message> messages = messageDao.findAll();
+
+        model3.addAttribute("messages", messages);
+
+        model2.addAttribute("chores", myChores);
 
         model.addAttribute("user", user);
 

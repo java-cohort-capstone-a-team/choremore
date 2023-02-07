@@ -19,9 +19,9 @@
 <div sec:authorize="isAuthenticated()">You're already logged in</div>
 <div class="container">
     <div class="row justify-content-between">
-        <div class="card col-12 col-md-6 justify-content-center mb-4">
+        <div class="card col-12 justify-content-center mb-4">
             <div class="card-body">
-                <h5 class="card-title">Chore Manager Login</h5>
+                <h5 class="card-title">Login</h5>
                 <div class="mb-4">
                     <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
                         <div class="row g-3">
@@ -32,26 +32,6 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Password</span>
                                 <input id="password" type="password" name="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <input class="btn btn-primary w-50 mx-auto" type="submit" value="Log In" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="card col-12 col-md-6 justify-content-center mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Avatar Login</h5>
-                <div class="mb-4">
-                    <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
-                        <div class="row g-3">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Username</span>
-                                <input id="avatarusername" type="text" name="avatarusername" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Password</span>
-                                <input id="avatarpassword" type="password" name="avatarpassword" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <input class="btn btn-primary w-50 mx-auto" type="submit" value="Log In" />
                         </div>
