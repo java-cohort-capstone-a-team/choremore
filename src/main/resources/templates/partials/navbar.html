@@ -26,10 +26,21 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+
+      <li class="nav-item">
+        <a class="nav-link active " aria-current="page" href="/profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active " aria-current="page" href="/avatar-manager">Child Manager</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active " aria-current="page" href="/chore-manager">Chore Manager</a>
+      </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link active " aria-current="page" href="/message-board">Message Board</a>
         </li>
       </ul>
+
       <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
