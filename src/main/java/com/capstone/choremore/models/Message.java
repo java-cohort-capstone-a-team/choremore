@@ -29,12 +29,16 @@ public class Message {
 //    private Date date;
 
     @ManyToOne
+    private User parent;
+
+    @ManyToOne
     private User child;
 
     public Message(Message copy) {
         id = copy.id;
         title = copy.title;
         body = copy.body;
+        parent = copy.parent;
         child = copy.child;
     }
 

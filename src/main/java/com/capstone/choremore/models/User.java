@@ -63,6 +63,9 @@ public class User {
     @OneToOne
     private Chore chore;
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
+//    List<Message> message;
+
     public User(User copy) {
 
         id = copy.id;
@@ -78,6 +81,7 @@ public class User {
         messages = copy.messages;
         chores = copy.chores;
         chore = copy.chore;
+//        message = copy.message;
 
     }
 

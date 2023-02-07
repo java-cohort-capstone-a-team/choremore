@@ -8,6 +8,18 @@
 
 <th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>
 
+<div>
+    <form action="/profile">
+        <button class="btn btn-primary" type="submit">Go to profile</button>
+    </form>
+</div>
+
+<div>
+    <form action="/avatar-manager">
+        <button class="btn btn-primary" type="submit">Go to avatar manager</button>
+    </form>
+</div>
+
 <div class="container mt-4">
     <div th:each="item : ${chores}" class="card mb-2">
         <div class="card-header">

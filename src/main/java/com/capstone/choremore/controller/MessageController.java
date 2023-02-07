@@ -1,13 +1,20 @@
 package com.capstone.choremore.controller;
 
+import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.Message;
+import com.capstone.choremore.models.User;
+import com.capstone.choremore.models.UserWithRoles;
+import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.MessageRepo;
 import com.capstone.choremore.services.MessageService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @NoArgsConstructor
@@ -18,6 +25,9 @@ public class MessageController {
 
     @Autowired
     private MessageService messageServ;
+
+    @Autowired
+    private AvatarRepo avatarDao;
 
     public MessageController(MessageService messageServ) {
 
@@ -52,6 +62,17 @@ public class MessageController {
 
     @PostMapping("/createmsg")
     public String createMessage(@ModelAttribute Message message) {
+
+        UserWithRoles me = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Optional<Avatar> myAvatar = avatarDao.findById(me.getId());
+
+        System.out.println(me.getId());
+        System.out.println(myAvatar.get().getId());
+
+        User parent = myAvatar.get().getParent();
+
+        message.setParent(parent);
 
         messageServ.createMessage(message);
 

@@ -31,6 +31,51 @@
 
 </div>
 
+<div class="container mt-4">
+  <div th:each="item : ${avatars}" class="card mb-2">
+    <div class="card-header">
+      <p th:text="${item.child.getUsername()}" />
+    </div>
+    <form th:action="@{/messages}" th:method="POST">
+      <div class="card-footer">
+        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div th:each="item : ${chores}" class="card mb-2">
+    <div class="card-header">
+      <p th:text="${item.title}" />
+    </div>
+    <div class="card-body">
+      <p th:text="${item.body}" />
+    </div>
+    <form th:action="@{/messages}" th:method="POST">
+      <div class="card-footer">
+        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div th:each="item : ${messages}" class="card mb-2">
+    <div class="card-header">
+      <p th:text="${item.title}" />
+    </div>
+    <div class="card-body">
+      <p th:text="${item.body}" />
+    </div>
+    <form th:action="@{/messages}" th:method="POST">
+      <div class="card-footer">
+        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!--<div class="container mt-4">-->
 <!--    <div th:each="item : ${posts}" class="card mb-2">-->
 <!--        <div class="card-header">-->
