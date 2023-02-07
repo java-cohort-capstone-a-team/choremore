@@ -64,8 +64,6 @@
                     </div>
 
                     <div class="mb-3">
-
-
                         <label class="fw-bold">Select a users to assign a chore to:</label>
                         <select class="form-select" name="option" aria-label="Disabled select example">
                             <option selected disabled>Select user</option>
@@ -75,8 +73,11 @@
 
                             </div>
                         </select>
+                    </div>
 
-
+                    <div class="mb-3">
+                        <label for="value" class="form-label">Enter difficulty value</label>
+                        <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value">
                     </div>
 
                 </div>
