@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/", "/login", "/sign-up")
                 .permitAll()
                 .and().authorizeHttpRequests().requestMatchers("/create-avatar", "/avatar-creation", "/profile", "/chore-manager", "/avatar-manager", "/createchore").hasAuthority("ROLE_PARENT")
-                .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg").hasAuthority("ROLE_CHILD")
+                .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg", "/skill-builder", "/hpplus", "/strengthplus", "/defenseplus").hasAuthority("ROLE_CHILD")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)

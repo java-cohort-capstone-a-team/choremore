@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -52,6 +53,57 @@ public class AvatarController {
         model.addAttribute("user", new User());
 
         return "avatars/index";
+
+    }
+
+    @PostMapping("/hpplus")
+    public String saveHp(@ModelAttribute User user) {
+
+        User me = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Avatar myAvatar = me.getAvatar();
+
+        if (myAvatar.getBuild_points() > 0) {
+            myAvatar.setHp(myAvatar.getHp() + 1);
+            myAvatar.setBuild_points(myAvatar.getBuild_points() - 1);
+            avatarDao.save(myAvatar);
+        }
+
+        return "redirect:/skill-builder";
+
+    }
+
+    @PostMapping("/strengthplus")
+    public String saveStrength(@ModelAttribute User user) {
+
+        User me = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Avatar myAvatar = me.getAvatar();
+
+        if (myAvatar.getBuild_points() > 0) {
+            myAvatar.setStrength(myAvatar.getStrength() + 1);
+            myAvatar.setBuild_points(myAvatar.getBuild_points() - 1);
+            avatarDao.save(myAvatar);
+        }
+
+        return "redirect:/skill-builder";
+
+    }
+
+    @PostMapping("/defenseplus")
+    public String saveDefense(@ModelAttribute User user) {
+
+        User me = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Avatar myAvatar = me.getAvatar();
+
+        if (myAvatar.getBuild_points() > 0) {
+            myAvatar.setDefense(myAvatar.getDefense() + 1);
+            myAvatar.setBuild_points(myAvatar.getBuild_points() - 1);
+            avatarDao.save(myAvatar);
+        }
+
+        return "redirect:/skill-builder";
 
     }
 

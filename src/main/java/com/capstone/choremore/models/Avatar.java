@@ -43,7 +43,10 @@ public class Avatar {
     private long defense = 1;
 
     @Column(length = 100)
-    private long exp = 10;
+    private long exp = 9;
+
+    @Column(length = 100)
+    private long build_points = 9;
 
 //    @Column(nullable = false, length = 100)
 //    private String roles = "ROLE_AVATAR";
@@ -65,6 +68,7 @@ public class Avatar {
         strength = copy.strength;
         defense = copy.defense;
         exp = copy.exp;
+        build_points = copy.build_points;
         parent = copy.parent;
         child = copy.child;
     }
