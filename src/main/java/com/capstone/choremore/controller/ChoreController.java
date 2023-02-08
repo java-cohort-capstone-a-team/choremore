@@ -1,6 +1,7 @@
 package com.capstone.choremore.controller;
 
 import com.capstone.choremore.models.Chore;
+import com.capstone.choremore.repositories.ChoreRepo;
 import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ChoreController {
 
     @Autowired
     private AvatarService avatarServ;
+
+    @Autowired
+    private ChoreRepo choreDao;
 
     @GetMapping("/chore-manager")
     public String choreView(Model model, Model model2, Model model3) {
@@ -76,7 +80,7 @@ public class ChoreController {
     }
 
     @PostMapping("/editchore")
-    public String editChore(@ModelAttribute Chore chore, @RequestParam(name = "option") long id, @RequestParam(name = "thisid") long id2) {
+    public String editChore(@ModelAttribute Chore chore, @RequestParam(name = "option") long id, @RequestParam(name = "editThis") long id2) {
 
         choreServ.editChore(chore, id, id2);
 
