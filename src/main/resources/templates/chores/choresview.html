@@ -47,24 +47,23 @@
 
                     <div class="container">
                         <div th:each="item : ${chores}" class="card">
-                            <div class="card-header">
-                                <p th:text="${item.title}"/>
+                            <div class="card-header d-flex justify-content-between">
+                                <p th:text="${item.title}" />
+                                <p th:text="'This chore is worth ' + ${item.value} + ' exp.'" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}"/>
                             </div>
-                            <form th:action="@{/messages}" th:method="POST">
-                                <div class="card-footer">
-                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">
-                                        View This Chore Post
-                                    </button>
-                                </div>
-                            </form>
+                            <div class="card-footer d-flex justify-content-between">
+                                <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
+                                <form th:action="@{/changestatus}" th:method="POST">
+                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">Change Chore Status</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="col-md-8" style="height: 600px">

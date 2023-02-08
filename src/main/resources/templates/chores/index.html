@@ -29,16 +29,63 @@
         <div class="card-body">
             <p th:text="${item.body}" />
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-flex justify-content-between">
             <form th:action="@{/approved}" th:method="POST">
                 <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">Sign off (on)</button>
             </form>
-<!--            <form th:action="@{/profile}" th:method="POST" th:object="${post}" th:if="${#authentication.principal.id == post.user.id}">-->
-<!--                <button name="button" th:value="${post.id}" type="submit" class="btn btn-success">Edit This Post</button>-->
-<!--            </form>-->
-<!--            <form th:action="@{/delete}" th:method="POST" th:if="${#authentication.principal.id == post.user.id}">-->
-<!--                <button name="button" th:value="${post.id}" type="submit" class="btn btn-danger">Delete This Post</button>-->
-<!--            </form>-->
+            <button type="button" name="editbtn" th:value="*{item.id}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editChore">
+                Edit this chore
+            </button>
+
+            <form th:action="@{/deletechore}" th:method="POST">
+                <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+        <div class="modal fade" id="editChore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form th:action="@{/editchore}" th:method="POST" th:object="${chore}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="fw-bold">Edit Chore</p>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Enter a title for your post</label>
+                                <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${chore.getTitle()}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="body" class="form-label">Enter post here</label>
+                                <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${chore.getBody()}" rows="5"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold">Select a users to assign a chore to:</label>
+                                <select class="form-select" name="option" aria-label="Disabled select example">
+                                    <option selected disabled>Select user</option>
+                                    <div th:each="item : ${avatars}">
+
+                                        <option th:value="${item.child.id}" th:text="${item.child.getUsername()}" />
+
+                                    </div>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="value" class="form-label">Enter difficulty value</label>
+                                <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="editvalue">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button name="thisid" th:value="${chore.getId()}" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit edit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -55,7 +102,7 @@
         <form th:action="@{/createchore}" th:method="POST" th:object="${chore}">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="fw-bold">Create a message</p>
+                    <p class="fw-bold">Create a chore</p>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

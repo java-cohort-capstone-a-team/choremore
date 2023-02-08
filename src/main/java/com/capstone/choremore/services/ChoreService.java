@@ -18,4 +18,8 @@ public interface ChoreService {
 
     List<Chore> childShowChores();
 
+    void deleteChoreById(long id);
+
+    void editChore(Chore chore, long id, long id2);
+
 }
