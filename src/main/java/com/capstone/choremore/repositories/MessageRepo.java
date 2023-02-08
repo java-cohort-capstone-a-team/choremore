@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
 
-    Message findByTitle(String title);
-
-    List<Message> findChildMessageByParentId(long id);
+    List<Message> getMessagesByChildId(Long id);
 
 }

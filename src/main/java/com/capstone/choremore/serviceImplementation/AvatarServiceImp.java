@@ -2,88 +2,79 @@ package com.capstone.choremore.serviceImplementation;
 
 import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.User;
+import com.capstone.choremore.models.UserWithRoles;
 import com.capstone.choremore.repositories.AvatarRepo;
-import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.AvatarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class AvatarServiceImp implements AvatarService {
 
-    private final AvatarRepo avatarDao;
-    private final UserRepo userDao;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private AvatarRepo avatarDao;
 
-    public AvatarServiceImp(AvatarRepo avatarRepo, UserRepo userRepo, PasswordEncoder passwordEncoder) {
-        this.avatarDao = avatarRepo;
-        this.userDao = userRepo;
-        this.passwordEncoder = passwordEncoder;
-    }
+    public Avatar showAvatarByChildId() {
 
-//    @Override
-//    public List<Avatar> profileShowUserAvatars() {
-//
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Avatar> avatars = userDao.findByUsername(user.getUsername()).getAvatars();
-//
-//        return avatars;
-//
-//    }
-
-//    @Override
-//    public void createAvatar(Avatar avatar) {
-//
-//        String hash = passwordEncoder.encode(avatar.getPassword());
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//        avatar.setUser(user);
-//        avatar.setPassword(hash);
-//        avatarDao.save(avatar);
-//
-//    }
-
-    @Override
-    public List<Avatar> showAvatars() {
-
-        List<Avatar> avatars = avatarDao.findAll();
-
-        return avatars;
-
-    }
-
-    @Override
-    public Avatar showById(long id) {
-
-        Avatar avatar = avatarDao.getReferenceById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+        Avatar avatar = avatarDao.findAvatarByChildId(userId);
 
         return avatar;
 
     }
 
-    @Override
-    public Avatar editAvatarById(long id) {
+    public List<Avatar> showAvatarsByParentsId() {
 
-        Avatar avatar = avatarDao.getReferenceById(id);
+            UserWithRoles user = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            long id = user.getId();
+            List<Avatar> avatars = avatarDao.findAvatarsByParentId(id);
 
-        return avatar;
-
-    }
-
-    @Override
-    public void editAvatar(Avatar avatar) {
-
-        avatarDao.save(avatar);
+            return avatars;
 
     }
 
-    @Override
-    public void deleteAvatarById(long id) {
+    public void editHp() {
 
-        avatarDao.deleteById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Avatar avatar = user.getAvatar();
+
+        if (avatar.getBuild_points() > 0) {
+
+            avatar.setHp(avatar.getHp() + 1);
+            avatar.setBuild_points(avatar.getBuild_points() - 1);
+            avatarDao.save(avatar);
+
+        }
 
     }
+
+    public void editStrength() {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Avatar avatar = user.getAvatar();
+
+        if (avatar.getBuild_points() > 0) {
+            avatar.setStrength(avatar.getStrength() + 1);
+            avatar.setBuild_points(avatar.getBuild_points() - 1);
+            avatarDao.save(avatar);
+        }
+
+    }
+
+    public void editDefense() {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Avatar avatar = user.getAvatar();
+
+        if (avatar.getBuild_points() > 0) {
+            avatar.setDefense(avatar.getDefense() + 1);
+            avatar.setBuild_points(avatar.getBuild_points() - 1);
+            avatarDao.save(avatar);
+        }
+
+    }
+
 }

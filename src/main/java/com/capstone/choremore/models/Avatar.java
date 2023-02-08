@@ -7,22 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "avatars")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "avatars")
 public class Avatar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-//    @Column(unique = true, nullable = false, length = 100)
-//    private String username;
-//
-//    @Column(nullable = false, length = 100)
-//    private String password;
 
     @Column(length = 100)
     private String classType;
@@ -48,21 +42,17 @@ public class Avatar {
     @Column(length = 100)
     private long build_points = 9;
 
-//    @Column(nullable = false, length = 100)
-//    private String roles = "ROLE_AVATAR";
-
     @ManyToOne
     private User parent;
 
     @OneToOne
     private User child;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "avatar")
-//    List<Message> messages;
-
     public Avatar(Avatar copy) {
+
         id = copy.id;
         classType = copy.classType;
+        image = copy.image;
         level = copy.level;
         hp = copy.hp;
         strength = copy.strength;
@@ -71,5 +61,7 @@ public class Avatar {
         build_points = copy.build_points;
         parent = copy.parent;
         child = copy.child;
+
     }
+
 }

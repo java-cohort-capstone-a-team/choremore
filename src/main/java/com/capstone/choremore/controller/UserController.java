@@ -1,68 +1,69 @@
 package com.capstone.choremore.controller;
 
-import com.capstone.choremore.models.Avatar;
-import com.capstone.choremore.models.Chore;
-import com.capstone.choremore.models.Message;
 import com.capstone.choremore.models.User;
-import com.capstone.choremore.repositories.AvatarRepo;
-import com.capstone.choremore.repositories.ChoreRepo;
-import com.capstone.choremore.repositories.MessageRepo;
-import com.capstone.choremore.repositories.UserRepo;
+import com.capstone.choremore.services.AvatarService;
+import com.capstone.choremore.services.ChoreService;
+import com.capstone.choremore.services.MessageService;
 import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.SessionException;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-import java.util.List;
-
 @Controller
-@NoArgsConstructor
 public class UserController {
 
     @Autowired
-    private UserRepo userDao;
+    private UserService userServ;
 
     @Autowired
-    private AvatarRepo avatarDao;
+    private ChoreService choreServ;
 
     @Autowired
-    private ChoreRepo choreDao;
+    private MessageService messageServ;
 
     @Autowired
-    private MessageRepo messageDao;
+    private AvatarService avatarServ;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @GetMapping("/create-avatar")
+    public String childAvatarForm(Model model) {
+
+        model.addAttribute("user", new User());
+
+        return "users/avatar-register";
+
+    }
+
+    @PostMapping("/avatar-creation")
+    public String createChildAvatar(@ModelAttribute User user) {
+
+        userServ.createChildUser(user);
+
+        return "redirect:/avatar-manager";
+
+    }
+
+    @GetMapping("/avatar-manager")
+    public String avatarManager(Model model, Model model2) {
+
+        model2.addAttribute("users", userServ.getChildOfParent());
+        model.addAttribute("user", new User());
+
+        return "avatars/index";
+
+    }
 
     @GetMapping("/profile")
     public String showProfile(Model model, Model model2, Model model3, Model model4) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        List<Avatar> myAvatars = avatarDao.findAvatarByParentId(user.getId());
-        List<Chore> myChores = choreDao.findChoreByParentId(user.getId());
-        List<Message> childMessages = messageDao.findAll();
-
-        model.addAttribute("user", user);
-        model2.addAttribute("avatars", myAvatars);
-        model3.addAttribute("chores", myChores);
-        model4.addAttribute("messages", childMessages);
+        model.addAttribute("user", userServ.getCurrentUser());
+        model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
+        model3.addAttribute("chores", choreServ.showChoresByParentsId());
+        model4.addAttribute("messages", messageServ.getChildMessages());
 
         return "users/profile";
 
@@ -71,40 +72,11 @@ public class UserController {
     @GetMapping("/child-profile")
     public String showChildProfile(Model model, Model model2, Model model3) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        List<Chore> myChores = choreDao.findAllByChildId(user.getId());
-        List<Message> messages = messageDao.findAll();
-
-        model3.addAttribute("messages", messages);
-
-        model2.addAttribute("chores", myChores);
-
-        model.addAttribute("user", user);
+        model3.addAttribute("messages", messageServ.getChildMessages());
+        model2.addAttribute("chores", choreServ.showChoresByChildId());
+        model.addAttribute("user", userServ.getCurrentUser());
 
         return "avatars/child-profile";
-
-    }
-
-    @GetMapping("/skill-builder")
-    public String showChildProfile(Model model) {
-
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        long userId = user.getId();
-
-        Avatar avatar = avatarDao.findAvatarByChildId(userId);
-
-//        List<Chore> myChores = choreDao.findAllByChildId(user.getId());
-//        List<Message> messages = messageDao.findAll();
-//
-//        model3.addAttribute("messages", messages);
-//
-//        model2.addAttribute("chores", myChores);
-
-        model.addAttribute("avatar", avatar);
-
-        return "avatars/skill-builder";
 
     }
 
@@ -120,24 +92,16 @@ public class UserController {
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user, Model model, HttpServletRequest request) throws ServletException {
 
-        try {
+        if (userServ.createNewUser(user, model, request)) {
 
-            String clearPass = user.getPassword();
+            return "redirect:/create-avatar";
 
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
 
-            userDao.save(user);
+            return "users/sign-up";
 
-            request.login(user.getUsername(), clearPass);
-
-            if (request.isUserInRole("ROLE_PARENT")) {
-                model.addAttribute("avatar", new Avatar());
-                return "/users/avatar-register";
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return "redirect:/sign-up";
+
     }
+
 }

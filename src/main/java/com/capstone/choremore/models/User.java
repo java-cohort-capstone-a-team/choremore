@@ -7,18 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.tomcat.util.buf.StringUtils;
-
 import javax.management.relation.Role;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -46,13 +45,12 @@ public class User {
     @Column(length = 100)
     private String roles = "ROLE_PARENT";
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
-//    List<Avatar> avatars;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "child")
-
     @OneToOne
+    @JoinColumn(name = "avatar_id", nullable = true, referencedColumnName = "id")
     private Avatar avatar;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
+    List<Avatar> avatars;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "child")
     List<Message> messages;
@@ -62,9 +60,6 @@ public class User {
 
     @OneToOne
     private Chore chore;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
-//    List<Message> message;
 
     public User(User copy) {
 
@@ -76,16 +71,15 @@ public class User {
         email = copy.email;
         password = copy.password;
         roles = copy.roles;
-//        avatars = copy.avatars;
         avatar = copy.avatar;
+        avatars = copy.avatars;
         messages = copy.messages;
         chores = copy.chores;
         chore = copy.chore;
-//        message = copy.message;
 
     }
 
-    public User(long id, String first_name, String last_name, Date dob, String username, String email, String password, List<Role> roles, Avatar avatar, List<Message> messages, List<Chore> chores, Chore chore) {
+    public User(long id, String first_name, String last_name, Date dob, String username, String email, String password, List<Role> roles, Avatar avatar, List<Avatar> avatars, List<Message> messages, List<Chore> chores, Chore chore) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -99,8 +93,10 @@ public class User {
         });
         this.roles = StringUtils.join(rolesStrList, ',');
         this.avatar = avatar;
+        this.avatars = avatars;
         this.messages = messages;
         this.chores = chores;
         this.chore = chore;
     }
+
 }

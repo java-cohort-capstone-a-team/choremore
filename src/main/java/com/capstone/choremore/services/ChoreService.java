@@ -6,20 +6,16 @@ import java.util.List;
 
 public interface ChoreService {
 
-    List<Chore> profileShowUserChores();
+    void createChore(Chore chore, long id);
 
-    void createChore(Chore chore);
+    void changeChoreStatus(long id);
 
-    List<Chore> showAllChores();
+    List<Chore> showChoresByParentsId();
 
-    Chore showChoreById(Long id);
+    List<Chore> showChoresByChildId();
 
-    Chore editChoreById(Long id);
+    void approveChore(long id);
 
-    void editChore(Chore chore);
-
-    void deleteChoreById(Long id);
-
-    Chore findByTitle(String title);
+    List<Chore> childShowChores();
 
 }

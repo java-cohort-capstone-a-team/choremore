@@ -1,23 +1,18 @@
 package com.capstone.choremore.services;
 
 import com.capstone.choremore.models.Avatar;
-
 import java.util.List;
 
 public interface AvatarService {
 
-//    List<Avatar> profileShowUserAvatars();
+    Avatar showAvatarByChildId();
 
-//    void createAvatar(Avatar avatar);
+    List<Avatar> showAvatarsByParentsId();
 
-    List<Avatar> showAvatars();
+    void editHp();
 
-    Avatar showById(long id);
+    void editStrength();
 
-    Avatar editAvatarById(long id);
-
-    void editAvatar(Avatar avatar);
-
-    void deleteAvatarById(long id);
+    void editDefense();
 
 }
