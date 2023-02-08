@@ -6,7 +6,33 @@
 
 <body>
 
-<th:block th:replace="~{partials/child-navbar.html :: navbar}"></th:block>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active " aria-current="page" href="/child-profile">Profile</a>-->
+<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/chores-view">Chores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/skill-builder">Skills Builder</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/message-board">Message Board</a>
+                </li>
+            </ul>
+
+            <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
+        </div>
+    </div>
+</nav>
+<!--<th:block th:replace="~{partials/child-navbar.html :: navbar}"></th:block>-->
 
 <div sec:authorize="isAuthenticated()">
     <div>
@@ -17,23 +43,23 @@
     </div>
 
 
-    <div>
-        <form action="/message-board">
-            <button class="btn btn-primary" type="submit">Go to message-board</button>
-        </form>
-    </div>
+<!--    <div>-->
+<!--        <form action="/message-board">-->
+<!--            <button class="btn btn-primary" type="submit">Go to message-board</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
-    <div>
-        <form action="/chores-view">
-            <button class="btn btn-primary" type="submit">View chores</button>
-        </form>
-    </div>
+<!--    <div>-->
+<!--        <form action="/chores-view">-->
+<!--            <button class="btn btn-primary" type="submit">View chores</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
-    <div>
-        <form action="/skill-builder">
-            <button class="btn btn-primary" type="submit">Build avatar</button>
-        </form>
-    </div>
+<!--    <div>-->
+<!--        <form action="/skill-builder">-->
+<!--            <button class="btn btn-primary" type="submit">Build avatar</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
 
 </div>
