@@ -81,6 +81,17 @@ public class UserController {
 
     }
 
+    @GetMapping("/battle-arena")
+    public String showBattleArena(Model model, Model model2, Model model3) {
+
+        model.addAttribute("user", userServ.getCurrentUser());
+        model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
+        model3.addAttribute("chores", choreServ.showChoresByParentsId());
+
+        return "avatars/battle-arena";
+
+    }
+
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
 
