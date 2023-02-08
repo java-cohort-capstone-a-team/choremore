@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -101,6 +102,15 @@ public class UserController {
             return "users/sign-up";
 
         }
+
+    }
+
+    @PostMapping("/deletechild")
+    public String deleteChildren(@RequestParam(name = "button") long id) {
+
+        userServ.deleteExistenceChildById(id);
+
+        return "redirect:/avatar-manager";
 
     }
 
