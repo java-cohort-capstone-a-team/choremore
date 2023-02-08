@@ -127,16 +127,16 @@ public class ChoreServiceImp implements ChoreService {
 
     public void editChore(Chore chore, long id, long id2) {
 
-        Chore editedChore = choreDao.getReferenceById(id2);
+        Chore editedChore = choreDao.findById(id2).get();
+
         editedChore.setTitle(chore.getTitle());
         editedChore.setBody(chore.getBody());
-
+        editedChore.setValue(chore.getValue());
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User child = userDao.findById(id).get();
 
 //        chore.setParent(user);
         editedChore.setChild(child);
-        editedChore.setId(id2);
 
         choreDao.save(editedChore);
 
