@@ -28,20 +28,30 @@
 
 <div class="container mt-4">
     <div class="card mb-2">
-        <div class="card-header">
-            <p th:text="${avatar.getLevel()}" />
-            <p th:text="${avatar.getExp()}" />
-            <p th:text="${avatar.getBuild_points()}" />
+        <div class="card-header d-flex justify-content-evenly">
+            <p th:text="'Lvl: ' + ${avatar.getLevel()}" />
+            <p th:text="'Exp: ' + ${avatar.getExp()}" />
+            <p th:text="'Exp needed to lvl up: ' + ${10 - avatar.getExp()}" />
+            <p th:text="'Available build points: ' + ${avatar.getBuild_points()}" />
         </div>
-        <div class="card-body">
-            <form th:action="@{/hpplus}" th:method="POST" >
-                <button class="btn btn-primary" type="submit"><p th:text="${avatar.getHp()}" /></button>
+        <div class="card-body row align-items-center">
+            <form class="col-12 col-md-4" th:action="@{/hpplus}" th:method="POST">
+                <div class="row">
+                    <p class="col-6 text-end" th:text="'HP: ' + ${avatar.getHp()}" />
+                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                </div>
             </form>
-            <form th:action="@{/strengthplus}" th:method="POST">
-                <button class="btn btn-primary" type="submit"><p th:text="${avatar.getStrength()}" /></button>
+            <form class="col-12 col-md-4 justify-content-center" th:action="@{/strengthplus}" th:method="POST">
+                <div class="row">
+                    <p class="col-6 text-end" th:text="'STR: ' + ${avatar.getStrength()}" />
+                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                </div>
             </form>
-            <form th:action="@{/defenseplus}" th:method="POST">
-                <button class="btn btn-primary" type="submit"><p th:text="${avatar.getDefense()}" /></button>
+            <form class="col-12 col-md-4 justify-content-center" th:action="@{/defenseplus}" th:method="POST">
+                <div class="row">
+                    <p class="col-6 text-end" th:text="'DEF: ' + ${avatar.getDefense()}" />
+                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                </div>
             </form>
         </div>
         <form th:action="@{/messages}" th:method="POST">

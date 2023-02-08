@@ -25,7 +25,7 @@ public class Chore {
     private String body;
 
     @Column(length = 100)
-    private String status = "incomplete";
+    private String status = "Incomplete";
 
     @Column(nullable = false, length = 100)
     private long value;

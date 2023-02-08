@@ -73,6 +73,64 @@ public class ChoreController {
         return "redirect:/chore-manager";
     }
 
+    @PostMapping("/changestatus")
+    public String changeStatus(@RequestParam(name = "button") long id) {
+
+        Chore chore = choreDao.getReferenceById(id);
+
+        if (chore.getStatus().equals("Incomplete")) {
+
+            chore.setStatus("Complete");
+
+        } else {
+
+            chore.setStatus("Incomplete");
+
+        }
+
+        choreDao.save(chore);
+
+        return "redirect:/chores-view";
+
+    }
+
+    @PostMapping("/approved")
+    public String approveCompleted(@RequestParam(name = "button") long id) {
+
+        Chore chore = choreDao.getReferenceById(id);
+
+        User child = chore.getChild();
+
+        Avatar avatar = avatarDao.findAvatarByChildId(child.getId());
+
+        if(chore.getStatus().equals("Complete")) {
+
+            long newExp = avatar.getExp() + chore.getValue();
+            long newBuildPoints = avatar.getBuild_points() + chore.getValue();
+
+            if (newExp > 10) {
+
+                long newLevel = avatar.getLevel() + 1;
+                avatar.setLevel(newLevel);
+                avatar.setExp(newExp - 10);
+
+            } else {
+
+                avatar.setExp(newExp);
+
+            }
+
+            avatar.setBuild_points(newBuildPoints);
+
+            avatarDao.save(avatar);
+            choreDao.delete(chore);
+
+        }
+
+        return "redirect:/chore-manager";
+
+    }
+
     @GetMapping("/chores-view")
     public String showAllChores(Model model) {
 
