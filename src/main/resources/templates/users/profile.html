@@ -14,9 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link active " aria-current="page" href="/profile">Profile</a>-->
-<!--        </li>-->
+
         <li class="nav-item">
           <a class="nav-link active " aria-current="page" href="/avatar-manager">Child Manager</a>
         </li>
@@ -28,7 +26,7 @@
     </div>
   </div>
 </nav>
-<!--<th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>-->
+
 
 <div sec:authorize="isAuthenticated()">
   <div>
@@ -37,19 +35,6 @@
   <div>
     Username: <span th:text="${#authentication.principal.username}"/>
   </div>
-
-
-<!--  <div>-->
-<!--    <form action="/chore-manager">-->
-<!--      <button class="btn btn-primary" type="submit">Go to chore manager</button>-->
-<!--    </form>-->
-<!--  </div>-->
-
-<!--  <div>-->
-<!--    <form action="/avatar-manager">-->
-<!--      <button class="btn btn-primary" type="submit">Go to avatar manager</button>-->
-<!--    </form>-->
-<!--  </div>-->
 
 </div>
 
