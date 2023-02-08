@@ -66,4 +66,22 @@ public class ChoreController {
 
     }
 
+    @PostMapping("/deletechore")
+    public String deleteChore(@RequestParam(name = "button") long id) {
+
+        choreServ.deleteChoreById(id);
+
+        return "redirect:/chore-manager";
+
+    }
+
+    @PostMapping("/editchore")
+    public String editChore(@ModelAttribute Chore chore, @RequestParam(name = "option") long id, @RequestParam(name = "thisid") long id2) {
+
+        choreServ.editChore(chore, id, id2);
+
+        return "redirect:/chore-manager";
+
+    }
+
 }
