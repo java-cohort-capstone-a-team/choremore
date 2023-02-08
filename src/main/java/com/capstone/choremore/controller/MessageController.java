@@ -32,4 +32,22 @@ public class MessageController {
 
     }
 
+    @PostMapping("/deletemsg")
+    public String deleteMessage(@RequestParam(name = "button") long id) {
+
+        messageServ.deleteMessageById(id);
+
+        return "redirect:/message-board";
+
+    }
+
+    @PostMapping("/editmsg")
+    public String editPostsById(@RequestParam (name="editbtn") long id) {
+
+        messageServ.editMessageById(id);
+
+        return "redirect:/profile";
+
+    }
+
 }

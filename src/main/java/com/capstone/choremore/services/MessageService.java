@@ -12,4 +12,8 @@ public interface MessageService {
 
     List<Message> getChildMessages();
 
+    void deleteMessageById(long id);
+
+    void editMessageById(long id);
+
 }

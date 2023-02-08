@@ -52,4 +52,16 @@ public class MessageServiceImp implements MessageService {
 
     }
 
+    public void deleteMessageById(long id) {
+
+        messageDao.deleteById(id);
+
+    }
+
+    public void editMessageById(long id) {
+
+        Message message = messageDao.getReferenceById(id);
+        messageDao.save(message);
+    }
+
 }
