@@ -1,63 +1,110 @@
 package com.capstone.choremore.serviceImplementation;
 
+import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.User;
+import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements UserService {
 
-    private final UserRepo userDao;
-    private final PasswordEncoder passwordEncoder;
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AvatarRepo avatarDao;
 
-    public UserServiceImp(UserRepo userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
+    @Autowired
+    private UserRepo userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public User getCurrentUser() {
+
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
     }
 
-    public void saveUser(User user) {
+    public Boolean createNewUser(User user, Model model, HttpServletRequest request) throws ServletException {
 
-        String hash = passwordEncoder.encode(user.getPassword());
+        try {
 
-        user.setPassword(hash);
+            String hash = user.getPassword();
+
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            userDao.save(user);
+
+            request.login(user.getUsername(), hash);
+
+            if (request.isUserInRole("ROLE_PARENT")) {
+
+                model.addAttribute("avatar", new Avatar());
+
+                return true;
+            }
+
+        } catch (ServletException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return false;
+
+    }
+
+    public void createChildUser(User user) {
+
+        Avatar avatar = new Avatar();
+        User me = new User((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        user.setRoles("ROLE_CHILD");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        userDao.save(user);
+
+        avatar.setParent(me);
+        avatar.setChild(user);
+
+        avatarDao.save(avatar);
+
+        user.setAvatar(avatar);
+        me.setAvatars(List.of(avatar));
+
+        userDao.save(me);
         userDao.save(user);
 
     }
 
-    public User getUserById(long id) {
-        return userDao.getOne(id);
-    }
+    public List<User> getChildOfParent() {
 
-    public List<User> getUsersByChildRole() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long id = user.getId();
 
-        return userDao.findAll().stream().filter(user -> user.getRoles().contains("ROLE_CHILD")).collect(Collectors.toList());
+        List<User> allUsers = userDao.findAll();
 
-    }
+        List<User> myChildren = new ArrayList<>();
 
-    public void authWithoutPassword(User user){
+        for (User usr : allUsers) {
 
-        try {
-            List<GrantedAuthority> roles = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles());
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), passwordEncoder.encode(user.getPassword()));
-            authenticationManager.authenticate(authentication);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (usr.getRoles().equals("ROLE_CHILD") && usr.getAvatar().getParent().getId() == id) {
+
+                myChildren.add(usr);
+
+            }
+
         }
+
+        return myChildren;
 
     }
 

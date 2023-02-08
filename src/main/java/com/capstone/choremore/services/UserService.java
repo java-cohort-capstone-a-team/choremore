@@ -1,23 +1,20 @@
 package com.capstone.choremore.services;
 
 import com.capstone.choremore.models.User;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
 public interface UserService {
 
-    void saveUser(User user);
+    User getCurrentUser();
 
-//    void authWithAuthManager(User user);
+    Boolean createNewUser(User user, Model model, HttpServletRequest request) throws ServletException;
 
-    List<User> getUsersByChildRole();
+    void createChildUser(User user);
 
-    User getUserById(long id);
-
-    void authWithoutPassword(User user);
-
-//    void authWithAuthManager(User user);
-
-//    void authenticateUserAndSetSession(User user);
+    List<User> getChildOfParent();
 
 }

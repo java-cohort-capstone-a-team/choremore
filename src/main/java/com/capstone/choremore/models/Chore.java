@@ -37,6 +37,7 @@ public class Chore {
     private User child;
 
     public Chore(Chore copy) {
+
         id = copy.id;
         title = copy.title;
         body = copy.body;
@@ -44,6 +45,7 @@ public class Chore {
         value = copy.value;
         parent = copy.parent;
         child = copy.child;
+
     }
 
 }
