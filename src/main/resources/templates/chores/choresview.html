@@ -28,22 +28,19 @@
 
 <div class="container mt-4">
     <div th:each="item : ${chores}" class="card mb-2">
-        <div class="card-header row justify-content-between">
-            <div class="col-6">
-                <p th:text="${item.title}" />
-            </div>
-            <div class="col-6">
-                <p th:text="${item.value}" />
-            </div>
+        <div class="card-header d-flex justify-content-between">
+            <p th:text="${item.title}" />
+            <p th:text="'This chore is worth ' + ${item.value} + ' exp.'" />
         </div>
         <div class="card-body">
             <p th:text="${item.body}" />
         </div>
-        <form th:action="@{/messages}" th:method="POST">
-            <div class="card-footer">
-                <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
-            </div>
-        </form>
+        <div class="card-footer d-flex justify-content-between">
+            <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
+            <form th:action="@{/changestatus}" th:method="POST">
+                <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">Change Chore Status</button>
+            </form>
+        </div>
     </div>
 </div>
 

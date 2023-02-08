@@ -22,17 +22,24 @@
 
 <div class="container mt-4">
     <div th:each="item : ${chores}" class="card mb-2">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <p th:text="${item.title}" />
+            <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
         </div>
         <div class="card-body">
             <p th:text="${item.body}" />
         </div>
-        <form th:action="@{/messages}" th:method="POST">
-            <div class="card-footer">
-                <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
-            </div>
-        </form>
+        <div class="card-footer">
+            <form th:action="@{/approved}" th:method="POST">
+                <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">Sign off (on)</button>
+            </form>
+<!--            <form th:action="@{/profile}" th:method="POST" th:object="${post}" th:if="${#authentication.principal.id == post.user.id}">-->
+<!--                <button name="button" th:value="${post.id}" type="submit" class="btn btn-success">Edit This Post</button>-->
+<!--            </form>-->
+<!--            <form th:action="@{/delete}" th:method="POST" th:if="${#authentication.principal.id == post.user.id}">-->
+<!--                <button name="button" th:value="${post.id}" type="submit" class="btn btn-danger">Delete This Post</button>-->
+<!--            </form>-->
+        </div>
     </div>
 </div>
 
