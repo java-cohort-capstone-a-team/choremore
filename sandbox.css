@@ -5,3 +5,8 @@
     --color-four: #c0d6df;
     --color-five: #eaeaea;
 }
+
+body {
+    background-color: var(--color-three);
+    font-family: Arial, Ubuntu, sans-serif;
+}
