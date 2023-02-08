@@ -1,8 +1,12 @@
 package com.capstone.choremore.serviceImplementation;
 
 import com.capstone.choremore.models.Avatar;
+import com.capstone.choremore.models.Chore;
+import com.capstone.choremore.models.Message;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.repositories.AvatarRepo;
+import com.capstone.choremore.repositories.ChoreRepo;
+import com.capstone.choremore.repositories.MessageRepo;
 import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
@@ -23,6 +27,12 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserRepo userDao;
+
+    @Autowired
+    private ChoreRepo choreDao;
+
+    @Autowired
+    private MessageRepo messageDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -105,6 +115,22 @@ public class UserServiceImp implements UserService {
         }
 
         return myChildren;
+
+    }
+
+    public void deleteExistenceChildById(long id) {
+
+        System.out.println("id = " + id);
+
+        List<Message> childMsgs =  messageDao.getMessagesByChildId(id);
+        messageDao.deleteAll(childMsgs);
+
+        List<Chore> childChores = choreDao.getChoresByChildId(id);
+        choreDao.deleteAll(childChores);
+
+        avatarDao.deleteAvatarByChildId(id);
+
+        userDao.deleteById(id);
 
     }
 

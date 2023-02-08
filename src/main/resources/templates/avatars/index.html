@@ -84,10 +84,8 @@
                             <div class="card-header">
                                 <p th:text="${item.username}" />
                             </div>
-                            <form th:action="@{/messages}" th:method="POST">
-                                <div class="card-footer">
-                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post</button>
-                                </div>
+                            <form th:action="@{/deletechild}" th:method="POST">
+                                <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </div>
                     </div>

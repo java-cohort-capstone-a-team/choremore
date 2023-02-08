@@ -13,4 +13,6 @@ public interface ChoreRepo extends JpaRepository<Chore, Long> {
 
     List<Chore> findAllByChildId(long id);
 
+    List<Chore> getChoresByChildId(long id);
+
 }
