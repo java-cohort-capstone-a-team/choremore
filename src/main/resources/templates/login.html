@@ -6,9 +6,9 @@
 <th:block th:replace="~{partials/header.html :: header}"></th:block>
 <body>
 
-<!--<th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>-->
+<th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
 
-<h1>Log In</h1>
+<!--<h1>Log In</h1>-->
 <div th:if="${param.error}">
     Invalid Username and Password.
 </div>
@@ -17,34 +17,71 @@
 </div>
 
 <div sec:authorize="isAuthenticated()">You're already logged in</div>
-<div class="container">
-    <div class="row justify-content-between">
-        <div class="card col-12 justify-content-center mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Login</h5>
-                <div class="mb-4">
-                    <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
-                        <div class="row g-3">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Username</span>
-                                <input id="username" type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Password</span>
-                                <input id="password" type="password" name="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <input class="btn btn-primary w-50 mx-auto" type="submit" value="Log In" />
-                        </div>
-                    </form>
+
+<div class="container mb-3 d-flex flex-row-reverse" sec:authorize="!isAuthenticated()">
+    <div class="row">
+        <label for="create-account">Don't have an account? Click here to create one.</label>
+        <a href="/sign-up"><button id="create-account" class="btn btn-warning">Create an account</button></a>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 5px">
+    <!-- Jumbotron -->
+    <div class="p-4 shadow-4 rounded-3" style="background-color: hsl(0, 0%, 94%);">
+        <h2>Hello world!</h2>
+        <p>
+            This is a simple hero unit, a simple jumbotron-style component for calling extra
+            attention to featured content or information.
+        </p>
+
+        <hr class="my-4" />
+
+        <p>
+            It uses utility classes for typography and spacing to space content out within the
+            larger container.
+        </p>
+        <button type="button" class="btn btn-primary">
+            Learn more
+        </button>
+    </div>
+    <!-- Jumbotron -->
+</div>
+
+<div class="container-fluid" style="margin-top: 5px">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container mb-4 row" sec:authorize="!isAuthenticated()">
-    <label for="create-account">Don't have an account? Click here to create one.</label>
-    <a href="/sign-up"><button id="create-account" class="btn btn-warning">Create an account</button></a>
-</div>
+
+<hr class="my-4" />
+
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 
