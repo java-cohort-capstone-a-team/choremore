@@ -4,14 +4,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 
 <th:block th:replace="~{partials/header.html :: header}"></th:block>
+
 <body>
 
 <th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
 
-<!--<h1>Log In</h1>-->
 <div th:if="${param.error}">
     Invalid Username and Password.
 </div>
+
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
@@ -22,6 +23,38 @@
     <div class="row">
         <label for="create-account">Don't have an account? Click here to create one.</label>
         <a href="/sign-up"><button id="create-account" class="btn btn-warning">Create an account</button></a>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form th:action="@{/login}" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Enter Username</label>
+                                <input id="username" type="text" name="username" class="form-control"
+                                       placeholder="Username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Enter Password</label>
+                                <input id="password" type="password" name="password" class="form-control"
+                                       placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">LOGIN
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

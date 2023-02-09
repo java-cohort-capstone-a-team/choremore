@@ -23,67 +23,17 @@
                 <li class="nav-item">
                     <a class="nav-link active " aria-current="page" href="/skill-builder">Skills Builder</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active " aria-current="page" href="/message-board">Message Board</a>-->
-<!--                </li>-->
             </ul>
-
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
         </div>
     </div>
 </nav>
-<!--<th:block th:replace="~{partials/child-navbar.html :: navbar}"></th:block>-->
-
-<!--<div>-->
-<!--    <form action="/child-profile">-->
-<!--        <button class="btn btn-primary" type="submit">Go to profile</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--    <form action="/chores-view">-->
-<!--        <button class="btn btn-primary" type="submit">View chores</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--    <form action="/skill-builder">-->
-<!--        <button class="btn btn-primary" type="submit">Build avatar</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-
-
-
-
-<!--💎👇💎👇💎👇💎👇💎👇💎👇💎👇 FUTRUE CODE 💎👇💎👇💎👇💎👇💎👇💎👇💎👇-->
-
-
-
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    create a new message 🛑
-</button>
-
-
-
-
-
-
-
-
-
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-around">
-
-
         <div class="col-md-4" style="height: 600px">
             <div class="card overflow-auto mh-100">
                 <div class="card-body d-inline-block">
-
                     <img src="img/The Paintings of Joe Jusko.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card with stretched link</h5>
@@ -91,94 +41,70 @@
                             the card's content.</p>
                         <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
                     </div>
-
                 </div>
             </div>
         </div>
-
-
         <div class="col-md-8" style="height: 600px">
             <div class="card overflow-auto mh-100">
                 <div class="card-body d-inline-block">
-
                     <h5 class="card-title">Message Board (all messages)</h5>
-
-
-
                     <div class="container mt-4">
                         <div th:each="item : ${messages}" class="card mb-2">
-                            <!--        <div class="modal fade" id="editChore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-                            <!--            <div class="modal-dialog" role="document">-->
-                            <!--                <form th:action="@{/editmsg}" th:method="POST">-->
-                            <!--                    <div class="modal-content">-->
-                            <!--                        <div class="modal-header">-->
-                            <!--                            <p class="fw-bold">Edit message</p>-->
-                            <!--                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
-                            <!--                                <span aria-hidden="true">&times;</span>-->
-                            <!--                            </button>-->
-                            <!--                        </div>-->
-                            <!--                        <div class="modal-body">-->
-                            <!--                            <div class="mb-3">-->
-                            <!--                                <label for="msgtitle" class="form-label">Enter a title for your post</label>-->
-                            <!--                                <input th:field="*{item.title}" name="msgtitle" type="text" class="form-control" id="msgtitle" th:placeholder="${item.title}">-->
-                            <!--                            </div>-->
-                            <!--                            <div class="mb-3">-->
-                            <!--                                <label for="msgbody" class="form-label">Enter post here</label>-->
-                            <!--                                <textarea th:field="*{item.body}" name="msgbody" class="form-control" id="msgbody" rows="5" th:placeholder="${item.body}"></textarea>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                            <!--                        <div class="modal-footer">-->
-                            <!--                            <button type="submit" name="editbtn" th:value="${item.id}" class="btn btn-primary" data-bs-dismiss="modal">Submit edit</button>-->
-                            <!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-                            <!--                        </div>-->
-                            <!--                    </div>-->
-                            <!--                </form>-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between">
                                 <p th:text="${item.title}" />
+                                <p th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
                             <div class="card-footer d-flex justify-content-between">
-                                <!--            <button th:if="${#authentication.principal.id == item.child.id}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editChore">-->
-                                <!--                Edit this chore-->
-                                <!--            </button>-->
-
+                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">
+                                    Edit this chore
+                                </button>
                                 <form th:action="@{/deletemsg}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete 🦃🦃🦃</button>
+                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete</button>
                                 </form>
+                                <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form th:action="@{/editmsg}" th:method="POST"  th:object="${message}">
+                                            <input type="hidden" th:value="${item.child.id}" name="childid" />
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <p class="fw-bold">Edit Message</p>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="edittitle" class="form-label">Edit title</label>
+                                                        <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editbody" class="form-label">Edit body</label>
+                                                        <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="editThis" th:value="${item.id}" class="btn btn-primary" data-bs-dismiss="modal">Submit edit</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
-
-
-
-
-
+        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            create a new message
+        </button>
     </div>
 </div>
 
-
-
-<!--💎👆💎👆💎👆💎👆💎👆💎👆💎👆 FUTRUE CODE 💎👆💎👆💎👆💎👆💎👆💎👆💎👆-->
-
-
-
-
-
-
-
-
-
-
-<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form th:action="@{/createmsg}" th:method="POST" th:object="${message}">
@@ -207,7 +133,6 @@
         </form>
     </div>
 </div>
-
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 

@@ -52,12 +52,30 @@ public class ChoreController {
 
     }
 
+    @PostMapping("/changestatusPro")
+    public String changeStatusPro(@RequestParam(name = "button") long id) {
+
+        choreServ.changeChoreStatus(id);
+
+        return "redirect:/child-profile";
+
+    }
+
     @PostMapping("/approved")
     public String approveCompleted(@RequestParam(name = "button") long id) {
 
         choreServ.approveChore(id);
 
         return "redirect:/chore-manager";
+
+    }
+
+    @PostMapping("/approvedPro")
+    public String approveCompletedPro(@RequestParam(name = "buttonpro") long id) {
+
+        choreServ.approveChore(id);
+
+        return "redirect:/profile";
 
     }
 
@@ -79,12 +97,30 @@ public class ChoreController {
 
     }
 
+    @PostMapping("/deletechorePro")
+    public String deleteChorePro(@RequestParam(name = "button") long id) {
+
+        choreServ.deleteChoreById(id);
+
+        return "redirect:/profile";
+
+    }
+
     @PostMapping("/editchore")
     public String editChore(@ModelAttribute Chore chore, @RequestParam(name = "option") long id, @RequestParam(name = "editThis") long id2) {
 
         choreServ.editChore(chore, id, id2);
 
         return "redirect:/chore-manager";
+
+    }
+
+    @PostMapping("/editchorePro")
+    public String editChorePro(@ModelAttribute Chore chore, @RequestParam(name = "option") long id, @RequestParam(name = "editThis") long id2) {
+
+        choreServ.editChore(chore, id, id2);
+
+        return "redirect:/profile";
 
     }
 

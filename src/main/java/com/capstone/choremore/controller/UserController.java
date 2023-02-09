@@ -1,5 +1,7 @@
 package com.capstone.choremore.controller;
 
+import com.capstone.choremore.models.Chore;
+import com.capstone.choremore.models.Message;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.models.UserWithRoles;
 import com.capstone.choremore.services.AvatarService;
@@ -61,12 +63,13 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Model model2, Model model3, Model model4) {
+    public String showProfile(Model model, Model model2, Model model3, Model model4, Model model5) {
 
         model.addAttribute("user", userServ.getCurrentUser());
         model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
         model3.addAttribute("chores", choreServ.showChoresByParentsId());
         model4.addAttribute("messages", messageServ.getChildMessages());
+        model5.addAttribute("chore", new Chore());
 
         return "users/profile";
 
@@ -75,7 +78,7 @@ public class UserController {
 
 
     @GetMapping("/child-profile")
-    public String showChildProfile(Model model, Model model2, Model model3) {
+    public String showChildProfile(Model model, Model model2, Model model3, Model model4) {
 
 //        User user = userServ.getCurrentUser();
 //
@@ -87,6 +90,7 @@ public class UserController {
 
 
         model3.addAttribute("messages", messageServ.showMessages());
+        model4.addAttribute("message", new Message());
         model2.addAttribute("chores", choreServ.showChoresByChildId());
         model.addAttribute("user", userServ.getCurrentUser());
 

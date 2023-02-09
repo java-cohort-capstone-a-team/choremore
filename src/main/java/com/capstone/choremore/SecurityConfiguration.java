@@ -68,8 +68,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/login", "/sign-up")
                 .permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/create-avatar", "/avatar-creation", "/profile", "/chore-manager", "/avatar-manager", "/deletechore", "/editchore", "/createchore", "/approved", "/deletechild").hasAuthority("ROLE_PARENT")
-                .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg", "/skill-builder", "/hpplus", "/strengthplus", "/deletemsg", "/defenseplus", "/changestatus", "/editmsg").hasAuthority("ROLE_CHILD")
+                .and().authorizeHttpRequests().requestMatchers("/create-avatar", "/avatar-creation", "/profile", "/chore-manager", "/avatar-manager", "/deletechore", "/editchore", "/createchore", "/approved", "/deletechild", "/approvedPro", "/deletechorePro", "/editchorePro").hasAuthority("ROLE_PARENT")
+                .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg", "/skill-builder", "/hpplus", "/strengthplus", "/deletemsg", "/defenseplus", "/changestatus", "/editmsg", "/editmsg", "/editmsgPro", "/deletemsgPro", "/changestatusPro").hasAuthority("ROLE_CHILD")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
