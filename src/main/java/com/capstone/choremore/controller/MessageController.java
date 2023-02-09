@@ -41,12 +41,30 @@ public class MessageController {
 
     }
 
+    @PostMapping("/deletemsgPro")
+    public String deleteMessagePro(@RequestParam(name = "button") long id) {
+
+        messageServ.deleteMessageById(id);
+
+        return "redirect:/child-profile";
+
+    }
+
     @PostMapping("/editmsg")
-    public String editPostsById(@RequestParam (name="editbtn") long id) {
+    public String editMessage(@ModelAttribute Message message, @RequestParam(name = "childid") long id, @RequestParam(name = "editThis") long id2) {
 
-        messageServ.editMessageById(id);
+        messageServ.editMessage(message, id, id2);
 
-        return "redirect:/profile";
+        return "redirect:/message-board";
+
+    }
+
+    @PostMapping("/editmsgPro")
+    public String editMessagePro(@ModelAttribute Message message, @RequestParam(name = "childid") long id, @RequestParam(name = "editThis") long id2) {
+
+        messageServ.editMessage(message, id, id2);
+
+        return "redirect:/child-profile";
 
     }
 

@@ -43,6 +43,7 @@ body, html {
     background-color: var(--color-three);
     font-weight: bold;
     animation: infinite;
+    color: var(--color-two);
 }
 
 body {

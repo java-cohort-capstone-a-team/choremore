@@ -7,179 +7,180 @@
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="/avatar-manager">Child Manager</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active " aria-current="page" href="/chore-manager">Chore Manager</a>
-        </li>
-      </ul>
-      <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/avatar-manager">Child Manager</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/chore-manager">Chore Manager</a>
+                </li>
+            </ul>
+            <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()">
+                <button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
 </nav>
 
-
 <div sec:authorize="isAuthenticated()">
-  <div>
-    User ID: <span th:text="${#authentication.principal.id}"/>
-  </div>
-  <div>
-    Username: <span th:text="${#authentication.principal.username}"/>
-  </div>
-
+    <div>
+        User ID: <span th:text="${#authentication.principal.id}"/>
+    </div>
+    <div>
+        Username: <span th:text="${#authentication.principal.username}"/>
+    </div>
 </div>
-
-
-
-
-
-<!--💎💎💎💎💎💎💎💎💎💎💎💎💎💎 new stuff 💎💎💎💎💎💎💎💎💎💎💎💎💎💎-->
-
 
 <div class="container-fluid">
-  <div class="row d-flex justify-content-around">
-
-
-    <div class="col-md-4" style="height: 600px">
-      <div class="card overflow-auto mh-100">
-        <div class="card-body d-inline-block">
-
-          <h5 class="card-title">List of Avatars </h5>
-
-          <div class="container mt-4">
-            <div th:each="item : ${avatars}" class="card mb-2">
-              <div class="card-header">
-                <p th:text="${item.child.getUsername()}"/>
-              </div>
-              <form th:action="@{/messages}" th:method="POST">
-                <div class="card-footer">
-                  <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post 🟩
-                  </button>
+    <div class="row d-flex justify-content-around">
+        <div class="col-md-4" style="height: 600px">
+            <div class="card overflow-auto mh-100">
+                <div class="card-body d-inline-block">
+                    <h5 class="card-title">Sub-Accounts</h5>
+                    <div class="container mt-4">
+                        <div th:each="item : ${avatars}" class="card mb-2">
+                            <div class="card-header">
+                                <p th:text="${item.child.getUsername()}"/>
+                            </div>
+                            <form th:action="@{/messages}" th:method="POST">
+                                <div class="card-footer">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
-
         </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4" style="height: 600px">
-      <div class="card overflow-auto mh-100">
-        <div class="card-body d-inline-block">
-
-          <h5 class="card-title">List of Chores </h5>
-
-          <div class="container mt-4">
-            <div th:each="item : ${chores}" class="card mb-2">
-              <div class="card-header">
-                <p th:text="${item.title}"/>
-              </div>
-              <div class="card-body">
-                <p th:text="${item.body}"/>
-              </div>
-              <form th:action="@{/messages}" th:method="POST">
-                <div class="card-footer">
-                  <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post 🟩🟩
-                  </button>
+        <div class="col-md-4" style="height: 600px">
+            <div class="card overflow-auto mh-100">
+                <div class="card-body d-inline-block">
+                    <div class="container mt-4">
+                        <div class="container mt-4">
+                            <div th:each="item : ${chores}" class="card mb-2">
+                                <div class="card-header d-flex justify-content-between">
+                                    <p th:text="${item.title}"/>
+                                    <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''"/>
+                                </div>
+                                <div class="card-body">
+                                    <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''"/>
+                                    <p th:text="${item.body}"/>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between">
+                                    <form th:action="@{/approvedPro}" th:method="POST">
+                                        <button name="buttonpro" th:value="*{item.id}" type="submit"
+                                                class="btn btn-primary">Sign off (on)
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            th:data-bs-target="'#' + ${item.id}">Edit
+                                    </button>
+                                    <form th:action="@{/deletechorePro}" th:method="POST">
+                                        <button name="button" th:value="${item.id}" type="submit"
+                                                class="btn btn-danger">Delete
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form th:action="@{/editchorePro}" th:method="POST" th:object="${chore}">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <p class="fw-bold">Edit Chore</p>
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="edittitle" class="form-label">Edit title</label>
+                                                        <input th:field="*{title}" name="title" type="text"
+                                                               class="form-control" id="edittitle"
+                                                               th:placeholder="${item.title}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editbody" class="form-label">Edit body</label>
+                                                        <textarea th:field="*{body}" name="body" class="form-control"
+                                                                  id="editbody" th:placeholder="${item.body}"
+                                                                  rows="5"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="fw-bold">Select a users to assign a chore
+                                                            to:</label>
+                                                        <select class="form-select" name="option"
+                                                                aria-label="Disabled select example">
+                                                            <option selected disabled>Select user</option>
+                                                            <div th:each="item : ${avatars}">
+                                                                <option th:value="${item.child.id}"
+                                                                        th:text="${item.child.getUsername()}"/>
+                                                            </div>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="value" class="form-label">Enter value on scale
+                                                            1-5</label>
+                                                        <input th:field="*{value}" type="range" class="value form-range"
+                                                               min="1" max="5" id="value">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="editThis" th:value="${item.id}"
+                                                            class="btn btn-primary" data-bs-dismiss="modal">Submit edit
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
-
         </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4" style="height: 600px">
-      <div class="card overflow-auto mh-100">
-        <div class="card-body d-inline-block">
-
-          <h5 class="card-title">List of Messages </h5>
-
-          <div class="container mt-4">
-            <div th:each="item : ${messages}" class="card mb-2">
-              <div class="card-header">
-                <p th:text="${item.title}"/>
-              </div>
-              <div class="card-body">
-                <p th:text="${item.body}"/>
-              </div>
-              <form th:action="@{/messages}" th:method="POST">
-                <div class="card-footer">
-                  <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary">View This Post
-                    🟩🟩🟩
-                  </button>
+        <div class="col-md-4" style="height: 600px">
+            <div class="card overflow-auto mh-100">
+                <div class="card-body d-inline-block">
+                    <h5 class="card-title">List of Messages</h5>
+                    <div class="container mt-4">
+                        <div th:each="item : ${messages}" class="card mb-2">
+                            <div class="card-header d-flex justify-content-between">
+                                <p th:text="${item.title}" />
+                                <p th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${item.body}" />
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-
-
-
-  </div>
 </div>
-
-
-
-
-<!--💎💎💎💎💎💎💎💎💎💎💎💎💎💎 new stuff 💎💎💎💎💎💎💎💎💎💎💎💎💎💎-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div class="container mt-4">-->
-<!--    <div th:each="item : ${posts}" class="card mb-2">-->
-<!--        <div class="card-header">-->
-<!--            <p th:text="${item.title}" />-->
-<!--        </div>-->
-<!--        <div class="card-body">-->
-<!--            <p th:text="${item.body}" />-->
-<!--        </div>-->
-<!--        <div class="card-footer d-flex justify-content-between">-->
-<!--            <form th:action="@{/profile}" th:method="POST">-->
-<!--                <button name="button" th:value="*{item.id}" type="submit" class="btn btn-success">Edit This Post</button>-->
-<!--            </form>-->
-<!--            <form th:action="@{/delete}" th:method="POST">-->
-<!--                <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete This Post</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

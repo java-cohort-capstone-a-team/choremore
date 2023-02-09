@@ -13,106 +13,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()">
                 <button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout
                 </button>
             </form>
-
-
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Log in / Sign up
-            </button>
-
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-
-                    <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
-
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Enter Username</label>
-                                            <input id="username" type="text" name="username" class="form-control"
-                                                   placeholder="Username">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Enter Password</label>
-                                            <input id="password" type="text" name="password" class="form-control"
-                                                   placeholder="Username">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">LOGIN
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <!--                    we will keep this on the login.html not in the nav-->
-
-                    <!--                    <div th:if="${param.error}">-->
-                    <!--                        Invalid Username and Password.-->
-                    <!--                    </div>-->
-                    <!--                    <div th:if="${param.logout}">-->
-                    <!--                        You have been logged out.-->
-                    <!--                    </div>-->
-
-                    <!--                    <div sec:authorize="isAuthenticated()">You're already logged in</div>-->
-                    <!--                    <div class="container">-->
-                    <!--                        <div class="row justify-content-between">-->
-                    <!--                            <div class="card col-12 justify-content-center mb-4">-->
-                    <!--                                <div class="card-body">-->
-                    <!--                                    <h5 class="card-title">Login</h5>-->
-                    <!--                                    <div class="mb-4">-->
-                    <!--                                        <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">-->
-                    <!--                                            <div class="row g-3">-->
-                    <!--                                                <div class="input-group mb-3">-->
-                    <!--                                                    <span class="input-group-text">Username</span>-->
-                    <!--                                                    <input id="username" type="text" name="username"-->
-                    <!--                                                           class="form-control"-->
-                    <!--                                                           placeholder="Username" aria-label="Username"-->
-                    <!--                                                           aria-describedby="basic-addon1">-->
-                    <!--                                                </div>-->
-                    <!--                                                <div class="input-group mb-3">-->
-                    <!--                                                    <span class="input-group-text">Password</span>-->
-                    <!--                                                    <input id="password" type="password" name="password"-->
-                    <!--                                                           class="form-control"-->
-                    <!--                                                           placeholder="Password" aria-label="Username"-->
-                    <!--                                                           aria-describedby="basic-addon1">-->
-                    <!--                                                </div>-->
-                    <!--                                                <input class="btn btn-primary w-50 mx-auto" type="submit"-->
-                    <!--                                                       value="Log In"/>-->
-                    <!--                                            </div>-->
-                    <!--                                        </form>-->
-                    <!--                                    </div>-->
-                    <!--                                    <div class="container mb-4 row" sec:authorize="!isAuthenticated()">-->
-                    <!--                                        <label for="create-account">Don't have an account? Click here to create one.</label>-->
-                    <!--                                        <a href="/sign-up">-->
-                    <!--                                            <button id="create-account" class="btn btn-warning">Create an account</button>-->
-                    <!--                                        </a>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-
-                </div>
-            </div>
-
-            <!--            <div class="text-center">-->
-            <!--                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">Launch-->
-            <!--                    Modal Register Form</a>-->
-            <!--            </div>-->
+            <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</button>
         </div>
     </div>
 </nav>
