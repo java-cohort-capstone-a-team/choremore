@@ -86,7 +86,7 @@ public class UserController {
 //        }
 
 
-        model3.addAttribute("messages", messageServ.getChildMessages());
+        model3.addAttribute("messages", messageServ.showMessages());
         model2.addAttribute("chores", choreServ.showChoresByChildId());
         model.addAttribute("user", userServ.getCurrentUser());
 
