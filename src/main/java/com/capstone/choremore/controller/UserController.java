@@ -1,6 +1,7 @@
 package com.capstone.choremore.controller;
 
 import com.capstone.choremore.models.User;
+import com.capstone.choremore.models.UserWithRoles;
 import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import com.capstone.choremore.services.MessageService;
@@ -8,6 +9,7 @@ import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,8 +72,19 @@ public class UserController {
 
     }
 
+
+
     @GetMapping("/child-profile")
     public String showChildProfile(Model model, Model model2, Model model3) {
+
+//        User user = userServ.getCurrentUser();
+//
+//        if (user.getAvatar().getImage() == null) {
+//
+//            return "redirect:/create-avatar";
+//
+//        }
+
 
         model3.addAttribute("messages", messageServ.getChildMessages());
         model2.addAttribute("chores", choreServ.showChoresByChildId());
