@@ -6,7 +6,50 @@
     --color-five: #eaeaea;
 }
 
-body {
-    background-color: var(--color-three);
+.card-header, .card-footer {
+    background-color: var(--color-four);
+    font-weight: bold;
+}
+
+.card-body {
+    background-color: var(--color-five);
+}
+
+button {
+    background-color: var(--color-one);
+    font-weight: bold;
+}
+
+/*body {*/
+/*    background-color: var(--color-three);*/
+/*    font-family: Arial, Ubuntu, sans-serif;*/
+/*}*/
+
+body, html {
+    background: linear-gradient(to top, var(--color-two) 15%, var(--color-one) 150%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Ubuntu, sans-serif;
+}
+
+.card {
+    box-shadow: 0px 0px 30px slategrey;
+}
+
+.btn {
+    background-color: var(--color-three);
+    font-weight: bold;
+    animation: infinite;
+}
+
+body {
+    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
+}
+
+.card:hover img {
+    animation: moveSlideshow 3s linear;
+    animation-fill-mode: forwards;
 }
