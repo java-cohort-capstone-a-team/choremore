@@ -36,9 +36,19 @@ public class AuthController {
         if (role.contains(new SimpleGrantedAuthority("ROLE_PARENT"))) {
             return "redirect:/profile";
         } else if (role.contains(new SimpleGrantedAuthority("ROLE_CHILD"))) {
-            return "redirect:/child-profile";
+
+            if (user.getAvatar().getImage() == null) {
+
+                return "avatars/avatar-form";
+
+            }
+
+                return "redirect:/child-profile";
+
         } else {
+
             return "redirect:/login";
+
         }
 
     }

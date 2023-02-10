@@ -1,9 +1,8 @@
 package com.capstone.choremore.controller;
 
-import com.capstone.choremore.models.Chore;
-import com.capstone.choremore.models.Message;
-import com.capstone.choremore.models.User;
-import com.capstone.choremore.models.UserWithRoles;
+import com.capstone.choremore.imagehandle.FileUploadUtil;
+import com.capstone.choremore.models.*;
+import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import com.capstone.choremore.services.MessageService;
@@ -14,16 +13,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class UserController {
 
     @Autowired
+    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/avatars";
+    @Autowired
     private UserService userServ;
+
+    @Autowired
+    private AvatarRepo avatarDao;
 
     @Autowired
     private ChoreService choreServ;
@@ -33,6 +44,8 @@ public class UserController {
 
     @Autowired
     private AvatarService avatarServ;
+//    @Autowired
+//    private AvatarRepo avatarRepo;
 
     @GetMapping("/create-avatar")
     public String childAvatarForm(Model model) {
@@ -78,29 +91,68 @@ public class UserController {
 
 
     @GetMapping("/child-profile")
-    public String showChildProfile(Model model, Model model2, Model model3, Model model4) {
-
-//        User user = userServ.getCurrentUser();
-
-//        if (user.getAvatar().getImage() == null) {
-//
-//            return "avatars/avatar-form";
-//
-//        }
+    public String showChildProfile(Model model, Model model2, Model model3, Model model4, Model model5) {
 
         model3.addAttribute("messages", messageServ.showMessages());
         model4.addAttribute("message", new Message());
         model2.addAttribute("chores", choreServ.showChoresByChildId());
         model.addAttribute("user", userServ.getCurrentUser());
+        model5.addAttribute("avatar", avatarServ.getCurrentAvatar());
 
         return "avatars/child-profile";
 
     }
 
-    @GetMapping("/build-avatar")
+    @PostMapping("/avatarbuilder")
+    public String addImageAndClassToAvatar(@RequestParam("image") MultipartFile image, @RequestParam("class_type") String class_type) throws IOException {
+
+        User user = userServ.getCurrentUser();
+        Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
+        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+        myAvatar.setImage(fileName);
+        myAvatar.setClassType(class_type);
+        Avatar savedAvatar = avatarDao.save(myAvatar);
+        String uploadDir = "src/main/resources/static/img/avatars/" + savedAvatar.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, image);
+
+//        StringBuilder filesNames = new StringBuilder();
+//        Path filesNameAndPath = Paths.get(UPLOAD_DIRECTORY, image.getOriginalFilename());
+//        filesNames.append(image.getOriginalFilename());
+//        Files.write(filesNameAndPath, image.getBytes());
+
+
+
+
+//        avatarDao.save(myAvatar);
+
+        return "redirect:/child-profile";
+
+//        try {
+//
+//            User user = userServ.getCurrentUser();
+//            Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
+//
+//            myAvatar.setImage(avimg.getBytes());
+//            myAvatar.setClassType(classType);
+//
+//            avatarDao.save(myAvatar);
+//
+//
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//
+//        }
+//
+//        return "redirect:/child-profile";
+
+    }
+
+    @GetMapping("/avatar-form")
     public String showAvatarForm(Model model) {
 
-        model.addAttribute("user", userServ.getCurrentUser());
+        model.addAttribute("avatar", new Avatar());
 
         return "avatars/avatar-form";
 
