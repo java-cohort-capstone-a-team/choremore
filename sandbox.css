@@ -6,51 +6,85 @@
     --color-five: #eaeaea;
 }
 
-.card-header, .card-footer {
+.header, footer {
+    border-radius: 0;
+    box-shadow: 1 1 10px 0 rgba(0, 0, 0, 0.2);
     background-color: var(--color-four);
+    color: var(--color-three);
     font-weight: bold;
+}
+
+.xyz {
+    color: var(--color-three);
+    font-weight: bold;
+}
+
+.card-title {
+    color: var(--color-one);
+    font-weight: bold;
+}
+
+.scroll-bg {
+    background-color: transparent;
 }
 
 .card-body {
     background-color: var(--color-five);
 }
 
-button {
-    background-color: var(--color-one);
-    font-weight: bold;
-}
-
-/*body {*/
-/*    background-color: var(--color-three);*/
-/*    font-family: Arial, Ubuntu, sans-serif;*/
-/*}*/
-
-body, html {
-    background: linear-gradient(to top, var(--color-two) 15%, var(--color-one) 150%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Ubuntu, sans-serif;
-}
-
-.card, .btn, .navbar {
-    box-shadow: 5px 0px 30px slategrey;
+.footer {
+    padding-top: 1rem;
+    background: var(--color-four);
 }
 
 .btn {
-    background-color: var(--color-three);
+    background-color: var(--color-two);
+    color: var(--color-three);
     font-weight: bold;
-    animation: infinite;
-    color: var(--color-two);
 }
+/*button {*/
+/*    background-color: var(--color-two);*/
+/*    color: var(--color-three);*/
+/*    font-weight: bold;*/
+/*}*/
+
+.col-12 {
+    background-color: transparent;
+}
+
+body, html {
+    background: linear-gradient(45deg, var(--color-one), var(--color-two), var(--color-three), var(--color-four), var(--color-five));
+    animation: infinite;
+    animation-fill-mode: forwards;
+}
+
+.card, .btn, .navbar {
+    border-radius: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    background-color: var(--color-four);
+    color: var(--color-three);
+    font-weight: bold;
+}
+
+/*.btn {*/
+/*    background-color: var(--color-five);*/
+/*    font-weight: bold;*/
+/*    animation: infinite;*/
+/*    color: var(--color-three);*/
+/*    animation-fill-mode: forwards;*/
+/*    border: 1px solid var(--color-three);*/
+/*}*/
 
 body {
     font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
 }
 
-.card:hover img {
-    animation: moveSlideshow 3s linear;
-    animation-fill-mode: forwards;
-}
+/*.card:hover img {*/
+/*    transform: scale(1.1);*/
+/*    transition: 0.5s;*/
+/*    animation: infinite;*/
+/*    animation-fill-mode: forwards;*/
+/*}*/
