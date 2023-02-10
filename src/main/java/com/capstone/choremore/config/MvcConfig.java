@@ -1,4 +1,4 @@
-package com.capstone.choremore.configuration;
+package com.capstone.choremore.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
