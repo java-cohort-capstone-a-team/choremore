@@ -16,6 +16,16 @@ public class AvatarServiceImp implements AvatarService {
     @Autowired
     private AvatarRepo avatarDao;
 
+    public Avatar getCurrentAvatar() {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+        Avatar avatar = avatarDao.findAvatarByChildId(userId);
+
+        return avatar;
+
+    }
+
     public Avatar showAvatarByChildId() {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -23,6 +33,18 @@ public class AvatarServiceImp implements AvatarService {
         Avatar avatar = avatarDao.findAvatarByChildId(userId);
 
         return avatar;
+
+    }
+
+    public void editAvatarImgClass(Avatar avatar) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Avatar myAvatar = user.getAvatar();
+
+        myAvatar.setImage(avatar.getImage());
+        myAvatar.setClassType(avatar.getClassType());
+
+        avatarDao.save(avatar);
 
     }
 

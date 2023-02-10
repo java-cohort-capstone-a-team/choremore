@@ -15,13 +15,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/child-profile">Profile</a>
+                    <a class="nav-link active" aria-current="page" href="/child-profile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/chores-view">Chores</a>
+                    <a class="nav-link active" aria-current="page" href="/chores-view">Chores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/skill-builder">Skills Builder</a>
+                    <a class="nav-link active" aria-current="page" href="/skill-builder">Skills Builder</a>
                 </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>

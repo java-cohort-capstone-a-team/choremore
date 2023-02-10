@@ -15,4 +15,8 @@ public interface AvatarService {
 
     void editDefense();
 
+    Avatar getCurrentAvatar();
+
+    void editAvatarImgClass(Avatar avatar);
+
 }

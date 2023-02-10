@@ -1,5 +1,6 @@
 package com.capstone.choremore.models;
 
+import com.sun.mail.iap.ByteArray;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "avatars")
 public class Avatar {
+    @Transient
+    public String getPhotosImagePath() {
+
+        if (image == null) return null;
+
+        return "/user-photos/" + id + "/" + image;
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +30,10 @@ public class Avatar {
     @Column(length = 100)
     private String classType;
 
-    @Column(length = 100)
+    @Lob
+    @Column(length = 64)
     private String image;
+//    private byte[] image;
 
     @Column(length = 100)
     private long level = 1;
