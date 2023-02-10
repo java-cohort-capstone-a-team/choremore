@@ -14,6 +14,17 @@
     font-weight: bold;
 }
 
+
+@keyframes infinite {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+
 .xyz {
     color: var(--color-three);
     font-weight: bold;
