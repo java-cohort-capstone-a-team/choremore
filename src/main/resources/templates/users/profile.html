@@ -39,19 +39,19 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Sub-Accounts</h5>
-                    <div class="container mt-4">
-                        <div th:each="item : ${avatars}" class="card mb-2">
-                            <div class="card-header">
+<div class="container">
+    <div class="row content">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h5 class="card-title text-center">Sub-Accounts</h5>
+                    <div class="container">
+                        <div th:each="item : ${avatars}" class="card mt-3">
+                            <div class="container header pt-3">
                                 <p th:text="${item.child.getUsername()}"/>
                             </div>
-                            <div class="card-footer">
-                                <form th:action="@{/deletechild}" th:method="POST">
+                            <div class="container footer pb-3">
+                                <form th:action="@{/deletechildPro}" th:method="POST">
                                     <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
                                 </form>
                             </div>
@@ -60,23 +60,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Chores</h5>
-                    <div class="container mt-4">
-                        <div class="container mt-4">
-                            <div th:each="item : ${chores}" class="card mb-2">
-                                <div class="card-header d-flex justify-content-between">
-                                    <p th:text="${item.title}"/>
-                                    <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''"/>
+        <div class="col-12 col-md-4 mt-3" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h5 class="card-title text-center">Chores</h5>
+                    <div class="container">
+                            <div th:each="item : ${chores}" class="card mt-3">
+                                <div class="container header pt-3">
+                                    <p class="xyz" th:text="${item.title}"/>
+                                    <p class="xyz" th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''"/>
                                 </div>
                                 <div class="card-body">
                                     <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''"/>
                                     <p th:text="${item.body}"/>
                                 </div>
-                                <div class="card-footer justify-content-between">
-                                    <form th:action="@{/approved}" th:method="POST">
+                                <div class="container footer pb-3">
+                                    <form th:action="@{/approvedPro}" th:method="POST">
                                         <button name="buttonpro" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 mb-1">Sign off (on)</button>
                                     </form>
                                     <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">
@@ -143,25 +142,25 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Messages</h5>
-                    <div class="container mt-4">
-                        <div th:each="item : ${messages}" class="card mb-2">
-                            <div class="card-header d-flex justify-content-between">
-                                <p th:text="${item.title}" />
-                                <p th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
+        <div class="col-12 col-md-4 mt-3" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h5 class="card-title text-center">Messages</h5>
+                    <div class="container">
+                        <div th:each="item : ${messages}" class="card mt-3">
+                            <div class="container header pt-3">
+                                <p class="xyz" th:text="${item.title}" />
+                                <p class="xyz" th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
-                            <div class="card-footer d-flex justify-content-between">
+                            <div class="container footer pb-3">
                             </div>
                         </div>
                     </div>

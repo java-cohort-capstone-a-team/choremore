@@ -29,39 +29,49 @@
     </div>
 </nav>
 
-<div class="container mt-4">
-    <div class="card mb-2">
-        <div class="card-header d-flex justify-content-evenly">
-            <p th:text="'Lvl: ' + ${avatar.getLevel()}" />
-            <p th:text="'Exp: ' + ${avatar.getExp()}" />
-            <p th:text="'Exp needed to lvl up: ' + ${10 - avatar.getExp()}" />
-            <p th:text="'Available build points: ' + ${avatar.getBuild_points()}" />
-        </div>
-        <div class="card-body row align-items-center">
-            <form class="col-12 col-md-4" th:action="@{/hpplus}" th:method="POST">
-                <div class="row">
-                    <p class="col-6 text-end" th:text="'HP: ' + ${avatar.getHp()}" />
-                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
-                </div>
-            </form>
-            <form class="col-12 col-md-4 justify-content-center" th:action="@{/strengthplus}" th:method="POST">
-                <div class="row">
-                    <p class="col-6 text-end" th:text="'STR: ' + ${avatar.getStrength()}" />
-                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
-                </div>
-            </form>
-            <form class="col-12 col-md-4 justify-content-center" th:action="@{/defenseplus}" th:method="POST">
-                <div class="row">
-                    <p class="col-6 text-end" th:text="'DEF: ' + ${avatar.getDefense()}" />
-                    <button class="col-6 btn btn-primary" type="submit">Add point</button>
-                </div>
-            </form>
-        </div>
-        <form th:action="@{/messages}" th:method="POST">
-            <div class="card-footer">
 
+<div class="container">
+    <div class="content">
+        <div class="screen" style="height: 600px">
+            <div class="notImg mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Skills Builder</h2>
+                    <div class="container">
+                        <div th:object="${avatar}" class="card mt-3">
+                            <div class="container header pt-3 d-flex justify-content-between">
+                                <p class="xyz" th:text="'Lvl: ' + ${avatar.getLevel()}"/>
+                                <p class="xyz" th:text="'Exp: ' + ${avatar.getExp()}"/>
+                                <p class="xyz" th:text="'Exp needed to lvl up: ' + ${10 - avatar.getExp()}"/>
+                                <p class="xyz" th:text="'Available build points: ' + ${avatar.getBuild_points()}"/>
+                            </div>
+                            <div class="card-body justify-content-center">
+                                <form class="col-12 col-md-4" th:action="@{/hpplus}" th:method="POST">
+                                    <div class="row">
+                                        <p class="col-6 text-end" th:text="'HP: ' + ${avatar.getHp()}"/>
+                                        <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                                    </div>
+                                </form>
+                                <form class="col-12 col-md-4 justify-content-center" th:action="@{/strengthplus}" th:method="POST">
+                                    <div class="row">
+                                        <p class="col-6 text-end" th:text="'STR: ' + ${avatar.getStrength()}"/>
+                                        <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                                    </div>
+                                </form>
+                                <form class="col-12 col-md-4 justify-content-center" th:action="@{/defenseplus}" th:method="POST">
+                                    <div class="row">
+                                        <p class="col-6 text-end" th:text="'DEF: ' + ${avatar.getDefense()}"/>
+                                        <button class="col-6 btn btn-primary" type="submit">Add point</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="container footer pb-3">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 

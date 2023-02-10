@@ -14,14 +14,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "avatars")
 public class Avatar {
-    @Transient
-    public String getPhotosImagePath() {
-
-        if (image == null) return null;
-
-        return "/user-photos/" + id + "/" + image;
-
-    }
+//    @Transient
+//    public String getPhotosImagePath() {
+//
+//        if (image == null) return null;
+//
+//        return "/user-photos/" + id + "/" + image;
+//
+//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,9 @@ public class Avatar {
     private String classType;
 
     @Lob
-    @Column(length = 64)
-    private String image;
-//    private byte[] image;
+    @Column(name = "path_to_image", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] image;
+//    private String image;
 
     @Column(length = 100)
     private long level = 1;
@@ -58,6 +58,9 @@ public class Avatar {
 
     @OneToOne
     private User child;
+
+    @Transient
+    String imageString;
 
     public Avatar(Avatar copy) {
 
