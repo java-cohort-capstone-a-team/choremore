@@ -81,13 +81,12 @@ public class UserController {
     public String showChildProfile(Model model, Model model2, Model model3, Model model4) {
 
 //        User user = userServ.getCurrentUser();
-//
+
 //        if (user.getAvatar().getImage() == null) {
 //
-//            return "redirect:/create-avatar";
+//            return "avatars/avatar-form";
 //
 //        }
-
 
         model3.addAttribute("messages", messageServ.showMessages());
         model4.addAttribute("message", new Message());
@@ -95,6 +94,15 @@ public class UserController {
         model.addAttribute("user", userServ.getCurrentUser());
 
         return "avatars/child-profile";
+
+    }
+
+    @GetMapping("/build-avatar")
+    public String showAvatarForm(Model model) {
+
+        model.addAttribute("user", userServ.getCurrentUser());
+
+        return "avatars/avatar-form";
 
     }
 
@@ -133,13 +141,13 @@ public class UserController {
 
     }
 
-    @PostMapping("/deletechild")
-    public String deleteChildren(@RequestParam(name = "button") long id) {
-
-        userServ.deleteExistenceChildById(id);
-
-        return "redirect:/avatar-manager";
-
-    }
+//    @PostMapping("/deletechild")
+//    public String deleteChildren(@RequestParam(name = "button") long id) {
+//
+//        userServ.deleteChildExistenceById(id);
+//
+//        return "redirect:/avatar-manager";
+//
+//    }
 
 }

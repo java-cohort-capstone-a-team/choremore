@@ -17,6 +17,6 @@ public interface UserService {
 
     List<User> getChildOfParent();
 
-    void deleteExistenceChildById(long id);
+//    void deleteChildExistenceById(long id);
 
 }

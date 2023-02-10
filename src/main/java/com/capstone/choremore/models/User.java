@@ -49,7 +49,7 @@ public class User {
     @JoinColumn(name = "avatar_id", nullable = true, referencedColumnName = "id")
     private Avatar avatar;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
+    @OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE }, mappedBy = "parent")
     List<Avatar> avatars;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "child")
@@ -57,9 +57,6 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     List<Chore> chores;
-
-    @OneToOne
-    private Chore chore;
 
     public User(User copy) {
 
@@ -75,7 +72,6 @@ public class User {
         avatars = copy.avatars;
         messages = copy.messages;
         chores = copy.chores;
-        chore = copy.chore;
 
     }
 
@@ -96,7 +92,6 @@ public class User {
         this.avatars = avatars;
         this.messages = messages;
         this.chores = chores;
-        this.chore = chore;
     }
 
 }
