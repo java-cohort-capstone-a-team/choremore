@@ -29,44 +29,52 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <img src="img/The Paintings of Joe Jusko.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card with stretched link</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary stretched-link w-100">Go somewhere</a>
+
+<div class="container">
+    <div class="row content">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
+            <div class="overflow-auto notImg mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Your Avatar</h2>
+                    <div class="container">
+                        <div class="card mt-3">
+                            <div class="container header pt-3">
+                                <p th:text="${#authentication.principal.username}" class="xyz"></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
+                                </div>
+                            </div>
+                            <div class="container footer pb-3">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-8" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Message Board (all messages)</h5>
-                    <div class="container mt-4">
-                        <div th:each="item : ${messages}" class="card mb-2">
-                            <div class="card-header d-flex justify-content-between">
-                                <p th:text="${item.title}" />
-                                <p th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
+        <div class="col-12 col-md-8 mt-3" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Messages</h2>
+                    <div class="container">
+                        <div th:each="item : ${messages}" class="card mt-3">
+                            <div class="container header pt-3">
+                                <p class="xyz" th:text="${item.title}" />
+                                <p class="xyz" th:text="'From: ' + ${item.child.username}" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
-                            <div class="card-footer d-flex justify-content-between">
-                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">
-                                    Edit this chore
-                                </button>
-                                <form th:action="@{/deletemsg}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger">Delete</button>
+                            <div class="container footer pb-3">
+                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100 mb-2" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">Edit</button>
+                                <form th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
+                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
                                 </form>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <form th:action="@{/editmsg}" th:method="POST"  th:object="${message}">
+                                        <form th:action="@{/editmsgPro}" th:method="POST"  th:object="${message}">
                                             <input type="hidden" th:value="${item.child.id}" name="childid" />
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -99,11 +107,12 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary mt-3 w-50" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            create a new message
-        </button>
     </div>
 </div>
+
+
+
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

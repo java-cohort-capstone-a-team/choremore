@@ -26,16 +26,15 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Chores</h5>
-                    <div class="container mt-4">
-                        <div class="container mt-4">
-                            <div th:each="item : ${chores}" class="card mb-2">
-                                <div class="card-header d-flex justify-content-between">
+<div class="container">
+    <div class="row content">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
+            <div class="overflow-auto notImg mh-100">
+                <div class="scroll-bg">
+                    <h5 class="card-title text-center">Chores</h5>
+                    <div class="container">
+                            <div th:each="item : ${chores}" class="card mt-3">
+                                <div class="container header pt-3">
                                     <p th:text="${item.title}" />
                                     <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
                                 </div>
@@ -43,7 +42,7 @@
                                     <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''" />
                                     <p th:text="${item.body}" />
                                 </div>
-                                <div class="card-footer justify-content-between">
+                                <div class="container footer pb-3">
                                     <form th:action="@{/approved}" th:method="POST">
                                         <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 mb-1">Sign off (on)</button>
                                     </form>
@@ -96,7 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -91,13 +96,24 @@ public class UserController {
 
 
     @GetMapping("/child-profile")
-    public String showChildProfile(Model model, Model model2, Model model3, Model model4, Model model5) {
+    public String showChildProfile(Model model, Model model2, Model model3, Model model4, Model model5) throws UnsupportedEncodingException {
+
+        Avatar myAv = avatarServ.getCurrentAvatar();
+
+        model5.addAttribute("avatar", myAv);
+
+        byte[] encodeBase64 = Base64.getEncoder().encode(myAv.getImage());
+        String base64Encoded = new String(encodeBase64, StandardCharsets.UTF_8);
+
+        model5.addAttribute("contentImage", base64Encoded);
+
+//        ModelAndView mav = new ModelAndView("view");
+//        mav.addObject("contentImage", base64Encoded);
 
         model3.addAttribute("messages", messageServ.showMessages());
         model4.addAttribute("message", new Message());
         model2.addAttribute("chores", choreServ.showChoresByChildId());
         model.addAttribute("user", userServ.getCurrentUser());
-        model5.addAttribute("avatar", avatarServ.getCurrentAvatar());
 
         return "avatars/child-profile";
 
@@ -108,12 +124,46 @@ public class UserController {
 
         User user = userServ.getCurrentUser();
         Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
-        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-        myAvatar.setImage(fileName);
-        myAvatar.setClassType(class_type);
-        Avatar savedAvatar = avatarDao.save(myAvatar);
-        String uploadDir = "src/main/resources/static/img/avatars/" + savedAvatar.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, image);
+
+        try {
+
+            if(image.isEmpty()) {
+
+                byte[] imageByte = image.getInputStream().readAllBytes();
+
+                myAvatar.setImage(imageByte);
+
+            } else {
+
+                Optional<Avatar> avatar = avatarDao.findById(myAvatar.getId());
+
+                if(avatar.isPresent()) {
+
+                    byte[] image2 = image.getInputStream().readAllBytes();
+
+                    myAvatar.setImage(image2);
+
+                }
+
+            }
+
+            myAvatar.setClassType(class_type);
+            avatarDao.save(myAvatar);
+
+        } catch (IOException e) {
+
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+
+        }
+
+//        User user = userServ.getCurrentUser();
+//        Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
+//        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+//        myAvatar.setImage(fileName);
+//        myAvatar.setClassType(class_type);
+//        Avatar savedAvatar = avatarDao.save(myAvatar);
+//        String uploadDir = "src/main/resources/static/img/avatars/" + savedAvatar.getId();
+//        FileUploadUtil.saveFile(uploadDir, fileName, image);
 
 //        StringBuilder filesNames = new StringBuilder();
 //        Path filesNameAndPath = Paths.get(UPLOAD_DIRECTORY, image.getOriginalFilename());

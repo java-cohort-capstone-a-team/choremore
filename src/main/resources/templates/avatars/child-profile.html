@@ -38,38 +38,47 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-<!--                    <img th:src="/@{${avatar.photosImagePath}}" />-->
-                    <div class="card-body">
-                        <h5 class="card-title">Card with stretched link</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary stretched-link w-100">Go somewhere</a>
+<div class="container">
+    <div class="row content">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
+            <div class="overflow-auto notImg mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Your Avatar</h2>
+                    <div class="container">
+                        <div class="card mt-3">
+                            <div class="container header pt-3">
+                                <p th:text="${#authentication.principal.username}" class="xyz"></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
+                                </div>
+                            </div>
+                            <div class="container footer pb-3">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">List of Chores </h5>
+        <div class="col-12 col-md-4 mt-3" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Chores</h2>
                     <div class="container">
-                        <div th:each="item : ${chores}" class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <p th:text="${item.title}" />
-                                <p th:text="'This chore is worth ' + ${item.value} + ' exp.'" />
+                        <div th:each="item : ${chores}" class="card mt-3">
+                            <div class="container header pt-3">
+                                <p th:text="${item.title}" class="xyz" />
+                                <p th:text="'This chore is worth ' + ${item.value} + ' exp.'" class="xyz" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}"/>
                             </div>
-                            <div class="card-footer justify-content-between">
+                            <div class="container footer pb-3">
                                 <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
                                 <form th:action="@{/changestatusPro}" th:method="POST">
-                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-100">Change Chore Status</button>
+                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-100">Change Status</button>
                                 </form>
                             </div>
                         </div>
@@ -77,20 +86,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Message Board (all messages)</h5>
-                    <div class="container mt-4">
-                        <div th:each="item : ${messages}" class="card mb-2">
-                            <div class="card-header d-flex justify-content-between">
-                                <p th:text="${item.title}" />
-                                <p th:text="'From: ' + ${item.child.username}" />
+
+        <div class="col-12 col-md-4 mt-3" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h2 class="card-title text-center">Messages</h2>
+                    <div class="container">
+                        <div th:each="item : ${messages}" class="card mt-3">
+                            <div class="container header pt-3">
+                                <p class="xyz" th:text="${item.title}" />
+                                <p class="xyz" th:text="'From: ' + ${item.child.username}" />
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
-                            <div class="card-footer justify-content-between">
+                            <div class="container footer pb-3">
                                 <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100 mb-2" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">Edit</button>
                                 <form th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
                                     <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>

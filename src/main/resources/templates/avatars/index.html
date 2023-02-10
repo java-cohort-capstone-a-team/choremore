@@ -26,18 +26,18 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-around">
-        <div class="col-md-4" style="height: 600px">
-            <div class="card overflow-auto mh-100">
-                <div class="card-body d-inline-block">
-                    <h5 class="card-title">Sub-Account</h5>
-                    <div class="container mt-4">
-                        <div th:each="item : ${users}" class="card mb-2">
-                            <div class="card-header">
-                                <p th:text="${item.username}" />
+<div class="container">
+    <div class="row content">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
+            <div class="overflow-auto mh-100">
+                <div class="scroll-bg">
+                    <h5 class="card-title text-center">Sub-Account</h5>
+                    <div class="container">
+                        <div th:each="item : ${users}" class="card mt-3">
+                            <div class="container header pt-3">
+                                <p class="xyz" th:text="${item.username}" />
                             </div>
-                            <div class="card-footer">
+                            <div class="container footer pb-3">
                                 <form th:action="@{/deletechild}" th:method="POST">
                                     <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
                                 </form>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 d-flex align-items-center justify-content-center" style="height: 600px;">
+        <div class="col-12 col-md-8 d-flex align-items-center justify-content-center" style="height: 600px;">
             <button type="button" class="btn btn-primary" style="height: 75px; width: 300px" data-bs-toggle="modal" data-bs-target="#exampleModal">Create new sub-account
             </button>
         </div>
