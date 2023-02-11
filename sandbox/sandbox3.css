@@ -1,0 +1,32 @@
+body {
+    background-color: #1b0642;
+}
+
+hr {
+    color: green;
+}
+
+.card-body {
+    background-color: #e82f0c;
+}
+
+
+.card-header {
+    background-color: #ff5606;
+}
+
+.card-footer {
+    background-color: #960a25;
+}
+
+.btn {
+    background-color: #740846;
+}
+
+.zzz {
+    background-color: #740846;
+}
+
+.uuu {
+    background-color: green;
+}
