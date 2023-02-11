@@ -60,21 +60,26 @@
                     <h2 class="card-title text-center">Messages</h2>
                     <div class="container">
                         <div th:each="item : ${messages}" class="card mt-3">
-                            <div class="container header pt-3">
-                                <p class="xyz" th:text="${item.title}" />
-                                <p class="xyz" th:text="'From: ' + ${item.child.username}" />
+                            <div class="container header pt-3 d-flex">
+                                <div class="me-auto">
+                                    <p class="xyz" th:text="${item.title}" />
+                                    <p class="xyz" th:text="'From: ' + ${item.child.username}" />
+                                </div>
+                                <div>
+                                    <img class="responsive pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
-                            <div class="container footer pb-3">
-                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100 mb-2" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">Edit</button>
-                                <form th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
+                            <div class="container footer pb-3 d-flex justify-content-around">
+                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                <form class="w-100" th:action="@{/deletemsg}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
                                     <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
                                 </form>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <form th:action="@{/editmsgPro}" th:method="POST"  th:object="${message}">
+                                        <form th:action="@{/editmsg}" th:method="POST"  th:object="${message}">
                                             <input type="hidden" th:value="${item.child.id}" name="childid" />
                                             <div class="modal-content">
                                                 <div class="modal-header">

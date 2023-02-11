@@ -34,23 +34,26 @@
                     <h5 class="card-title text-center">Chores</h5>
                     <div class="container">
                             <div th:each="item : ${chores}" class="card mt-3">
-                                <div class="container header pt-3">
-                                    <p th:text="${item.title}" />
-                                    <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
+                                <div class="container header pt-3 d-flex">
+                                    <div class="me-auto">
+                                        <p class="xyz" th:text="${item.title}"/>
+                                        <p class="xyz" th:text="'\'' + ${item.getStatus()} + '\''"/>
+                                    </div>
+                                    <div th:if="${!item.child.avatar.imageString.isEmpty()}">
+                                        <img class="responsive pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''" />
                                     <p th:text="${item.body}" />
                                 </div>
-                                <div class="container footer pb-3">
-                                    <form th:action="@{/approved}" th:method="POST">
-                                        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 mb-1">Sign off (on)</button>
+                                <div class="container footer pb-3 d-flex justify-content-center">
+                                    <button type="button" class="btn btn-success w-25" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                    <form class="w-25" th:action="@{/approved}" th:method="POST">
+                                        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg"></i></button>
                                     </form>
-                                    <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">
-                                        Edit this chore
-                                    </button>
-                                    <form th:action="@{/deletechore}" th:method="POST">
-                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 mb-1">Delete</button>
+                                    <form class="w-25" th:action="@{/deletechore}" th:method="POST">
+                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100"><i class="bi bi-trash-fill"></i></button>
                                     </form>
                                 </div>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,11 +121,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Enter a title for your post</label>
+                        <label for="title" class="form-label">Enter title</label>
                         <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title">
                     </div>
                     <div class="mb-3">
-                        <label for="body" class="form-label">Enter post here</label>
+                        <label for="body" class="form-label">Enter chore here</label>
                         <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5"></textarea>
                     </div>
                     <div class="mb-3">
@@ -135,7 +138,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="value" class="form-label">Enter difficulty value</label>
+                        <label for="value" class="form-label">Enter difficulty value(1 - 5)</label>
                         <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value">
                     </div>
                 </div>

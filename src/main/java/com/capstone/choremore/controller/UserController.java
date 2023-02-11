@@ -28,13 +28,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class UserController {
 
-    @Autowired
-    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/avatars";
+//    @Autowired
+//    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/avatars";
     @Autowired
     private UserService userServ;
 
@@ -73,6 +74,18 @@ public class UserController {
     @GetMapping("/avatar-manager")
     public String avatarManager(Model model, Model model2) {
 
+        List<User> users = userServ.getChildOfParent();
+
+        users.forEach(user -> {
+
+
+
+            Avatar avatar = avatarDao.findAvatarByChildId(user.getId());
+            String base64Encoded = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded);
+
+        });
+
         model2.addAttribute("users", userServ.getChildOfParent());
         model.addAttribute("user", new User());
 
@@ -81,13 +94,41 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Model model2, Model model3, Model model4, Model model5) {
+    public String showProfile(Model model) {
+
+        List<Avatar> myAvatars = avatarServ.showAvatarsByParentsId();
+
+        myAvatars.forEach(avatar -> {
+
+            String base64Encoded = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded);
+
+        });
+
+        List<Chore> chores = choreServ.showChoresByParentsId();
+
+        chores.forEach(chore -> {
+
+            Avatar avatar = avatarServ.getAvatarByChore(chore);
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded2);
+
+        });
+
+        List<Message> messages = messageServ.getChildMessages();
+        messages.forEach(message -> {
+
+            Avatar avatar = avatarServ.getAvatarByMessage(message);
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded2);
+
+        });
 
         model.addAttribute("user", userServ.getCurrentUser());
-        model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
-        model3.addAttribute("chores", choreServ.showChoresByParentsId());
-        model4.addAttribute("messages", messageServ.getChildMessages());
-        model5.addAttribute("chore", new Chore());
+        model.addAttribute("avatars", myAvatars);
+        model.addAttribute("chores", chores);
+        model.addAttribute("messages", messages);
+        model.addAttribute("chore", new Chore());
 
         return "users/profile";
 
@@ -96,23 +137,31 @@ public class UserController {
 
 
     @GetMapping("/child-profile")
-    public String showChildProfile(Model model, Model model2, Model model3, Model model4, Model model5) throws UnsupportedEncodingException {
+    public String showChildProfile(Model model) throws UnsupportedEncodingException {
 
         Avatar myAv = avatarServ.getCurrentAvatar();
 
-        model5.addAttribute("avatar", myAv);
+        model.addAttribute("avatar", myAv);
 
-        byte[] encodeBase64 = Base64.getEncoder().encode(myAv.getImage());
-        String base64Encoded = new String(encodeBase64, StandardCharsets.UTF_8);
+        String base64Encoded = avatarServ.getAvatarImg(myAv);
 
-        model5.addAttribute("contentImage", base64Encoded);
+        model.addAttribute("contentImage", base64Encoded);
+
+        List<Message> messages = messageServ.showMessages();
+        messages.forEach(message -> {
+
+            Avatar avatar = avatarServ.getAvatarByMessage(message);
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded2);
+
+        });
 
 //        ModelAndView mav = new ModelAndView("view");
 //        mav.addObject("contentImage", base64Encoded);
 
-        model3.addAttribute("messages", messageServ.showMessages());
-        model4.addAttribute("message", new Message());
-        model2.addAttribute("chores", choreServ.showChoresByChildId());
+        model.addAttribute("messages", messages);
+        model.addAttribute("message", new Message());
+        model.addAttribute("chores", choreServ.showChoresByChildId());
         model.addAttribute("user", userServ.getCurrentUser());
 
         return "avatars/child-profile";
@@ -156,46 +205,7 @@ public class UserController {
 
         }
 
-//        User user = userServ.getCurrentUser();
-//        Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
-//        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-//        myAvatar.setImage(fileName);
-//        myAvatar.setClassType(class_type);
-//        Avatar savedAvatar = avatarDao.save(myAvatar);
-//        String uploadDir = "src/main/resources/static/img/avatars/" + savedAvatar.getId();
-//        FileUploadUtil.saveFile(uploadDir, fileName, image);
-
-//        StringBuilder filesNames = new StringBuilder();
-//        Path filesNameAndPath = Paths.get(UPLOAD_DIRECTORY, image.getOriginalFilename());
-//        filesNames.append(image.getOriginalFilename());
-//        Files.write(filesNameAndPath, image.getBytes());
-
-
-
-
-//        avatarDao.save(myAvatar);
-
         return "redirect:/child-profile";
-
-//        try {
-//
-//            User user = userServ.getCurrentUser();
-//            Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
-//
-//            myAvatar.setImage(avimg.getBytes());
-//            myAvatar.setClassType(classType);
-//
-//            avatarDao.save(myAvatar);
-//
-//
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//
-//        }
-//
-//        return "redirect:/child-profile";
 
     }
 

@@ -1,5 +1,6 @@
 package com.capstone.choremore.controller;
 
+import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.services.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class AvatarController {
     @GetMapping("/skill-builder")
     public String showChildProfile(Model model) {
 
+        Avatar myAv = avatarServ.getCurrentAvatar();
+        model.addAttribute("avatar", myAv);
+        String base64Encoded = avatarServ.getAvatarImg(myAv);
+        model.addAttribute("contentImage", base64Encoded);
         model.addAttribute("avatar", avatarServ.showAvatarByChildId());
 
         return "avatars/skill-builder";

@@ -13,11 +13,9 @@
     <form th:action="@{/avatarbuilder}" method="POST" th:object="${avatar}" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="mb-3">
-
                 <div>
                     <input type="file" name="image" accept="image/*" class="form-control-file">
                 </div>
-
                 <label class="fw-bold">Select a class:</label>
                 <select class="form-select" name="class_type" aria-label="Disabled select example">
                     <option selected disabled>Select user</option>

@@ -31,7 +31,7 @@
 
 <div class="container">
     <div class="row content">
-        <div class="col-12 col-md-4 mt-3" style="height: 600px">
+        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
                     <h2 class="card-title text-center">Chores</h2>
@@ -46,8 +46,8 @@
                             </div>
                             <div class="container footer pb-3">
                                 <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
-                                <form th:action="@{/changestatusPro}" th:method="POST">
-                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-100">Change Status</button>
+                                <form class="d-flex justify-content-center" th:action="@{/changestatus}" th:method="POST">
+                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-50"><i class="bi bi-check-lg"></i></button>
                                 </form>
                             </div>
                         </div>
