@@ -40,24 +40,20 @@
 
 <div class="container">
     <div class="row content">
-        <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
-            <div class="overflow-auto notImg mh-100">
-                <div class="scroll-bg">
-                    <h2 class="card-title text-center">Your Avatar</h2>
-                    <div class="container">
-                        <div class="card mt-3">
-                            <div class="container header pt-3">
-                                <p th:text="${#authentication.principal.username}" class="xyz"></p>
-                            </div>
-                            <div class="card-body">
-                                <div class="container-fluid">
-                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
-                                </div>
-                            </div>
-                            <div class="container footer pb-3">
-
-                            </div>
+        <div class="col-12 col-md-4 mt-3 screen sticky-md-top">
+            <h2 class="card-title text-center">Your Avatar</h2>
+            <div class="container">
+                <div class="card mt-3">
+                    <div class="container header pt-3">
+                        <p th:text="${#authentication.principal.username}" class="xyz"></p>
+                    </div>
+                    <div th:if="${!contentImage.isEmpty()}" class="card-body">
+                        <div class="container-fluid">
+                            <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
                         </div>
+                    </div>
+                    <div class="container footer pb-3">
+
                     </div>
                 </div>
             </div>
@@ -77,8 +73,8 @@
                             </div>
                             <div class="container footer pb-3">
                                 <p th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''" />
-                                <form th:action="@{/changestatusPro}" th:method="POST">
-                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-100">Change Status</button>
+                                <form class="d-flex justify-content-center" th:action="@{/changestatusPro}" th:method="POST">
+                                    <button name="button" th:value="*{item.id}" type="submit" class="btn btn-warning w-50"><i class="bi bi-check-lg"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -93,46 +89,51 @@
                     <h2 class="card-title text-center">Messages</h2>
                     <div class="container">
                         <div th:each="item : ${messages}" class="card mt-3">
-                            <div class="container header pt-3">
-                                <p class="xyz" th:text="${item.title}" />
-                                <p class="xyz" th:text="'From: ' + ${item.child.username}" />
+                            <div class="container header pt-3 d-flex">
+                                <div class="me-auto">
+                                    <p class="xyz" th:text="${item.title}" />
+                                    <p class="xyz" th:text="'From: ' + ${item.child.username}" />
+                                </div>
+                                <div th:if="${!item.child.avatar.imageString.isEmpty()}">
+                                    <img class="responsive pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />
                             </div>
-                            <div class="container footer pb-3">
-                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100 mb-2" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">Edit</button>
-                                <form th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
+                            <div class="container footer pb-3 d-flex justify-content-around">
+                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success" style="width: 100%;" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                <form style="width: 100%;" th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
+                                    <button name="button" style="width: 100%;" th:value="${item.id}" type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                                 </form>
-                                <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <form th:action="@{/editmsgPro}" th:method="POST"  th:object="${message}">
-                                            <input type="hidden" th:value="${item.child.id}" name="childid" />
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <p class="fw-bold">Edit Message</p>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                            </div>
+                            <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <form th:action="@{/editmsgPro}" th:method="POST"  th:object="${message}">
+                                        <input type="hidden" th:value="${item.child.id}" name="childid" />
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <p class="fw-bold">Edit Message</p>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="edittitle" class="form-label">Edit title</label>
+                                                    <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}">
                                                 </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="edittitle" class="form-label">Edit title</label>
-                                                        <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="editbody" class="form-label">Edit body</label>
-                                                        <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" name="editThis" th:value="${item.id}" class="btn btn-primary" data-bs-dismiss="modal">Submit edit</button>
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <div class="mb-3">
+                                                    <label for="editbody" class="form-label">Edit body</label>
+                                                    <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5"></textarea>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" name="editThis" th:value="${item.id}" class="btn btn-primary" data-bs-dismiss="modal">Submit edit</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

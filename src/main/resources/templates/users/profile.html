@@ -44,15 +44,20 @@
         <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center">Sub-Accounts</h5>
+                    <h5 class="card-title text-center sticky-top">Sub-Accounts</h5>
                     <div class="container">
                         <div th:each="item : ${avatars}" class="card mt-3">
                             <div class="container header pt-3">
                                 <p th:text="${item.child.getUsername()}"/>
                             </div>
+                            <div class="card-body">
+                                <div th:if="${!item.imageString.isEmpty()}" class="container-fluid">
+                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.imageString}"/>
+                                </div>
+                            </div>
                             <div class="container footer pb-3">
-                                <form th:action="@{/deletechildPro}" th:method="POST">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
+                                <form class="d-flex justify-content-center" th:action="@{/deletechildPro}" th:method="POST">
+                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-50"><i class="bi bi-trash-fill"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -63,26 +68,29 @@
         <div class="col-12 col-md-4 mt-3" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center">Chores</h5>
+                    <h5 class="card-title text-center sticky-top">Chores</h5>
                     <div class="container">
                             <div th:each="item : ${chores}" class="card mt-3">
-                                <div class="container header pt-3">
-                                    <p class="xyz" th:text="${item.title}"/>
-                                    <p class="xyz" th:text="'This chore is currently: \'' + ${item.getStatus()} + '\''"/>
+                                <div class="container header pt-3 d-flex">
+                                    <div class="me-auto">
+                                        <p class="xyz" th:text="${item.title}"/>
+                                        <p class="xyz" th:text="'\'' + ${item.getStatus()} + '\''"/>
+                                    </div>
+                                    <div th:if="${!item.child.avatar.imageString.isEmpty()}">
+                                        <img class="responsive pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''"/>
                                     <p th:text="${item.body}"/>
                                 </div>
-                                <div class="container footer pb-3">
-                                    <form th:action="@{/approvedPro}" th:method="POST">
-                                        <button name="buttonpro" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 mb-1">Sign off (on)</button>
+                                <div class="container footer pb-3 d-flex justify-content-center">
+                                    <button type="button" class="btn btn-success w-25" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                    <form class="w-25" th:action="@{/approvedPro}" th:method="POST">
+                                        <button name="buttonpro" th:value="*{item.id}" type="submit" class="btn btn-warning w-100"><i class="bi bi-check-lg"></i></button>
                                     </form>
-                                    <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}">
-                                        Edit this chore
-                                    </button>
-                                    <form th:action="@{/deletechorePro}" th:method="POST">
-                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 mb-1">Delete</button>
+                                    <form class="w-25" th:action="@{/deletechorePro}" th:method="POST">
+                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100"><i class="bi bi-trash-fill"></i></button>
                                     </form>
                                 </div>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog"
@@ -150,12 +158,17 @@
         <div class="col-12 col-md-4 mt-3" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center">Messages</h5>
+                    <h5 class="card-title text-center sticky-top">Messages</h5>
                     <div class="container">
                         <div th:each="item : ${messages}" class="card mt-3">
-                            <div class="container header pt-3">
-                                <p class="xyz" th:text="${item.title}" />
-                                <p class="xyz" th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
+                            <div class="container header pt-3 d-flex">
+                                <div class="me-auto">
+                                    <p class="xyz" th:text="${item.title}" />
+                                    <p class="xyz" th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
+                                </div>
+                                <div>
+                                    <img class="responsive pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <p th:text="${item.body}" />

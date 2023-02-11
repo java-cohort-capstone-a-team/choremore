@@ -72,7 +72,7 @@ public class SecurityConfiguration {
                 .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg", "/skill-builder", "/hpplus", "/strengthplus", "/deletemsg", "/defenseplus", "/changestatus", "/editmsg", "/editmsg", "/editmsgPro", "/deletemsgPro", "/changestatusPro", "/deletechild", "/avatar-form", "/avatarbuilder").hasAuthority("ROLE_CHILD")
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 
         return http.build();
     }

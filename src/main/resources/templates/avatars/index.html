@@ -31,11 +31,16 @@
         <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center">Sub-Account</h5>
+                    <h5 class="card-title text-center">Sub-Accounts</h5>
                     <div class="container">
                         <div th:each="item : ${users}" class="card mt-3">
                             <div class="container header pt-3">
                                 <p class="xyz" th:text="${item.username}" />
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${!item.avatar.imageString.isEmpty()}" class="container-fluid">
+                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.avatar.imageString}"/>
+                                </div>
                             </div>
                             <div class="container footer pb-3">
                                 <form th:action="@{/deletechild}" th:method="POST">
@@ -59,23 +64,23 @@
         <form th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="fw-bold">Create a message</p>
+                    <p class="fw-bold">Create child</p>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Enter a title for your post</label>
+                        <label for="username" class="form-label">Enter username</label>
                         <input type="text" placeholder="username" name="username" class="form-control" id="username" th:field="*{username}" />
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Enter post here</label>
+                        <label for="password" class="form-label">Enter password</label>
                         <input type="password" placeholder="password" class="form-control" name="password" id="password" th:field="*{password}" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit Post</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package com.capstone.choremore.controller;
 
+import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.Chore;
 import com.capstone.choremore.repositories.ChoreRepo;
 import com.capstone.choremore.services.AvatarService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class ChoreController {
@@ -26,6 +29,16 @@ public class ChoreController {
 
     @GetMapping("/chore-manager")
     public String choreView(Model model, Model model2, Model model3) {
+
+        List<Chore> chores = choreServ.showChoresByParentsId();
+
+        chores.forEach(chore -> {
+
+            Avatar avatar = avatarServ.getAvatarByChore(chore);
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded2);
+
+        });
 
         model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
         model.addAttribute("chore", new Chore());

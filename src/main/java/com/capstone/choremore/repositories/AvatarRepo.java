@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface AvatarRepo extends JpaRepository<Avatar, Long> {
 
-    List<Avatar> findAvatarsByParentId(long id);
+    List<Avatar> findAvatarsByParentId(Long id);
 
-    Avatar findAvatarByChildId(long userId);
+//    Avatar findAvatarByParentId(Long id);
+
+    Avatar findAvatarByChildId(Long userId);
 
 //    void deleteAvatarByChildId(long id);
 }

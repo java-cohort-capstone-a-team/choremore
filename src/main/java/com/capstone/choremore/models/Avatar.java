@@ -31,9 +31,8 @@ public class Avatar {
     private String classType;
 
     @Lob
-    @Column(name = "path_to_image", length = Integer.MAX_VALUE, nullable = true)
+    @Column(name = "path_to_image", length = Integer.MAX_VALUE)
     private byte[] image;
-//    private String image;
 
     @Column(length = 100)
     private long level = 1;
