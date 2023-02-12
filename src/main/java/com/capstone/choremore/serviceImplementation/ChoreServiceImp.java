@@ -89,7 +89,7 @@ public class ChoreServiceImp implements ChoreService {
             long newExp = avatar.getExp() + chore.getValue();
             long newBuildPoints = avatar.getBuild_points() + chore.getValue();
 
-            if (newExp > 10) {
+            if (newExp >= 10) {
 
                 long newLevel = avatar.getLevel() + 1;
 
