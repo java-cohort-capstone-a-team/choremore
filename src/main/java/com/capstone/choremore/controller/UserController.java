@@ -1,6 +1,5 @@
 package com.capstone.choremore.controller;
 
-import com.capstone.choremore.imagehandle.FileUploadUtil;
 import com.capstone.choremore.models.*;
 import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.UserRepo;
@@ -11,32 +10,22 @@ import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
 public class UserController {
 
-//    @Autowired
-//    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/avatars";
     @Autowired
     private UserService userServ;
 
@@ -54,8 +43,6 @@ public class UserController {
 
     @Autowired
     private AvatarService avatarServ;
-//    @Autowired
-//    private AvatarRepo avatarRepo;
 
     @GetMapping("/create-avatar")
     public String childAvatarForm(Model model) {
@@ -158,9 +145,6 @@ public class UserController {
 
         });
 
-//        ModelAndView mav = new ModelAndView("view");
-//        mav.addObject("contentImage", base64Encoded);
-
         model.addAttribute("messages", messages);
         model.addAttribute("message", new Message());
         model.addAttribute("chores", choreServ.showChoresByChildId());
@@ -175,6 +159,28 @@ public class UserController {
 
         User user = userServ.getCurrentUser();
         Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
+
+        if (Objects.equals(class_type, "fairy")) {
+
+            String fairy;
+
+        } else if (Objects.equals(class_type, "warrior")) {
+
+            String warrior;
+
+        } else if (Objects.equals(class_type, "mage")) {
+
+            String wizard;
+
+        } else if (Objects.equals(class_type, "undead")) {
+
+            String undead;
+
+        } else if (Objects.equals(class_type, "dwarf")) {
+
+            String dwarf;
+
+        }
 
         try {
 
@@ -228,8 +234,6 @@ public class UserController {
         model.addAttribute("avatar", myAv);
 
         String base64Encoded = avatarServ.getAvatarImg(myAv);
-
-
 
         List<Avatar> avatars = avatarDao.findAll();
         avatars.forEach(avatar -> {
