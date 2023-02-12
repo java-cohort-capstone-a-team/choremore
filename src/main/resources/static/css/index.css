@@ -134,3 +134,113 @@ a:hover:after {
     }
 }
 
+.avatar {
+    position: relative;
+}
+
+
+
+#tooltip {
+
+    position: relative;
+    cursor: pointer;
+    border-bottom: 2px dotted;
+    padding: 7px;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+#tooltip {
+
+    position: absolute;
+    left: 50%;
+    top:0;
+    transform: translate(-50%);
+    background-color: #000;
+    color: #fff;
+    white-space: nowrap;
+    padding: 10px 15px;
+    border-radius: 7px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+}
+
+#tooltipText::before{
+
+    content: "";
+    position: absolute;
+    left:50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 15px solid;
+    border-color: #000 #000 #000 #000;
+
+}
+
+#tooltip:hover #tooltipText{
+
+    top: -130%;
+    visibility: visible;
+    opacity: 1;
+
+}
+
+.avatar::before,
+.avatar::after {
+    --scale: 0;
+    --arrow-size: 20px;
+    --tooltip-color: #dd6e42;
+
+    position: absolute;
+    top: -.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+}
+
+.avatar::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+
+    content: attr(data-tooltip);
+    color: white;
+    padding: .5rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    background: var(--tooltip-color);
+}
+
+.avatar:hover::before,
+.avatar:hover::after {
+    --scale: 1;
+}
+
+.avatar::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+
+    content: '';
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
