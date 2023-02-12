@@ -3,6 +3,7 @@ package com.capstone.choremore.controller;
 import com.capstone.choremore.imagehandle.FileUploadUtil;
 import com.capstone.choremore.models.*;
 import com.capstone.choremore.repositories.AvatarRepo;
+import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import com.capstone.choremore.services.MessageService;
@@ -38,6 +39,9 @@ public class UserController {
 //    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/avatars";
     @Autowired
     private UserService userServ;
+
+    @Autowired
+    private UserRepo userDao;
 
     @Autowired
     private AvatarRepo avatarDao;
@@ -77,8 +81,6 @@ public class UserController {
         List<User> users = userServ.getChildOfParent();
 
         users.forEach(user -> {
-
-
 
             Avatar avatar = avatarDao.findAvatarByChildId(user.getId());
             String base64Encoded = avatarServ.getAvatarImg(avatar);
@@ -219,11 +221,29 @@ public class UserController {
     }
 
     @GetMapping("/battle-arena")
-    public String showBattleArena(Model model, Model model2, Model model3) {
+    public String showBattleArena(Model model) {
 
-        model.addAttribute("user", userServ.getCurrentUser());
-        model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
-        model3.addAttribute("chores", choreServ.showChoresByParentsId());
+        Avatar myAv = avatarServ.getCurrentAvatar();
+
+        model.addAttribute("avatar", myAv);
+
+        String base64Encoded = avatarServ.getAvatarImg(myAv);
+
+
+
+        List<Avatar> avatars = avatarDao.findAll();
+        avatars.forEach(avatar -> {
+
+
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+            avatar.setImageString(base64Encoded2);
+
+        });
+
+
+        model.addAttribute("contentImage", base64Encoded);
+        model.addAttribute("avatars", avatars);
+
 
         return "avatars/battle-arena";
 
