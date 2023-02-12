@@ -38,11 +38,11 @@ public class MessageController {
     }
 
     @GetMapping("/message-board")
-    public String show(Model model, Model model2, Model model3) throws UnsupportedEncodingException {
+    public String show(Model model) throws UnsupportedEncodingException {
 
         Avatar myAvatar = avatarServ.getCurrentAvatar();
 
-        model3.addAttribute("avatars", myAvatar);
+        model.addAttribute("avatars", myAvatar);
 
         String base64Encoded = avatarServ.getAvatarImg(myAvatar);
 
@@ -55,8 +55,8 @@ public class MessageController {
 
         });
 
-        model3.addAttribute("contentImage", base64Encoded);
-        model2.addAttribute("messages", messages);
+        model.addAttribute("contentImage", base64Encoded);
+        model.addAttribute("messages", messages);
         model.addAttribute("message", new Message());
 
         return "/messages/index";
