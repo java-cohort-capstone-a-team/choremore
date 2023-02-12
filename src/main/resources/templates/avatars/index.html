@@ -39,7 +39,7 @@
                             </div>
                             <div class="card-body">
                                 <div th:if="${!item.avatar.imageString.isEmpty()}" class="container-fluid">
-                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.avatar.imageString}"/>
+                                    <img class="responsive img-thumbnail" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.avatar.imageString}"/>
                                 </div>
                             </div>
                             <div class="container footer pb-3">

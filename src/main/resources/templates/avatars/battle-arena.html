@@ -21,6 +21,9 @@
                     <a class="nav-link active " aria-current="page" href="/chores-view">Chores</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="/skill-builder">Skills Builder</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active " aria-current="page" href="/message-board">Message Board</a>
                 </li>
             </ul>
@@ -41,7 +44,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container-fluid">
-                            <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
+                            <img class="responsive img-thumbnail" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${contentImage}"/>
                         </div>
                     </div>
                     <div class="container footer pb-3">
@@ -50,9 +53,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="col-12 col-md-8 mt-3" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
@@ -65,11 +65,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
-                                    <img class="responsive" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.imageString}"/>
+                                    <img class="responsive img-thumbnail" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.imageString}"/>
                                 </div>
                             </div>
                             <div class="container footer pb-3">
-                                <form style="width: 100%;" th:action="@{/deletemsgPro}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
+                                <form th:action="@{/battle}" th:method="POST" class="d-flex justify-content-center">
                                     <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-75"><i class="bi bi-lightning-charge-fill"></i></button>
                                 </form>
                             </div>
@@ -78,10 +78,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </div>
 
