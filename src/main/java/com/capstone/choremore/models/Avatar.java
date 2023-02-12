@@ -14,14 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "avatars")
 public class Avatar {
-//    @Transient
-//    public String getPhotosImagePath() {
-//
-//        if (image == null) return null;
-//
-//        return "/user-photos/" + id + "/" + image;
-//
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
