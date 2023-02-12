@@ -77,7 +77,7 @@
                                         <p class="xyz" th:text="'\'' + ${item.getStatus()} + '\''"/>
                                     </div>
                                     <div th:if="${!item.child.avatar.imageString.isEmpty()}">
-                                        <img class="responsive img-thumbnail pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                        <img class="responsive img-thumbnail" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -167,7 +167,7 @@
                                     <p class="xyz" th:if="${#authentication.principal.id != item.child.id}" th:text="'Author: ' + ${item.child.username}" />
                                 </div>
                                 <div>
-                                    <img class="responsive img-thumbnail pb-2" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
+                                    <img class="responsive img-thumbnail" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
                                 </div>
                             </div>
                             <div class="card-body">
