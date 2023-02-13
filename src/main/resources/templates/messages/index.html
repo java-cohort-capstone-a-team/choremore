@@ -76,9 +76,9 @@
                                 <p th:text="${item.body}" />
                             </div>
                             <div class="container footer pb-3 d-flex justify-content-around">
-                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                <button th:if="${#authentication.principal.id == item.child.id}" type="button" class="btn btn-success w-100" data-tooltip="Edit current message" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
                                 <form class="w-100" th:action="@{/deletemsg}" th:method="POST" th:if="${#authentication.principal.id == item.child.id}">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100">Delete</button>
+                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100" data-tooltip="Delete current message">Delete</button>
                                 </form>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">

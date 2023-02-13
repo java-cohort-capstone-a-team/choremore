@@ -64,23 +64,23 @@
                         <p class="xyz" th:text="'Lvl: ' + ${avatar.getLevel()}"/>
                         <p class="xyz" th:text="'Exp: ' + ${avatar.getExp()}"/>
                         <p class="xyz" th:text="'Exp to lvl up: ' + ${10 - avatar.getExp()}"/>
-                        <p class="xyz" th:text="'Build Points: ' + ${avatar.getBuild_points()}"/>
+                        <p class="xyz" th:text="'Build Points: ' + ${avatar.getBuild_points()}"  data-tooltip="Available build points"/>
                     </div>
                     <div class="card-body d-flex justify-content-around">
                         <form th:action="@{/hpplus}" th:method="POST">
-                            <div>
+                            <div   data-tooltip="Increase health">
                                 <p class="text-center" th:text="'HP: ' + ${avatar.getHp()}"/>
                                 <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </form>
                         <form th:action="@{/strengthplus}" th:method="POST">
-                            <div>
+                            <div   data-tooltip="Increase strength">
                                 <p class="text-center" th:text="'STR: ' + ${avatar.getStrength()}"/>
                                 <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i></button>
                             </div>
                         </form>
                         <form th:action="@{/defenseplus}" th:method="POST">
-                            <div>
+                            <div   data-tooltip="Increase defense">
                                 <p class="text-center" th:text="'DEF: ' + ${avatar.getDefense()}"/>
                                 <button class="btn btn-primary" type="submit"><i class="bi bi-plus-lg"></i></button>
                             </div>
