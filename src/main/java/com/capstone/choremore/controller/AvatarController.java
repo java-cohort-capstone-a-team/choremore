@@ -20,9 +20,15 @@ public class AvatarController {
     public String showChildProfile(Model model) {
 
         Avatar myAv = avatarServ.getCurrentAvatar();
+
         model.addAttribute("avatar", myAv);
+
         String base64Encoded = avatarServ.getAvatarImg(myAv);
-        model.addAttribute("contentImage", base64Encoded);
+
+        myAv.setImageString(base64Encoded);
+
+        
+        model.addAttribute("contentImage", myAv.getImageString());
         model.addAttribute("avatar", avatarServ.showAvatarByChildId());
 
         return "avatars/skill-builder";

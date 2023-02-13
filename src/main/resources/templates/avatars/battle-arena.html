@@ -57,7 +57,7 @@
                 <div class="scroll-bg">
                     <h2 class="card-title text-center">Opponents</h2>
                     <div class="container row">
-                        <div th:each="item : ${avatars}" class="card col-12 col-sm-6 col-md-4 mt-3"  th:if="${#authentication.principal.username != item.child.username}">
+                        <div th:each="item : ${avatars}" class="border border-0 card col-12 col-sm-6 col-md-4 mt-3"  th:if="${#authentication.principal.username != item.child.username}">
                             <div class="container header pt-3 d-flex justify-content-between">
                                 <p th:text="${item.child.username}" class="xyz"></p>
                                 <p class="xyz" th:text="'Lvl: ' + ${item.level}" />

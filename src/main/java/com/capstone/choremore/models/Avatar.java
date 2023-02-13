@@ -66,6 +66,7 @@ public class Avatar {
         build_points = copy.build_points;
         parent = copy.parent;
         child = copy.child;
+        imageString = copy.imageString;
 
     }
 
