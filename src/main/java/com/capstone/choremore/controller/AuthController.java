@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.capstone.choremore.repositories.UserRepo;
 
-
 @Controller
 @NoArgsConstructor
 public class AuthController {
@@ -34,7 +33,9 @@ public class AuthController {
         var role = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles());
 
         if (role.contains(new SimpleGrantedAuthority("ROLE_PARENT"))) {
+
             return "redirect:/profile";
+
         } else if (role.contains(new SimpleGrantedAuthority("ROLE_CHILD"))) {
 
             if (user.getAvatar().getImage() == null) {
@@ -52,4 +53,5 @@ public class AuthController {
         }
 
     }
+
 }

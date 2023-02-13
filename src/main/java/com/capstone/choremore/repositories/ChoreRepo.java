@@ -7,12 +7,8 @@ import java.util.List;
 
 public interface ChoreRepo extends JpaRepository<Chore, Long> {
 
-    Chore findByTitle(String title);
-
     List<Chore> findChoreByParentId(long id);
 
     List<Chore> findAllByChildId(long id);
-
-    List<Chore> getChoresByChildId(long id);
 
 }

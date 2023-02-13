@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ChoremoreApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(ChoremoreApplication.class, args);
+
     }
 
 }

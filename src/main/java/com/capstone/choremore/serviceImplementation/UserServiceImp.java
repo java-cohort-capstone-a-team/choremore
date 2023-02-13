@@ -1,8 +1,6 @@
 package com.capstone.choremore.serviceImplementation;
 
 import com.capstone.choremore.models.Avatar;
-import com.capstone.choremore.models.Chore;
-import com.capstone.choremore.models.Message;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.ChoreRepo;
@@ -117,61 +115,5 @@ public class UserServiceImp implements UserService {
         return myChildren;
 
     }
-
-//    public void deleteChildExistenceById(long id) {
-//
-////        System.out.println("id = " + id);
-////
-////        List<Message> childMsgs =  messageDao.getMessagesByChildId(id);
-////        childMsgs.forEach(msg -> msg.setChild(null));
-////        messageDao.deleteAll(childMsgs);
-////
-////        List<Chore> childChores = choreDao.getChoresByChildId(id);
-////        childChores.forEach(chore -> {
-////
-////            chore.setChild(null);
-////            chore.setParent(null);
-////
-////        });
-////
-////        choreDao.deleteAll(childChores);
-////
-////        Avatar child = avatarDao.findAvatarByChildId(id);
-////        child.setChild(null);
-////        child.setParent(null);
-////        avatarDao.delete(child);
-//
-//        userDao.findById(id).ifPresent(user -> {
-//
-//            if (user.getRoles().equals("ROLE_CHILD")) {
-//
-//                List<Message> childMsgs =  messageDao.getMessagesByChildId(id);
-//                childMsgs.forEach(msg -> msg.setChild(null));messageDao.deleteAll(childMsgs);
-//
-//                List<Chore> childChores = choreDao.getChoresByChildId(id);
-//                childChores.forEach(chore -> {
-//
-//                    chore.setChild(null);
-//                    chore.setParent(null);
-//
-//                });
-//
-//                choreDao.deleteAll(childChores);
-//
-//                user.getAvatar().setChild(null);
-//                user.getAvatar().setParent(null);
-//                avatarDao.delete(user.getAvatar());
-//
-//            }
-////            user.setChore(null);
-////            user.setChores(null);
-////            user.setAvatar(null);
-////            userDao.save(user);
-//
-//        });
-//
-//        userDao.deleteById(id);
-//
-//    }
 
 }
