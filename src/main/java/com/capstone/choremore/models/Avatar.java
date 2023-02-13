@@ -69,5 +69,4 @@ public class Avatar {
         imageString = copy.imageString;
 
     }
-
 }

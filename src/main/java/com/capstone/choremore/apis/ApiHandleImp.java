@@ -1,6 +1,7 @@
 package com.capstone.choremore.apis;
 
 import com.capstone.choremore.config.Config;
+import com.capstone.choremore.models.Avatar;
 import okhttp3.*;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -161,4 +162,45 @@ public class ApiHandleImp {
         apiHandleImp.Fairy();
     }
 
+//    public String getAvatarImg(Avatar myAvatar) {
+//        String avatarImg = "";
+//        switch (myAvatar.getAvatarType()) {
+//            case "Mage":
+//                try {
+//                    avatarImg = Mage();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            case "Warrior":
+//                try {
+//                    avatarImg = Warrior();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            case "Fairy":
+//                try {
+//                    avatarImg = Fairy();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            case "Dwarf":
+//                try {
+//                    avatarImg = Dwarf();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            case "Undead":
+//                try {
+//                    avatarImg = Undead();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//        }
+//        return avatarImg;
+//    }
 }
