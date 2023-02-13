@@ -7,10 +7,13 @@ import com.capstone.choremore.models.UserWithRoles;
 import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.MessageRepo;
 import com.capstone.choremore.repositories.UserRepo;
+import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,9 @@ public class MessageServiceImp implements MessageService {
 
     @Autowired
     private AvatarRepo avatarDao;
+
+    @Autowired
+    private AvatarService avatarServ;
 
     @Override
     public void createMessage(Message message) {
@@ -75,6 +81,29 @@ public class MessageServiceImp implements MessageService {
         editedMessage.setChild(child);
 
         messageDao.save(editedMessage);
+
+    }
+
+    public void messageBoardView(Model model) throws UnsupportedEncodingException {
+
+        Avatar myAvatar = avatarServ.getCurrentAvatar();
+
+        model.addAttribute("avatars", myAvatar);
+
+        String base64Encoded = avatarServ.getAvatarImg(myAvatar);
+
+        List<Message> messages = showMessages();
+        messages.forEach(message -> {
+
+            Avatar msgAvatar = avatarServ.getAvatarByMessage(message);
+            String base64Encoded2 = avatarServ.getAvatarImg(msgAvatar);
+            msgAvatar.setImageString(base64Encoded2);
+
+        });
+
+        model.addAttribute("contentImage", base64Encoded);
+        model.addAttribute("messages", messages);
+        model.addAttribute("message", new Message());
 
     }
 

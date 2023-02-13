@@ -1,6 +1,5 @@
 package com.capstone.choremore.models;
 
-import com.sun.mail.iap.ByteArray;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
