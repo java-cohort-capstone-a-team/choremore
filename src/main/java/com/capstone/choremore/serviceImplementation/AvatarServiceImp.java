@@ -8,7 +8,6 @@ import com.capstone.choremore.services.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -19,9 +18,6 @@ public class AvatarServiceImp implements AvatarService {
 
     @Autowired
     private AvatarRepo avatarDao;
-
-    @Autowired
-    private MessageRepo messageDao;
 
     @Autowired
     private UserRepo userDao;
@@ -73,20 +69,11 @@ public class AvatarServiceImp implements AvatarService {
 
     }
 
-//    public Avatar showAvatarByParentId() {
-//
-//            UserWithRoles user = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//            Long id = user.getId();
-//
-//            return avatarDao.findAvatarByParentId(id);
-//
-//    }
-
     public List<Avatar> showAvatarsByParentsId() {
 
             UserWithRoles user = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Long id = user.getId();
+
             return avatarDao.findAvatarsByParentId(id);
 
     }
@@ -111,15 +98,20 @@ public class AvatarServiceImp implements AvatarService {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userDao.findById(user.getId());
+
         if (optionalUser.isPresent()) {
+
             user = optionalUser.get();
+
         }
+
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
 
             avatar.setHp(avatar.getHp() + 1);
             avatar.setBuild_points(avatar.getBuild_points() - 1);
+
             avatarDao.save(avatar);
 
         }
@@ -130,15 +122,22 @@ public class AvatarServiceImp implements AvatarService {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userDao.findById(user.getId());
+
         if (optionalUser.isPresent()) {
+
             user = optionalUser.get();
+
         }
+
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
+
             avatar.setStrength(avatar.getStrength() + 1);
             avatar.setBuild_points(avatar.getBuild_points() - 1);
+
             avatarDao.save(avatar);
+
         }
 
     }
@@ -147,15 +146,22 @@ public class AvatarServiceImp implements AvatarService {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userDao.findById(user.getId());
+
         if (optionalUser.isPresent()) {
+
             user = optionalUser.get();
+
         }
+
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
+
             avatar.setDefense(avatar.getDefense() + 1);
             avatar.setBuild_points(avatar.getBuild_points() - 1);
+
             avatarDao.save(avatar);
+
         }
 
     }

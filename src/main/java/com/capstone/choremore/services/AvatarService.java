@@ -14,8 +14,6 @@ public interface AvatarService {
 
     String getAvatarImg(Avatar myAv);
 
-//    Avatar showAvatarByParentId();
-
     Avatar getAvatarByMessage(Message message);
 
     Avatar getAvatarByChore (Chore chore);

@@ -36,6 +36,7 @@ public class ChoreController {
 
             Avatar avatar = avatarServ.getAvatarByChore(chore);
             String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+
             avatar.setImageString(base64Encoded2);
 
         });
@@ -54,6 +55,7 @@ public class ChoreController {
         choreServ.createChore(chore, id);
 
         return "redirect:/chore-manager";
+
     }
 
     @PostMapping("/changestatus")

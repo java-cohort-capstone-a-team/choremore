@@ -103,6 +103,7 @@ public class ChoreServiceImp implements ChoreService {
             }
 
             avatar.setBuild_points(newBuildPoints);
+
             avatarDao.save(avatar);
             choreDao.delete(chore);
 
@@ -132,10 +133,9 @@ public class ChoreServiceImp implements ChoreService {
         editedChore.setTitle(chore.getTitle());
         editedChore.setBody(chore.getBody());
         editedChore.setValue(chore.getValue());
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         User child = userDao.findById(id).get();
 
-//        chore.setParent(user);
         editedChore.setChild(child);
 
         choreDao.save(editedChore);

@@ -9,9 +9,6 @@ public interface AvatarRepo extends JpaRepository<Avatar, Long> {
 
     List<Avatar> findAvatarsByParentId(Long id);
 
-//    Avatar findAvatarByParentId(Long id);
-
     Avatar findAvatarByChildId(Long userId);
 
-//    void deleteAvatarByChildId(long id);
 }

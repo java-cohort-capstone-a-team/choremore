@@ -26,8 +26,6 @@ public class AvatarController {
         String base64Encoded = avatarServ.getAvatarImg(myAv);
 
         myAv.setImageString(base64Encoded);
-
-        
         model.addAttribute("contentImage", myAv.getImageString());
         model.addAttribute("avatar", avatarServ.showAvatarByChildId());
 

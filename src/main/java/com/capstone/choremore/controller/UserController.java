@@ -11,7 +11,6 @@ import com.capstone.choremore.services.MessageService;
 import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,17 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.FileUtils;
-
 
 @Controller
 public class UserController {
@@ -52,6 +43,9 @@ public class UserController {
 
     @Autowired
     private AvatarService avatarServ;
+
+    @Autowired
+    private ApiHandleImp apiServ;
 
     @GetMapping("/create-avatar")
     public String childAvatarForm(Model model) {
@@ -164,173 +158,40 @@ public class UserController {
     }
 
     @PostMapping("/avatarbuilder")
-    public String addImageAndClassToAvatar(@RequestParam("image") MultipartFile image, @RequestParam("class_type") String class_type) throws IOException {
+    public String addImageAndClassToAvatar(@RequestParam("image") MultipartFile image, @RequestParam("class_type") String class_type) throws Exception {
 
         User user = userServ.getCurrentUser();
         Avatar myAvatar = avatarDao.findAvatarByChildId(user.getId());
-        ApiHandleImp apiHandle = new ApiHandleImp();
-//        String base = apiHandle.getAvatarImg(myAvatar);
-
-
 
         if (Objects.equals(class_type, "fairy")) {
 
-
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .connectTimeout(40, TimeUnit.SECONDS)
-                    .writeTimeout(40, TimeUnit.SECONDS)
-                    .readTimeout(40, TimeUnit.SECONDS)
-                    .build();
-            MediaType mediaType = MediaType.parse("text/plain");
-//        FileUtils.writeByteArrayToFile(outputFile, dataForWriting);
-            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("image", "image.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"), new File(image.getOriginalFilename())))
-                    .build();
-            Request request = new Request.Builder()
-                    .url("https://toonify.p.rapidapi.com/v0/emojify")
-                    .method("POST", body)
-                    .addHeader("X-RapidAPI-Key", Config.toonApiKey)
-                    .addHeader("X-RapidAPI-Host", Config.toonApiHost)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } else if (Objects.equals(class_type, "warrior")) {
-
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .connectTimeout(40, TimeUnit.SECONDS)
-                    .writeTimeout(40, TimeUnit.SECONDS)
-                    .readTimeout(40, TimeUnit.SECONDS)
-                    .build();
-            MediaType mediaType = MediaType.parse("text/plain");
-//        FileUtils.writeByteArrayToFile(outputFile, dataForWriting);
-            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("image", "image.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"), new File(image.getOriginalFilename())))
-                    .build();
-            Request request = new Request.Builder()
-                    .url("https://toonify.p.rapidapi.com/v0/toonifyplus")
-                    .method("POST", body)
-                    .addHeader("X-RapidAPI-Key", Config.toonApiKey)
-                    .addHeader("X-RapidAPI-Host", Config.toonApiHost)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            byte[] newImg = apiServ.apiCall(image, Config.toonFairy);
+            myAvatar.setImage(newImg);
 
         } else if (Objects.equals(class_type, "mage")) {
 
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .connectTimeout(40, TimeUnit.SECONDS)
-                    .writeTimeout(40, TimeUnit.SECONDS)
-                    .readTimeout(40, TimeUnit.SECONDS)
-                    .build();
-            MediaType mediaType = MediaType.parse("text/plain");
-//        FileUtils.writeByteArrayToFile(outputFile, dataForWriting);
-            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("image", "image.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"), new File(image.getOriginalFilename())))
-                    .build();
-            Request request = new Request.Builder()
-                    .url("https://toonify.p.rapidapi.com/v0/emojify")
-                    .method("POST", body)
-                    .addHeader("X-RapidAPI-Key", Config.toonApiKey)
-                    .addHeader("X-RapidAPI-Host", Config.toonApiHost)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            byte[] newImg = apiServ.apiCall(image, Config.toonMage);
+            myAvatar.setImage(newImg);
+
+        } else if (Objects.equals(class_type, "warrior")) {
+
+            byte[] newImg = apiServ.apiCall(image, Config.toonWarrior);
+            myAvatar.setImage(newImg);
 
         } else if (Objects.equals(class_type, "undead")) {
 
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .connectTimeout(40, TimeUnit.SECONDS)
-                    .writeTimeout(40, TimeUnit.SECONDS)
-                    .readTimeout(40, TimeUnit.SECONDS)
-                    .build();
-            MediaType mediaType = MediaType.parse("text/plain");
-//        FileUtils.writeByteArrayToFile(outputFile, dataForWriting);
-            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("image", "image.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"), new File(image.getOriginalFilename())))
-                    .build();
-            Request request = new Request.Builder()
-                    .url("https://toonify.p.rapidapi.com/v0/zombify?proceed_without_face=false&return_aligned=false")
-                    .method("POST", body)
-                    .addHeader("X-RapidAPI-Key", Config.toonApiKey)
-                    .addHeader("X-RapidAPI-Host", Config.toonApiHost)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            byte[] newImg = apiServ.apiCall(image, Config.toonUndead);
+            myAvatar.setImage(newImg);
 
         } else if (Objects.equals(class_type, "dwarf")) {
 
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .connectTimeout(40, TimeUnit.SECONDS)
-                    .writeTimeout(40, TimeUnit.SECONDS)
-                    .readTimeout(40, TimeUnit.SECONDS)
-                    .build();
-            MediaType mediaType = MediaType.parse("text/plain");
-//        FileUtils.writeByteArrayToFile(outputFile, dataForWriting);
-            RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("image", "image.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"), new File(image.getOriginalFilename())))
-                    .build();
-            Request request = new Request.Builder()
-                    .url("https://toonify.p.rapidapi.com/v0/emojify")
-                    .method("POST", body)
-                    .addHeader("X-RapidAPI-Key", Config.toonApiKey)
-                    .addHeader("X-RapidAPI-Host", Config.toonApiHost)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            byte[] newImg = apiServ.apiCall(image, Config.toonDwarf);
+            myAvatar.setImage(newImg);
 
         }
 
-        try {
-
-            if(image.isEmpty()) {
-
-                byte[] imageByte = image.getInputStream().readAllBytes();
-
-                myAvatar.setImage(imageByte);
-
-            } else {
-
-                Optional<Avatar> avatar = avatarDao.findById(myAvatar.getId());
-
-                if(avatar.isPresent()) {
-
-                    byte[] image2 = image.getInputStream().readAllBytes();
-
-                    myAvatar.setImage(image2);
-
-                }
-
-            }
-
-            myAvatar.setClassType(class_type);
-            avatarDao.save(myAvatar);
-
-        } catch (IOException e) {
-
-            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
-
-        }
+        myAvatar.setClassType(class_type);
+        avatarDao.save(myAvatar);
 
         return "redirect:/child-profile";
 
@@ -395,14 +256,5 @@ public class UserController {
         }
 
     }
-
-//    @PostMapping("/deletechild")
-//    public String deleteChildren(@RequestParam(name = "button") long id) {
-//
-//        userServ.deleteChildExistenceById(id);
-//
-//        return "redirect:/avatar-manager";
-//
-//    }
 
 }
