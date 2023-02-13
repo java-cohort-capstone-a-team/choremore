@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AvatarServiceImp implements AvatarService {
@@ -109,6 +110,10 @@ public class AvatarServiceImp implements AvatarService {
     public void editHp() {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userDao.findById(user.getId());
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
@@ -124,6 +129,10 @@ public class AvatarServiceImp implements AvatarService {
     public void editStrength() {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userDao.findById(user.getId());
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
@@ -137,6 +146,10 @@ public class AvatarServiceImp implements AvatarService {
     public void editDefense() {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userDao.findById(user.getId());
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
         Avatar avatar = user.getAvatar();
 
         if (avatar.getBuild_points() > 0) {
