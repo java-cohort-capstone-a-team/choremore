@@ -3,13 +3,21 @@ package com.capstone.choremore.apis;
 import com.capstone.choremore.config.Config;
 import com.capstone.choremore.models.Avatar;
 import okhttp3.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class ApiHandleImp {
 
     // Undead API call to turn a picture into a zombie >>>>>>>>>>
-    public String Undead() throws Exception {
+    public String Undead(MultipartFile image) throws Exception {
+
+        String filePath = System.getProperty("java.io.tmpdir") + File.separator + image.getOriginalFilename();
+        File file = new File(filePath);
+        image.transferTo(file);
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(40, TimeUnit.SECONDS)
@@ -19,8 +27,7 @@ public class ApiHandleImp {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image","IMG_8020.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                new File("/Users/alvinmckenzie/Desktop/IMG_8020.png")))
+                        RequestBody.create(MediaType.parse("application/octet-stream"), file))
                 .build();
         Request request = new Request.Builder()
                 .url("https://toonify.p.rapidapi.com/v0/zombify?proceed_without_face=false&return_aligned=false")
@@ -37,7 +44,11 @@ public class ApiHandleImp {
 
     // Mage API call to turn a picture into a mage >>>>>>>>>>
 
-    public String Mage() throws Exception {
+    public String Mage(MultipartFile image) throws Exception {
+
+        String filePath = System.getProperty("java.io.tmpdir") + File.separator + image.getOriginalFilename();
+        File file = new File(filePath);
+        image.transferTo(file);
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(40, TimeUnit.SECONDS)
@@ -47,8 +58,7 @@ public class ApiHandleImp {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image","IMG_8020.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                new File("/Users/alvinmckenzie/Desktop/IMG_8020.png")))
+                        RequestBody.create(MediaType.parse("application/octet-stream"), file))
                 .build();
         Request request = new Request.Builder()
                 .url("https://toonify.p.rapidapi.com/v0/comic?proceed_without_face=false&return_aligned=false")
@@ -66,7 +76,11 @@ public class ApiHandleImp {
 
     // Warrior API call to turn a picture into a warrior >>>>>>>>>>
 
-    public String Warrior() throws Exception {
+    public String Warrior(MultipartFile image) throws Exception {
+
+        String filePath = System.getProperty("java.io.tmpdir") + File.separator + image.getOriginalFilename();
+        File file = new File(filePath);
+        image.transferTo(file);
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(40, TimeUnit.SECONDS)
@@ -76,8 +90,7 @@ public class ApiHandleImp {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image","IMG_8020.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                new File("/Users/alvinmckenzie/Desktop/IMG_8020.png")))
+                        RequestBody.create(MediaType.parse("application/octet-stream"), file))
                 .build();
         Request request = new Request.Builder()
                 .url("https://toonify.p.rapidapi.com/v0/toonifyplus")
@@ -95,7 +108,11 @@ public class ApiHandleImp {
 
     //  Fairy API call to turn a picture into a fairy >>>>>>>>>>
 
-    public String Fairy() throws Exception {
+    public String Fairy(MultipartFile image) throws Exception {
+
+        String filePath = System.getProperty("java.io.tmpdir") + File.separator + image.getOriginalFilename();
+        File file = new File(filePath);
+        image.transferTo(file);
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(40, TimeUnit.SECONDS)
@@ -105,8 +122,7 @@ public class ApiHandleImp {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image","IMG_8020.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                new File("/Users/alvinmckenzie/Desktop/IMG_8020.png")))
+                        RequestBody.create(MediaType.parse("application/octet-stream"), file))
                 .build();
         Request request = new Request.Builder()
                 .url("https://toonify.p.rapidapi.com/v0/emojify")
@@ -124,7 +140,11 @@ public class ApiHandleImp {
 
 //    this is the code I am using to test the api >>>>>>>>>
 
-    public String Dwarf() throws Exception {
+    public String Dwarf(MultipartFile image) throws Exception {
+
+        String filePath = System.getProperty("java.io.tmpdir") + File.separator + image.getOriginalFilename();
+        File file = new File(filePath);
+        image.transferTo(file);
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(40, TimeUnit.SECONDS)
@@ -134,8 +154,7 @@ public class ApiHandleImp {
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("image","IMG_8020.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                new File("/Users/alvinmckenzie/Desktop/IMG_8020.png")))
+                        RequestBody.create(MediaType.parse("application/octet-stream"), file))
                 .build();
         Request request = new Request.Builder()
                 .url("https://toonify.p.rapidapi.com/v0/emojify")
@@ -152,14 +171,7 @@ public class ApiHandleImp {
     //   <<<<<<<<<< this is the code I am using to test the api
 
     public static void main(String[] args) throws Exception {
-        ApiHandleImp apiHandleImp = new ApiHandleImp();
-        apiHandleImp.Undead();
-        apiHandleImp.Mage();
-        apiHandleImp.Warrior();
 
-        String t = apiHandleImp.Dwarf();
-        System.out.println(t);
-        apiHandleImp.Fairy();
     }
 
 //    public String getAvatarImg(Avatar myAvatar) {
