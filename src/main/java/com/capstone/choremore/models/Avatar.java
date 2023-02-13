@@ -68,5 +68,4 @@ public class Avatar {
         child = copy.child;
 
     }
-
 }
