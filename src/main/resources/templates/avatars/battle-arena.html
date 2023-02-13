@@ -69,7 +69,7 @@
                             </div>
                             <div class="container footer pb-3">
                                 <form th:action="@{/battle}" th:method="POST" class="d-flex justify-content-center">
-                                    <button name="enemy" th:value="${item.id}" type="submit" class="btn btn-danger w-75"><i class="bi bi-lightning-charge-fill"></i></button>
+                                    <button name="enemy" th:value="${item.id}" type="submit" class="btn btn-danger w-75"   data-tooltip="Begin battle"><i class="bi bi-lightning-charge-fill"></i></button>
                                 </form>
                             </div>
                         </div>
