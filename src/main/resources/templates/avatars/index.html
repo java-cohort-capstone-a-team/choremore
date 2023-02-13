@@ -8,17 +8,17 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><span class="orangeLine">Navbar</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/profile">Profile</a>
+                    <a class="nav-link active " aria-current="page" href="/profile"><span class="orangeLine">Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/chore-manager">Chore Manager</a>
+                    <a class="nav-link active " aria-current="page" href="/chore-manager"><span class="orangeLine">Manager</span></a>
                 </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="container footer pb-3">
                                 <form th:action="@{/deletechild}" th:method="POST">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 avatar" data-tooltip="Allows user to DELETE this current Avatar/Sub-Account">Delete</button>
+                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 avatar" data-tooltip="Delete Sub-Account">Delete</button>
                                 </form>
                             </div>
                         </div>
