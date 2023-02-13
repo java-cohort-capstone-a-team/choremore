@@ -6,10 +6,13 @@ import com.capstone.choremore.models.User;
 import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.ChoreRepo;
 import com.capstone.choremore.repositories.UserRepo;
+import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import java.util.List;
 
 @Service
@@ -23,6 +26,9 @@ public class ChoreServiceImp implements ChoreService {
 
     @Autowired
     private UserRepo userDao;
+
+    @Autowired
+    private AvatarService avatarServ;
 
     @Override
     public List<Chore> showChoresByParentsId() {
@@ -139,6 +145,31 @@ public class ChoreServiceImp implements ChoreService {
         editedChore.setChild(child);
 
         choreDao.save(editedChore);
+
+    }
+
+    public void choreManagerView(Model model) {
+
+        List<Chore> chores = showChoresByParentsId();
+
+        chores.forEach(chore -> {
+
+            Avatar avatar = avatarServ.getAvatarByChore(chore);
+            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
+
+            avatar.setImageString(base64Encoded2);
+
+        });
+
+        model.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
+        model.addAttribute("chore", new Chore());
+        model.addAttribute("chores", showChoresByParentsId());
+
+    }
+
+    public void choresView(Model model) {
+
+        model.addAttribute("chores", childShowChores());
 
     }
 

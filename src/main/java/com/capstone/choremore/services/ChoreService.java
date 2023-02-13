@@ -1,6 +1,7 @@
 package com.capstone.choremore.services;
 
 import com.capstone.choremore.models.Chore;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -21,5 +22,9 @@ public interface ChoreService {
     void deleteChoreById(long id);
 
     void editChore(Chore chore, long id, long id2);
+
+    void choreManagerView(Model model);
+
+    void choresView(Model model);
 
 }

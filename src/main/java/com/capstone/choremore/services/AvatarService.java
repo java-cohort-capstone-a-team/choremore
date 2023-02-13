@@ -3,6 +3,7 @@ package com.capstone.choremore.services;
 import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.Chore;
 import com.capstone.choremore.models.Message;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -26,6 +27,6 @@ public interface AvatarService {
 
     Avatar getCurrentAvatar();
 
-    void editAvatarImgClass(Avatar avatar);
+    void skillBuilderView(Model model);
 
 }

@@ -1,9 +1,6 @@
 package com.capstone.choremore.controller;
 
-import com.capstone.choremore.models.Avatar;
 import com.capstone.choremore.models.Chore;
-import com.capstone.choremore.repositories.ChoreRepo;
-import com.capstone.choremore.services.AvatarService;
 import com.capstone.choremore.services.ChoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,37 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 public class ChoreController {
 
     @Autowired
     private ChoreService choreServ;
 
-    @Autowired
-    private AvatarService avatarServ;
-
-    @Autowired
-    private ChoreRepo choreDao;
-
     @GetMapping("/chore-manager")
-    public String choreView(Model model, Model model2, Model model3) {
+    public String choreView(Model model) {
 
-        List<Chore> chores = choreServ.showChoresByParentsId();
-
-        chores.forEach(chore -> {
-
-            Avatar avatar = avatarServ.getAvatarByChore(chore);
-            String base64Encoded2 = avatarServ.getAvatarImg(avatar);
-
-            avatar.setImageString(base64Encoded2);
-
-        });
-
-        model2.addAttribute("avatars", avatarServ.showAvatarsByParentsId());
-        model.addAttribute("chore", new Chore());
-        model3.addAttribute("chores", choreServ.showChoresByParentsId());
+        choreServ.choreManagerView(model);
 
         return "chores/index";
 
@@ -97,7 +73,7 @@ public class ChoreController {
     @GetMapping("/chores-view")
     public String showAllChores(Model model) {
 
-        model.addAttribute("chores", choreServ.childShowChores());
+        choreServ.choresView(model);
 
         return "chores/choresview";
 

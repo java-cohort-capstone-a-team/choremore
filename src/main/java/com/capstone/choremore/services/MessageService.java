@@ -1,7 +1,9 @@
 package com.capstone.choremore.services;
 
 import com.capstone.choremore.models.Message;
+import org.springframework.ui.Model;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface MessageService {
@@ -15,5 +17,7 @@ public interface MessageService {
     void deleteMessageById(long id);
 
     void editMessage(Message message, long id, long id2);
+
+    void messageBoardView(Model model) throws UnsupportedEncodingException;
 
 }
