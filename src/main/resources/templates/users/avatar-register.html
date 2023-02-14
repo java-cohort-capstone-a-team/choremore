@@ -6,10 +6,10 @@
 
 <body>
 
-<th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>
+<th:block th:replace="~{partials/homenav :: navbar}"></th:block>
 
 
-<div class="container mt-4" style="height: 600px">
+<div class="container mt-4" style="height: 600px; padding-top: 50px">
   <h4 class="fw-semibold">Your account is all set, now set up your first child account!</h4>
   <form th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
     <div class="row mb-3">
