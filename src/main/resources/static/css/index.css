@@ -1,5 +1,4 @@
 
-
 :root {
     --color-one: #dd6e42;
     --color-two: #e8dab2;
@@ -55,20 +54,17 @@
     color: var(--color-three);
     font-weight: bold;
 }
-/*button {*/
-/*    background-color: var(--color-two);*/
-/*    color: var(--color-three);*/
-/*    font-weight: bold;*/
-/*}*/
 
 .col-12 {
     background-color: transparent;
 }
 
+body {
+    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
+}
+
 body, html {
-    background: linear-gradient(45deg, var(--color-one), var(--color-two), var(--color-three), var(--color-four), var(--color-five));
-    animation: infinite;
-    animation-fill-mode: forwards;
+    background:#EEE9DA;
 }
 
 .card, .btn, .navbar {
@@ -80,151 +76,6 @@ body, html {
     background-color: var(--color-four);
     color: var(--color-three);
     font-weight: bold;
-}
-
-/*.btn {*/
-/*    background-color: var(--color-five);*/
-/*    font-weight: bold;*/
-/*    animation: infinite;*/
-/*    color: var(--color-three);*/
-/*    animation-fill-mode: forwards;*/
-/*    border: 1px solid var(--color-three);*/
-/*}*/
-
-body {
-    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
-}
-
-/*.card:hover img {*/
-/*    transform: scale(1.1);*/
-/*    transition: 0.5s;*/
-/*    animation: infinite;*/
-/*    animation-fill-mode: forwards;*/
-/*}*/
-
-
-
-
-.orangeLine{
-    display: inline-block;
-    padding: 3px;
-    position: relative;
-}
-.orangeLine:after {
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: orangered;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-}
-.orangeLine:hover:after {
-    width: 100%;
-    left: 0;
-}
-@media screen and (max-height: 300px) {
-    ul {
-        margin-top: 40px;
-    }
-}
-
-:root {
-    --color-one: #dd6e42;
-    --color-two: #e8dab2;
-    --color-three: #4f6d7a;
-    --color-four: #c0d6df;
-    --color-five: #eaeaea;
-}
-
-.header, footer {
-    border-radius: 0;
-    box-shadow: 1 1 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: var(--color-four);
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-
-@keyframes infinite {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
-
-.xyz {
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-.card-title {
-    color: var(--color-one);
-    font-weight: bold;
-}
-
-.scroll-bg {
-    background-color: transparent;
-}
-
-.card-body {
-    background-color: var(--color-five);
-}
-
-.footer {
-    padding-top: 1rem;
-    background: var(--color-four);
-}
-
-.btn {
-    background-color: var(--color-two);
-    color: var(--color-three);
-    font-weight: bold;
-}
-/*button {*/
-/*    background-color: var(--color-two);*/
-/*    color: var(--color-three);*/
-/*    font-weight: bold;*/
-/*}*/
-
-.col-12 {
-    background-color: transparent;
-}
-
-body, html {
-    background: linear-gradient(45deg, var(--color-one), var(--color-two), var(--color-three), var(--color-four), var(--color-five));
-    animation: infinite;
-    animation-fill-mode: forwards;
-}
-
-.card, .btn, .navbar {
-    border-radius: 0;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.header {
-    background-color: var(--color-four);
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-/*.btn {*/
-/*    background-color: var(--color-five);*/
-/*    font-weight: bold;*/
-/*    animation: infinite;*/
-/*    color: var(--color-three);*/
-/*    animation-fill-mode: forwards;*/
-/*    border: 1px solid var(--color-three);*/
-/*}*/
-
-body {
-    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
 }
 
 [data-tooltip]:hover:after {
@@ -263,6 +114,132 @@ body {
 [data-tooltip] {
     position: relative;
 }
+
+.orangeLine{
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+}
+.orangeLine:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: orangered;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.orangeLine:hover:after {
+    width: 100%;
+    left: 0;
+}
+@media screen and (max-height: 300px) {
+    ul {
+        margin-top: 40px;
+    }
+}
+
+--------------------------
+
+.avatar {
+    position: relative;
+}
+
+
+
+#tooltip {
+
+    position: relative;
+    cursor: pointer;
+    border-bottom: 2px dotted;
+    padding: 7px;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+#tooltip {
+
+    position: absolute;
+    left: 50%;
+    top:0;
+    transform: translate(-50%);
+    background-color: #000;
+    color: #fff;
+    white-space: nowrap;
+    padding: 10px 15px;
+    border-radius: 7px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+}
+
+#tooltipText::before{
+
+    content: "";
+    position: absolute;
+    left:50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 15px solid;
+    border-color: #000 #000 #000 #000;
+
+}
+
+#tooltip:hover #tooltipText{
+
+    top: -130%;
+    visibility: visible;
+    opacity: 1;
+
+}
+
+.avatar::before,
+.avatar::after {
+    --scale: 0;
+    --arrow-size: 20px;
+    --tooltip-color: #dd6e42;
+
+    position: absolute;
+    top: -.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+}
+
+.avatar::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+
+    content: attr(data-tooltip);
+    color: white;
+    padding: .5rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    background: var(--tooltip-color);
+}
+
+.avatar:hover::before,
+.avatar:hover::after {
+    --scale: 1;
+}
+
+.avatar::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+
+    content: '';
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+}
+
 
 
 
