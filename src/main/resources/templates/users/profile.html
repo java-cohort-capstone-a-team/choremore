@@ -88,7 +88,7 @@
                             </div>
                             <div class="container footer pb-3 d-flex justify-content-center">
                                 <button type="button" class="btn btn-success w-25 avatar" data-tooltip="Edit this chore" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
-                                <form class="w-25" th:action="@{/approvedPro}" th:method="POST">
+                                <form th:if="${item.getStatus() == 'Complete'}" class="w-25" th:action="@{/approvedPro}" th:method="POST">
                                     <button name="buttonpro" th:value="*{item.id}" type="submit" class="btn btn-warning w-100 avatar" data-tooltip="Sign off task"><i class="bi bi-check-lg"></i></button>
                                 </form>
                                 <form class="w-25" th:action="@{/deletechorePro}" th:method="POST">
