@@ -79,7 +79,7 @@
                                     <img class="responsive img-thumbnail" style="border-radius: 50%; float: right;" width="60px" height="auto" th:src="'data:image/jpeg;base64,'+${item.child.avatar.imageString}"/>
                                 </div>
                                 <div>
-                                    <span th:style="'background-color:' + (${item.getStatus()} == 'Complete' ? 'green' : 'red') + '; height: 25px; width: 25px; border-radius: 50%; display: inline-block;'" ></span>
+                                    <span th:style="'background-color:' + (${item.getStatus()} == 'Complete' ? 'green' : 'red') + '; height: 25px; width: 25px; border-radius: 50%; display: inline-block;'" data-tooltip="status"></span>
                                 </div>
                             </div>
                             <div class="card-body">
