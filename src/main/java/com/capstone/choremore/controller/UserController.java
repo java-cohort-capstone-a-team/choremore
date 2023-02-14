@@ -34,7 +34,7 @@ public class UserController {
 
         userServ.createChildUser(user);
 
-        return "redirect:/avatar-manager";
+        return "redirect:/profile";
 
     }
 
@@ -81,7 +81,7 @@ public class UserController {
 
         userServ.avatarFormView(model);
 
-        return "avatars/avatar-form";
+        return "users/profile";
 
     }
 
