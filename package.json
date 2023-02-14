@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/main/resources/static/js/index.js"
   },
   "dependencies": {
     "chart.js": "^4.2.0"
