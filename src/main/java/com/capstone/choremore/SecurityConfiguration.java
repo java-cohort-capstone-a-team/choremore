@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                 .logoutSuccessUrl("/login?logout")
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/login", "/sign-up", "/css/**")
+                .requestMatchers("/", "/login", "/sign-up", "/css/**", "/js/**")
                 .permitAll()
                 .and().authorizeHttpRequests().requestMatchers("/create-avatar", "/avatar-creation", "/profile", "/chore-manager", "/avatar-manager", "/deletechore", "/editchore", "/createchore", "/approved", "/deletechild", "/approvedPro", "/deletechorePro", "/editchorePro").hasAuthority("ROLE_PARENT")
                 .and().authorizeHttpRequests().requestMatchers("/child-profile", "/chores-view", "/message-board", "/createmsg", "/skill-builder", "/hpplus", "/strengthplus", "/deletemsg", "/defenseplus", "/changestatus", "/editmsg", "/editmsg", "/editmsgPro", "/deletemsgPro", "/changestatusPro", "/deletechild", "/avatar-form", "/avatarbuilder", "/battle-arena", "/battle").hasAuthority("ROLE_CHILD")
