@@ -81,7 +81,7 @@ public class UserController {
 
         userServ.avatarFormView(model);
 
-        return "users/profile";
+        return "avatars/avatar-form";
 
     }
 

@@ -40,7 +40,7 @@
         <div class="col-12 col-md-4 mt-3 screen" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center sticky-top">Sub-Accounts</h5>
+                    <h5 class="card-title text-center">Sub-Accounts</h5>
                     <div class="container">
                         <div th:each="item : ${avatars}" class="card mt-3">
                             <div class="container header pt-3">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="container footer pb-3">
                                 <form class="d-flex justify-content-center" th:action="@{/deletechildPro}" th:method="POST">
-                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-50 avatar" data-tooltip="Delete Sub-Account"><i class="bi bi-trash-fill"></i></button>
+<!--                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-50 avatar" data-tooltip="Delete Sub-Account"><i class="bi bi-trash-fill"></i></button>-->
                                 </form>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
         <div class="col-12 col-md-4 mt-3" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center sticky-top">Chores</h5>
+                    <h5 class="card-title text-center">Chores</h5>
                     <div class="container">
                         <div th:each="item : ${chores}" class="card mt-3">
                             <div class="container header pt-3 d-flex">
@@ -85,6 +85,7 @@
                             <div class="card-body">
                                 <p th:text="'This chore is assigned to: \'' + ${item.child.getUsername()} + '\''"/>
                                 <p th:text="${item.body}"/>
+                                <p th:text="'This chore is worth ' + ${item.value} + ' exp.'" class="xyz" />
                             </div>
                             <div class="container footer pb-3 d-flex justify-content-center">
                                 <button type="button" class="btn btn-success w-25 avatar" data-tooltip="Edit this chore" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
@@ -162,7 +163,7 @@
         <div class="col-12 col-md-4 mt-3" style="height: 600px">
             <div class="overflow-auto mh-100">
                 <div class="scroll-bg">
-                    <h5 class="card-title text-center sticky-top">Messages</h5>
+                    <h5 class="card-title text-center">Messages</h5>
                     <div class="container">
                         <div th:each="item : ${messages}" class="card mt-3">
                             <div class="container header pt-3 d-flex">
