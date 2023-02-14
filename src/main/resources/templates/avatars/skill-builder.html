@@ -8,23 +8,23 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><span class="orangeLine">Navbar</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/child-profile">Profile</a>
+                    <a class="nav-link active " aria-current="page" href="/child-profile"><span class="orangeLine">Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/chores-view">Chores</a>
+                    <a class="nav-link active " aria-current="page" href="/chores-view"><span class="orangeLine">Chores</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/message-board">Message Board</a>
+                    <a class="nav-link active " aria-current="page" href="/message-board"><span class="orangeLine">Message Board</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/battle-arena">Battle Arena</a>
+                    <a class="nav-link active " aria-current="page" href="/battle-arena"><span class="orangeLine">Battle Arena</span></a>
                 </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>

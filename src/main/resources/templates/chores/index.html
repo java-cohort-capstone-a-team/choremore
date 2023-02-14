@@ -8,17 +8,17 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><span class="orangeLine">Navbar</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/profile">Profile</a>
+                    <a class="nav-link active " aria-current="page" href="/profile"><span class="orangeLine">Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/avatar-manager">Child Manager</a>
+                    <a class="nav-link active " aria-current="page" href="/avatar-manager"><span class="orangeLine">Child Manager</span></a>
                 </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
@@ -48,12 +48,12 @@
                                     <p th:text="${item.body}" />
                                 </div>
                                 <div class="container footer pb-3 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-success w-25 avatar" data-tooltip="Allows user to EDIT this current chore" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
+                                    <button type="button" class="btn btn-success w-25 avatar"   data-tooltip="Edit this chore" data-bs-toggle="modal" th:data-bs-target="'#' + ${item.id}"><i class="bi bi-pencil-fill"></i></button>
                                     <form class="w-25" th:action="@{/approved}" th:method="POST">
-                                        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 avatar" data-tooltip="Allows user to sign off this current chore"><i class="bi bi-check-lg"></i></button>
+                                        <button name="button" th:value="*{item.id}" type="submit" class="btn btn-primary w-100 avatar" data-tooltip="Sign off task"><i class="bi bi-check-lg"></i></button>
                                     </form>
                                     <form class="w-25" th:action="@{/deletechore}" th:method="POST">
-                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 avatar" data-tooltip="Allows user to DELETE this current chore"><i class="bi bi-trash-fill"></i></button>
+                                        <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-100 avatar" data-tooltip="Delete this chore"><i class="bi bi-trash-fill"></i></button>
                                     </form>
                                 </div>
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
