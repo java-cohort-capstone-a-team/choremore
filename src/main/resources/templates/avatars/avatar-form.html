@@ -6,10 +6,10 @@
 
 <body>
 
-<th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>
-<h1>Create an account</h1>
+<th:block th:replace="~{partials/homenav :: navbar}"></th:block>
 
-<div class="container" style="height: 500px">
+<div class="container" style="height: 680px; padding-top: 70px">
+    <h4 class="fw-semibold">Upload a profile image and select a class-type</h4>
     <form th:action="@{/avatarbuilder}" method="POST" th:object="${avatar}" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="mb-3">

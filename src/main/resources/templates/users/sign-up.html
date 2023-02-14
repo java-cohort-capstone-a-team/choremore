@@ -7,9 +7,9 @@
 <body>
 
 <th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
-<h4 style="padding-top: 70px">Create an account</h4>
 
-<div class="container" style="height: 600px">
+<div class="container" style="height: 680px; padding-top: 70px">
+    <h4 class="fw-semibold">Create an account</h4>
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
         <div class="row mb-3">
             <label for="username" class="col-sm-2 col-form-label">Username</label>
