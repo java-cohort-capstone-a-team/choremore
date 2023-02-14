@@ -1,9 +1,0 @@
-//{
-//  "scripts": {
-//    "start": "node src/main/resources/static/js/index.js",
-//    "start"
-//  },
-//  "dependencies": {
-//    "chart.js": "^4.2.0"
-//  }
-//}
