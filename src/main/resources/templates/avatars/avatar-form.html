@@ -9,7 +9,7 @@
 <th:block th:replace="~{partials/navbar.html :: navbar}"></th:block>
 <h1>Create an account</h1>
 
-<div class="container">
+<div class="container" style="height: 500px">
     <form th:action="@{/avatarbuilder}" method="POST" th:object="${avatar}" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="mb-3">
