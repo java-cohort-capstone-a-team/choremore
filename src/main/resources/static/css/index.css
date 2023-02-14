@@ -1,5 +1,3 @@
-
-
 :root {
     --color-one: #dd6e42;
     --color-two: #e8dab2;
@@ -55,20 +53,17 @@
     color: var(--color-three);
     font-weight: bold;
 }
-/*button {*/
-/*    background-color: var(--color-two);*/
-/*    color: var(--color-three);*/
-/*    font-weight: bold;*/
-/*}*/
 
 .col-12 {
     background-color: transparent;
 }
 
+body {
+    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
+}
+
 body, html {
-    background: linear-gradient(45deg, var(--color-one), var(--color-two), var(--color-three), var(--color-four), var(--color-five));
-    animation: infinite;
-    animation-fill-mode: forwards;
+    background:#EEE9DA;
 }
 
 .card, .btn, .navbar {
@@ -80,151 +75,6 @@ body, html {
     background-color: var(--color-four);
     color: var(--color-three);
     font-weight: bold;
-}
-
-/*.btn {*/
-/*    background-color: var(--color-five);*/
-/*    font-weight: bold;*/
-/*    animation: infinite;*/
-/*    color: var(--color-three);*/
-/*    animation-fill-mode: forwards;*/
-/*    border: 1px solid var(--color-three);*/
-/*}*/
-
-body {
-    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
-}
-
-/*.card:hover img {*/
-/*    transform: scale(1.1);*/
-/*    transition: 0.5s;*/
-/*    animation: infinite;*/
-/*    animation-fill-mode: forwards;*/
-/*}*/
-
-
-
-
-.orangeLine{
-    display: inline-block;
-    padding: 3px;
-    position: relative;
-}
-.orangeLine:after {
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: orangered;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-}
-.orangeLine:hover:after {
-    width: 100%;
-    left: 0;
-}
-@media screen and (max-height: 300px) {
-    ul {
-        margin-top: 40px;
-    }
-}
-
-:root {
-    --color-one: #dd6e42;
-    --color-two: #e8dab2;
-    --color-three: #4f6d7a;
-    --color-four: #c0d6df;
-    --color-five: #eaeaea;
-}
-
-.header, footer {
-    border-radius: 0;
-    box-shadow: 1 1 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: var(--color-four);
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-
-@keyframes infinite {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
-
-.xyz {
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-.card-title {
-    color: var(--color-one);
-    font-weight: bold;
-}
-
-.scroll-bg {
-    background-color: transparent;
-}
-
-.card-body {
-    background-color: var(--color-five);
-}
-
-.footer {
-    padding-top: 1rem;
-    background: var(--color-four);
-}
-
-.btn {
-    background-color: var(--color-two);
-    color: var(--color-three);
-    font-weight: bold;
-}
-/*button {*/
-/*    background-color: var(--color-two);*/
-/*    color: var(--color-three);*/
-/*    font-weight: bold;*/
-/*}*/
-
-.col-12 {
-    background-color: transparent;
-}
-
-body, html {
-    background: linear-gradient(45deg, var(--color-one), var(--color-two), var(--color-three), var(--color-four), var(--color-five));
-    animation: infinite;
-    animation-fill-mode: forwards;
-}
-
-.card, .btn, .navbar {
-    border-radius: 0;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.header {
-    background-color: var(--color-four);
-    color: var(--color-three);
-    font-weight: bold;
-}
-
-/*.btn {*/
-/*    background-color: var(--color-five);*/
-/*    font-weight: bold;*/
-/*    animation: infinite;*/
-/*    color: var(--color-three);*/
-/*    animation-fill-mode: forwards;*/
-/*    border: 1px solid var(--color-three);*/
-/*}*/
-
-body {
-    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
 }
 
 [data-tooltip]:hover:after {
@@ -265,11 +115,42 @@ body {
     position: relative;
 }
 
+
 [data-tooltip].left::before {
     top: 50%;
     right: calc(100% + 5px);
     transform: translateY(-50%);
 }
+
+.orangeLine{
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+}
+.orangeLine:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: orangered;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.orangeLine:hover:after {
+    width: 100%;
+    left: 0;
+}
+@media screen and (max-height: 300px) {
+    ul {
+        margin-top: 40px;
+    }
+}
+
+
 
 [data-tooltip].left::after {
     top: 50%;

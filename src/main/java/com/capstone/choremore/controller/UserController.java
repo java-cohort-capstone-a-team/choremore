@@ -34,7 +34,7 @@ public class UserController {
 
         userServ.createChildUser(user);
 
-        return "redirect:/avatar-manager";
+        return "redirect:/profile";
 
     }
 

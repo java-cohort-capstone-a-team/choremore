@@ -30,7 +30,7 @@ public class ChoreController {
 
         choreServ.createChore(chore, id);
 
-        return "redirect:/chore-manager";
+        return "redirect:/profile";
 
     }
 
@@ -39,7 +39,7 @@ public class ChoreController {
 
         choreServ.changeChoreStatus(id);
 
-        return "redirect:/chores-view";
+        return "redirect:/child-profile";
 
     }
 
@@ -57,7 +57,7 @@ public class ChoreController {
 
         choreServ.approveChore(id);
 
-        return "redirect:/chore-manager";
+        return "redirect:/profile";
 
     }
 
@@ -75,7 +75,7 @@ public class ChoreController {
 
         choreServ.choresView(model);
 
-        return "chores/choresview";
+        return "avatars/child-profile";
 
     }
 
@@ -84,7 +84,7 @@ public class ChoreController {
 
         choreServ.deleteChoreById(id);
 
-        return "redirect:/chore-manager";
+        return "redirect:/profile";
 
     }
 
@@ -102,7 +102,7 @@ public class ChoreController {
 
         choreServ.editChore(chore, id, id2);
 
-        return "redirect:/chore-manager";
+        return "redirect:/profile";
 
     }
 

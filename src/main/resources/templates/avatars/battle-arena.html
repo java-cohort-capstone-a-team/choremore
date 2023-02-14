@@ -18,13 +18,10 @@
                     <a class="nav-link active " aria-current="page" href="/child-profile"><span class="orangeLine">Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/chores-view"><span class="orangeLine">Chores</span></a>
+                    <a class="nav-link active " aria-current="page" href="/message-board"><span class="orangeLine">Message Board</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active " aria-current="page" href="/skill-builder"><span class="orangeLine">Skills Builder</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active " aria-current="page" href="/message-board"><span class="orangeLine">Message Board</span></a>
                 </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()"><button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout</button></form>
