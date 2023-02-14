@@ -19,13 +19,6 @@
 
 <div sec:authorize="isAuthenticated()">You're already logged in</div>
 
-<div class="container mb-3 d-flex flex-row-reverse" sec:authorize="!isAuthenticated()">
-    <div class="row">
-        <label for="create-account">Don't have an account? Click here to create one.</label>
-        <a href="/sign-up"><button id="create-account" class="btn btn-warning">Create an account</button></a>
-    </div>
-</div>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -61,7 +54,7 @@
 <div class="container-fluid" style="margin-top: 5px">
     <!-- Jumbotron -->
     <div class="p-4 shadow-4 rounded-3" style="background-color: hsl(0, 0%, 94%);">
-        <h2>Hello world!</h2>
+        <h2>Hello To ChoreMore!</h2>
         <p>
             This is a simple hero unit, a simple jumbotron-style component for calling extra
             attention to featured content or information.
@@ -73,40 +66,37 @@
             It uses utility classes for typography and spacing to space content out within the
             larger container.
         </p>
-        <button type="button" class="btn btn-primary">
-            Learn more
-        </button>
+        <div class="row">
+            <label for="create-account">Don't have an account? Click here to create one.</label>
+            <a href="/sign-up"><button id="create-account" class="btn btn-warning">Create an account</button></a>
+        </div>
     </div>
     <!-- Jumbotron -->
 </div>
 
-<div class="container-fluid" style="margin-top: 5px">
+<div class="container-fluid" style="margin-top: 15px">
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Parent Accounts</h5>
+                    <li class="list-group-item">- Main account holder can create sub accounts</li>
+                    <li class="list-group-item">- Main account assign (CREATE) posted chores to the sub account</li>
+                    <li class="list-group-item">- Main account track (VIEW) posted chores and their completion of chores</li>
+                    <li class="list-group-item">- The main account holder then confirms (DELETE) the completion from the main account and  the sub account avatar is awarded build points </li>
+                    <li class="list-group-item">- Main account can track posts made on the message board by sub accounts</li>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Child Accounts</h5>
+                    <li class="list-group-item">- Sub account holder creates an avatar </li>
+                    <li class="list-group-item">- Sub account selects a class from a pool of 5 class options, and builds (CREATE) a stat line following the scope of an RPG style game</li>
+                    <li class="list-group-item">- Sub accounts avatar is awarded points (UPDATE) or ‘buffs’ to build the stat line</li>
+                    <li class="list-group-item">- There is also a message board for sub account holders to post message and connect with friends</li>
                 </div>
             </div>
         </div>
