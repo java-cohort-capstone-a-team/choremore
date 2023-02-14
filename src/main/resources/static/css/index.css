@@ -232,6 +232,7 @@ body {
     transition: all 0.2s ease 0.5s;
     transition-delay: 3s;
     visibility: visible;
+    z-index: 99999;
 }
 
 [data-tooltip]:after {
@@ -264,8 +265,14 @@ body {
     position: relative;
 }
 
+[data-tooltip].left::before {
+    top: 50%;
+    right: calc(100% + 5px);
+    transform: translateY(-50%);
+}
 
-
-
-
-
+[data-tooltip].left::after {
+    top: 50%;
+    right: calc(100% + 5px);
+    transform: translateY(-50%);
+}
