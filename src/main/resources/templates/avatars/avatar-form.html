@@ -8,7 +8,7 @@
 
 <th:block th:replace="~{partials/homenav :: navbar}"></th:block>
 
-<div class="container" style="padding-top: 90px; padding-bottom: 90px; height: 730px">
+<div class="container" style="padding-top: 90px; padding-bottom: 90px; height: 760px">
     <h4 class="fw-semibold">Upload a profile image and select a class-type</h4>
     <form th:action="@{/avatarbuilder}" method="POST" th:object="${avatar}" enctype="multipart/form-data">
         <div class="row mb-3">
