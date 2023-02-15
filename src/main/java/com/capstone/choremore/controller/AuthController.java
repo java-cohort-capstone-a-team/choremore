@@ -28,29 +28,31 @@ public class AuthController {
     @GetMapping("/")
     private String routeUser() {
 
-        UserWithRoles principal = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.getById(principal.getId());
-        var role = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles());
+        if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().equals(String.class)) {
 
-        if (role.contains(new SimpleGrantedAuthority("ROLE_PARENT"))) {
+            UserWithRoles principal = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userDao.getById(principal.getId());
+            var role = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles());
 
-            return "redirect:/profile";
+            if (role.contains(new SimpleGrantedAuthority("ROLE_PARENT"))) {
 
-        } else if (role.contains(new SimpleGrantedAuthority("ROLE_CHILD"))) {
+                return "redirect:/profile";
 
-            if (user.getAvatar().getImage() == null) {
+            } else if (role.contains(new SimpleGrantedAuthority("ROLE_CHILD"))) {
 
-                return "avatars/avatar-form";
+                if (user.getAvatar().getImage() == null) {
 
-            }
+                    return "avatars/avatar-form";
+
+                }
 
                 return "redirect:/child-profile";
 
-        } else {
-
-            return "redirect:/login";
+            }
 
         }
+
+        return "redirect:/login";
 
     }
 
