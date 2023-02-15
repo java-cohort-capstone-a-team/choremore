@@ -9,16 +9,16 @@
 
 <th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
 
-<div th:if="${param.error}">
-    Invalid Username and Password.
-</div>
-
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-
-<div sec:authorize="isAuthenticated()">You're already logged in</div>
 <div class="container pb-xxl-5" style="padding-top: 70px">
+    <div th:if="${param.error}">
+        Invalid Username and Password
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        You're already logged in
+    </div>
     <div class="content mh-100">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">

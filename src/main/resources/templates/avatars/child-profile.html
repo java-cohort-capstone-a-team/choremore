@@ -29,15 +29,6 @@
     </div>
 </nav>
 
-<div sec:authorize="isAuthenticated()">
-    <div>
-        User ID: <span th:text="${#authentication.principal.id}"/>
-    </div>
-    <div>
-        Username: <span th:text="${#authentication.principal.username}"/>
-    </div>
-</div>
-
 <div class="container">
     <div class="row content">
         <div class="col-12 col-md-4 mt-4 screen sticky-md-top">
