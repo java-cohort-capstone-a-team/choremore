@@ -28,7 +28,7 @@ public class MessageController {
 
         messageServ.messageBoardView(model);
 
-        return "/messages/index";
+        return "messages/index";
 
     }
 
