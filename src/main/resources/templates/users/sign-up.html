@@ -99,7 +99,7 @@
     sendVerificationEmailButton.addEventListener("click", sendVerificationEmail);
     function sendVerificationEmail() {
         const email = document.getElementById("email").value;
-        fetch(location.host + "/verify-email", {
+        fetch("/api/verify-email", {
             method: "POST",
             headers : {
                 "Content-Type" : "application/json",
@@ -154,14 +154,14 @@
         return true;
     }
     function checkUsername(username) {
-        return fetch(`/check-username?username=${username}`).then(function(response) {
+        return fetch(`/api/check-username?username=${username}`).then(function(response) {
             return response.json().then(function(data) {
                 return data.exists;
             });
         });
     }
     function checkEmail(email) {
-        return fetch(`/check-email?email=${email}`).then(function(response) {
+        return fetch(`/api/check-email?email=${email}`).then(function(response) {
             return response.json().then(function(data) {
                 return data.exists;
             });
