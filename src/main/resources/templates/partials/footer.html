@@ -1,98 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<footer th:fragment="footer">
+<footer th:fragment="footer" class="text-center">
 
-  <hr class="my-4"/>
-
-  <div class="container">
+  <hr class="my-4">
+  <div class="container align-content-center">
     <div class="row">
-      <div class="col-md-3 col-lg-3 col-6 footer-column">
-        <ul class="nav flex-column">
+      <ul class="nav flex-column my-auto">
+        <div class="col-md-12 col-lg-12 col-12 footer-column d-flex justify-content-center">
           <li class="nav-item">
             <span class="footer-title">Developers</span>
           </li>
           <li class="nav-item">
-            <h6 style="padding-top: 10px">John-Michael Krsak</h6>
+            <div class="d-flex align-items-center">
+              <h6 class="name">John-Michael Krsak</h6>
+              <div class="d-flex">
+                <a href="https://www.github.com/jmkrsak" class="nav-link">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/john-michael-krsak/" class="nav-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:jmkrsak@gmail.com" class="nav-link">
+                  <i class="far fa-envelope"></i>
+                </a>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
-            <h6>Alvin Mckenzie</h6>
+            <div class="d-flex align-items-center">
+              <h6 class="name">Alvin McKenzie</h6>
+              <div class="d-flex">
+                <a href="https://www.github.com/AlvinMcKenzie" class="nav-link">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/alvin-mckenzie-697324133/" class="nav-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:alvinamckenzie@gmail.com" class="nav-link">
+                  <i class="far fa-envelope"></i>
+                </a>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
-            <h6>Ethan Gonzalez</h6>
+            <div class="d-flex align-items-center">
+              <h6 class="name">Ethan Gonzalez</h6>
+              <div class="d-flex">
+                <a href="https://www.github.com/ethangonzalez77" class="nav-link">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ethan-gonzalez-a0a0a2234/" class="nav-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ethan.gonzalez00774@gmail.com" class="nav-link">
+                  <i class="far fa-envelope"></i>
+                </a>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
-            <h6>Josef Fussell</h6>
+            <div class="d-flex align-items-center">
+              <h6 class="name">Josef Fussell</h6>
+              <div class="d-flex">
+                <a href="https://www.github.com/joseffussell" class="nav-link">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/josef-fussell-272610257/" class="nav-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:josef.k.fussell@gmail.com" class="nav-link">
+                  <i class="far fa-envelope"></i>
+                </a>
+              </div>
+            </div>
           </li>
-        </ul>
-      </div>
-      <div class="col-md-3 col-lg-3 col-6 footer-column">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <span class="footer-title">Github</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.github.com/jmkrsak" style="padding-left: 0px; padding-right: 0px">John's Github</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.github.com/AlvinMckenzie" style="padding-left: 0px; padding-right: 0px">Alvin's Github</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.github.com/ethangonzalez77" style="padding-left: 0px; padding-right: 0px">Ethan's Github</a>
-          </li>
-          <li>
-            <a class="nav-link" href="https://www.github.com/joseffussell" style="padding-left: 0px; padding-right: 0px">Josef's Github</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-3 col-lg-3 col-6 footer-column">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <span class="footer-title">Linkedin Profiles</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/john-michael-krsak/" style="padding-left: 0px; padding-right: 0px; padding-top: 4px">John's Linkedin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/alvin-mckenzie-697324133/" style="padding-left: 0px; padding-right: 0px">Alvin's Linkedin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/ethan-gonzalez-a0a0a2234/" style="padding-left: 0px; padding-right: 0px">Ethan's Linkedin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/josef-fussell-272610257/" style="padding-left: 0px; padding-right: 0px">Josef's Linkedin</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-3 col-lg-3 col-6 footer-column">
-        <ul class="nav flex-column d-flex flex-wrap justify-content-between">
-          <li class="nav-item">
-            <span class="footer-title">Developer Emails</span>
-          </li>
-          <li class="nav-item">
-            <a onclick="copyToClipboard('jmkrsak@gmail.com')" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px">John's Email</a>
-          </li>
-          <li class="nav-item">
-            <a onclick="copyToClipboard('alvinamckenzie@gmail.com')" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px">Alvin's Email</a>
-          </li>
-          <li class="nav-item">
-            <a onclick="copyToClipboard('ethan.gonzalez00774@gmail.com')" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px">Ethan's Email</a>
-          </li>
-          <li class="nav-item">
-            <a onclick="copyToClipboard('josef.k.fussell@gmail.com')" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px">Josef's Email</a>
-          </li>
-        </ul>
-
-        <script>
-          function copyToClipboard(text) {
-            navigator.clipboard.writeText(text)
-                    .then(() => console.log('Copied to clipboard'))
-                    .catch((err) => console.error('Error copying to clipboard:', err));
-          }
-        </script>
-      </div>
+      </ul>
     </div>
   </div>
   </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 </footer>
 </html>
