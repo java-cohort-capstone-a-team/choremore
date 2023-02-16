@@ -59,9 +59,8 @@
                     <input type="hidden" th:value="${avatar.classType}" id="classType" />
                     <div class="container header pt-3 d-flex justify-content-between">
                         <p class="xyz" th:text="'Lvl: ' + ${avatar.getLevel()}"/>
-                        <p class="xyz" th:text="'Exp: ' + ${avatar.getExp()}"/>
-                        <p class="xyz" th:text="'Exp to lvl up: ' + ${10 - avatar.getExp()}"/>
-                        <p class="xyz" th:text="'Build Points: ' + ${avatar.getBuild_points()}"  data-tooltip="Available build points"/>
+                        <p class="xyz" th:text="'Exp: ' + ${avatar.getExp()} + ' (Next lvl: ' + ${10 - avatar.getExp()} + ')'"/>
+                        <p class="xyz" th:text="'Skill Points: ' + ${avatar.getBuild_points()}"  data-tooltip="Available build points"/>
                     </div>
                     <div class="card-body d-flex justify-content-around">
                         <form th:action="@{/hpplus}" th:method="POST">
@@ -92,7 +91,7 @@
             <div class="container d-flex justify-content-center">
                 <div class="card mt-3">
                     <div class="container header pt-3">
-                        <p class="xyz">Current skills buildout</p>
+                        <p class="xyz">Current Skill Build</p>
                     </div>
                     <div class="card-body">
                         <canvas id="myChart"></canvas>
