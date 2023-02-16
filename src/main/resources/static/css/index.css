@@ -51,7 +51,7 @@
 .btn {
     background-color: var(--color-two);
     color: var(--color-three);
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .col-12 {
@@ -59,7 +59,7 @@
 }
 
 body {
-    font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;
+    /*font-family: "Euphemia UCAS", "Arial", "Ubuntu", sans-serif;*/
 }
 
 body, html {
@@ -164,6 +164,16 @@ body, html {
     object-fit: cover;
 }
 
+
+/*general font*/
+li, p{
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+h5, h2, button label{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 .footer-column {
     display: flex;
     flex-direction: column;
@@ -190,3 +200,4 @@ body, html {
     font-weight: bold;
     margin-right: 10px;
 }
+
