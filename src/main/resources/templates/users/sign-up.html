@@ -73,7 +73,7 @@
     sendVerificationEmailButton.addEventListener("click", sendVerificationEmail);
     function sendVerificationEmail() {
         const email = document.getElementById("email").value;
-        fetch("/verify-email", {
+        fetch(location.host + "/verify-email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
