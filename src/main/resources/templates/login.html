@@ -9,16 +9,16 @@
 
 <th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
 
-<div class="container" style="height: 730px; padding-top: 70px; padding-bottom: 100px">
-    <div th:if="${param.error}">
-        Invalid Username and Password
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out
-    </div>
-    <div sec:authorize="isAuthenticated()">
-        You're already logged in
-    </div>
+<div th:if="${param.error}">
+    Invalid Username and Password.
+</div>
+
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+
+<div sec:authorize="isAuthenticated()">You're already logged in</div>
+<div class="container pb-xxl-5" style="padding-top: 70px">
     <div class="content mh-100">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -31,12 +31,12 @@
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Enter Username</label>
                                         <input id="username" type="text" name="username" class="form-control"
-                                               placeholder="Username" required>
+                                               placeholder="Username">
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Enter Password</label>
                                         <input id="password" type="password" name="password" class="form-control"
-                                               placeholder="Password" required>
+                                               placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -76,37 +76,96 @@
         </div>
 
         <div class="container-fluid" style="margin-top: 15px">
+            <h5 class="card-title" style="margin-bottom: 5px">Parent</h5>
 
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
+                <div class="col-sm-4 d-flex align-items">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/accounts1.jpeg}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Parent Accounts</h5>
-                            <li class="list-group-item">- Main account holder can create sub accounts</li>
-                            <li class="list-group-item">- Main account assign (CREATE) posted chores to the sub account</li>
-                            <li class="list-group-item">- Main account track (VIEW) posted chores and their completion of chores</li>
-                            <li class="list-group-item">- The main account holder then confirms (DELETE) the completion from the main account and  the sub account avatar is awarded build points </li>
-                            <li class="list-group-item">- Main account can track posts made on the message board by sub accounts</li>
+
+                            <li class="list-group-item">- Create a main account for yourself</li>
+                            <li class="list-group-item">- Create a subaccount for child/children</li>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card">
+
+                <div class="col-sm-4 d-flex align-items">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/assign.jpg}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Child Accounts</h5>
-                            <li class="list-group-item">- Sub account holder creates an avatar </li>
-                            <li class="list-group-item">- Sub account selects a class from a pool of 5 class options, and builds (CREATE) a stat line following the scope of an RPG style game</li>
-                            <li class="list-group-item">- Sub accounts avatar is awarded points (UPDATE) or ‘buffs’ to build the stat line</li>
-                            <li class="list-group-item">- There is also a message board for sub account holders to post message and connect with friends</li>
+
+                            <li class="list-group-item">- Assign chores/task to child/children</li>
+                            <li class="list-group-item">- Assign Battle Point worth with each chore</li>
+
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-4 d-flex align-items">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/mon.jpeg}" alt="Card image cap">
+                        <div class="card-body">
+
+                            <li class="list-group-item">- Monitor what your child/children are post on the message board</li>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
+        </div>
+
+
+        <div class="container-fluid" style="margin-top: 15px">
+
+            <h5 class="card-title" style="margin-bottom: 5px">Children</h5>
+
+            <div class="row">
+                <div class="col-sm-4 d-flex align-items-stretch">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/complete1.jpeg}" alt="Card image cap">
+                        <div class="card-body">
+
+                            <li class="list-group-item">- Complete chores</li>
+                            <li class="list-group-item">- Earn battle points</li>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 d-flex align-items-stretch">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/avatar.jpg}" alt="Card image cap">
+                        <div class="card-body">
+
+                            <li class="list-group-item">- Create a card Avatar</li>
+                            <li class="list-group-item">- Build and level up skills</li>
+                            <li class="list-group-item">- Tak on other players in the battle arena</li>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 d-flex align-items-stretch">
+                    <div class="card mt-3">
+                        <img class="card-img-top" th:src="@{/img/board.jpeg}" alt="Card image cap">
+                        <div class="card-body">
+
+                            <li class="list-group-item">- Interact with other players on the message board</li>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>
-<hr class="my-4" />
-
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 
