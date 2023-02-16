@@ -163,3 +163,30 @@ body, html {
     height: 20vw;
     object-fit: cover;
 }
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-column li {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-column h6 {
+    margin: 0;
+}
+
+.footer-column .nav-link {
+    margin-left: 10px;
+    padding: 0px;
+}
+
+.footer-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
