@@ -94,6 +94,7 @@
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 <script>
     let isVerificationCodeEntered = false;
+    const token = document.getElementsByName("_csrf")[0].getAttribute("content")
     const sendVerificationEmailButton = document.getElementById("send-verification-email");
     sendVerificationEmailButton.addEventListener("click", sendVerificationEmail);
     function sendVerificationEmail() {
