@@ -36,7 +36,7 @@ public class UserRestController {
     }
 
     @PostMapping("/verify-email")
-    public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam String email) {
+    public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam("email") String email) {
         int theCode = email.length();
         emailDao.prepareAndSend(email, "Choremore Verification Code", "Your verification code is: " + theCode);
         Map<String, String> response = new HashMap<>();
