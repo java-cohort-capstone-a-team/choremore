@@ -13,13 +13,16 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href=""><span class="orangeLine"></span></a>
                 </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/profile}" sec:authorize="hasRole('ROLE_PARENT')" class="nav-link"><span class="orangeLine">Profile</span></a>
+                    <a th:href="@{/child-profile}" sec:authorize="hasRole('ROLE_CHILD')" class="nav-link"><span class="orangeLine">Profile</span></a>
+                </li>
             </ul>
             <form th:action="@{/logout}" method="post" style="display: inline-block" sec:authorize="isAuthenticated()">
                 <button sec:authorize="isAuthenticated()" id="logout" class="btn btn-danger" type="submit">Logout
                 </button>
             </form>
-            <!-- Button trigger modal -->
-            <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</button>
+            <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
         </div>
     </div>
 </nav>
