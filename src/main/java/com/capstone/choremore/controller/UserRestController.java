@@ -36,7 +36,7 @@ public class UserRestController {
         return response;
     }
 
-    @RequestMapping(value = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, consumes =MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam("email") String email) {
         int theCode = email.length();
         emailDao.prepareAndSend(email, "Choremore Verification Code", "Your verification code is: " + theCode);
