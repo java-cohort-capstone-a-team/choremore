@@ -4,6 +4,7 @@ package com.capstone.choremore.controller;
 import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class UserRestController {
         return response;
     }
 
-    @PostMapping("/verify-email")
+    @RequestMapping(value = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam("email") String email) {
         int theCode = email.length();
         emailDao.prepareAndSend(email, "Choremore Verification Code", "Your verification code is: " + theCode);
