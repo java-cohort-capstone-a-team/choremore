@@ -2,9 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 
-<th:block th:replace="~{partials/header.html :: header}">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/></th:block>
+<th:block th:replace="~{partials/header.html :: header}"></th:block>
 
 <body>
 
