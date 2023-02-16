@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 
-<th:block th:replace="~{partials/header.html :: header}"></th:block>
+<th:block th:replace="~{partials/header.html :: header}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/></th:block>
 
 <body>
 
@@ -75,9 +77,11 @@
         const email = document.getElementById("email").value;
         fetch(location.host + "/verify-email", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            headers : {
+                "Content-Type" : "application/json",
+                "X-CSRF-TOKEN" : token
             },
+            credentials : "include",
             body: JSON.stringify({email: email})
         })
             .then(response => response.json())
