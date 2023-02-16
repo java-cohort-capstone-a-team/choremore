@@ -93,36 +93,57 @@
 </div>
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 <script>
+
     let isVerificationCodeEntered = false;
     const token = document.getElementsByName("_csrf")[0].getAttribute("content")
     const sendVerificationEmailButton = document.getElementById("send-verification-email");
+
     sendVerificationEmailButton.addEventListener("click", sendVerificationEmail);
+
     function sendVerificationEmail() {
+
         const email = document.getElementById("email").value;
+
+
         fetch("/api/verify-email", {
+
             method: "POST",
             headers : {
+
                 "Content-Type" : "application/json",
                 "X-CSRF-TOKEN" : token
+
             },
+
             credentials : "include",
             body: JSON.stringify({email: email})
+
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status === "success") {
+
+                if (data.status === true) {
+
                     alert("Verification email sent!");
+
                 } else {
-                    console.log(data);
+
                     alert("Failed to send verification email.");
+
                 }
+
             })
             .catch(error => {
+
                 console.error("Failed to send verification email:", error);
                 alert("Failed to send verification email.");
+
             });
+
     }
+
     function validateForm() {
+
         const username = document.getElementById("username").value;
         const email = document.getElementById("email").value;
         const isUsernameTaken = checkUsername(username);
@@ -132,82 +153,143 @@
         const verificationCode = document.getElementById("verify").value;
         const verificationCodeError = document.getElementById("verify-error");
         const theCode = email.length;
+
         if (verificationCode !== theCode) {
+
             verificationCodeError.innerText = isVerificationCodeEntered ? "Incorrect verification code" : "Please enter the verification code sent to your email";
             verificationCodeError.style.color = "red";
             isVerificationCodeEntered = true;
+
             event.preventDefault();
+
             return false;
+
         }
+
         if (isUsernameTaken) {
+
             usernameError.style.display = "block";
+
             return false;
+
         } else {
+
             usernameError.style.display = "none";
+
         }
+
         if (isEmailTaken) {
+
             emailError.style.display = "block";
+
             return false;
+
         } else {
+
             emailError.style.display = "none";
+
         }
+
         return true;
+
     }
+
     function checkUsername(username) {
+
         return fetch(`/api/check-username?username=${username}`).then(function(response) {
+
             return response.json().then(function(data) {
+
                 return data.exists;
+
             });
+
         });
+
     }
+
     function checkEmail(email) {
+
         return fetch(`/api/check-email?email=${email}`).then(function(response) {
             return response.json().then(function(data) {
                 return data.exists;
+
             });
+
         });
+
     }
+
     const registrationForm = document.getElementById('registration-form');
     const usernameInput = document.getElementById('username');
     const emailInput = document.getElementById('email');
     const usernameError = document.getElementById('username-error');
     const emailError = document.getElementById('email-error');
+
     registrationForm.addEventListener('submit', function(event) {
+
         event.preventDefault();
+
         const username = usernameInput.value;
         const email = emailInput.value;
+
         Promise.all([checkUsername(username), checkEmail(email)]).then(function(results) {
+
             const usernameExists = results[0];
             const emailExists = results[1];
+
             if (usernameExists) {
+
                 usernameError.textContent = 'Username already taken.';
+
             } else {
+
                 usernameError.textContent = '';
+
             }
+
             if (emailExists) {
+
                 emailError.textContent = 'Email already taken.';
+
             } else {
+
                 emailError.textContent = '';
+
             }
+
             if (!usernameExists && !emailExists) {
+
                 registrationForm.submit();
+
             }
+
         });
+
     });
+
     const passwordInput = document.getElementById("password");
     const passwordRequirements = document.getElementById("password-requirements");
+
     passwordInput.addEventListener("input", function() {
+
         const password = passwordInput.value;
         const hasCapital = /[A-Z]/.test(password);
         const hasNumber = /\d/.test(password);
         const isLengthValid = password.length >= 8 && password.length <= 16;
+
         if (hasCapital && hasNumber && isLengthValid) {
+
             passwordInput.setCustomValidity("");
             passwordRequirements.style.color = "green";
+
         } else {
+
             passwordInput.setCustomValidity("Invalid password");
             passwordRequirements.style.color = "red";
+
         }
+
     });
 
 </script>
