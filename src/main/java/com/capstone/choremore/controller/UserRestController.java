@@ -3,6 +3,9 @@ package com.capstone.choremore.controller;
 
 import com.capstone.choremore.repositories.UserRepo;
 import com.capstone.choremore.services.EmailService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +39,32 @@ public class UserRestController {
         return response;
     }
 
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    private static class EmailVarReq {
+
+        String email;
+
+    }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    private static class EmailVarRes {
+
+        Boolean status;
+        int code;
+
+    }
+
     @RequestMapping(path = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, consumes =MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam("email") String email) {
-        int theCode = email.length();
-        emailDao.prepareAndSend(email, "Choremore Verification Code", "Your verification code is: " + theCode);
+    public EmailVarRes verifyEmail(@RequestBody EmailVarReq email) {
+        int theCode = email.email.length();
+        emailDao.prepareAndSend(email.email, "Choremore Verification Code", "Your verification code is: " + theCode);
         Map<String, String> response = new HashMap<>();
         response.put("status", "success");
-        return ResponseEntity.ok(response);
+        return new EmailVarRes(true, theCode);
     }
 
 //    @GetMapping("/check-username")
