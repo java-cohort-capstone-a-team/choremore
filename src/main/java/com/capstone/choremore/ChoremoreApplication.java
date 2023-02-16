@@ -12,20 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @SpringBootApplication
-@RestController
 public class ChoremoreApplication {
-
-
-    @Autowired
-    private StreamingService service;
-
-    @GetMapping(value = "video/{title}", produces = "video/mp4")
-    public Mono<Resource> getVideos(@PathVariable String title, @RequestHeader("Range") String range) {
-        System.out.println("YOOOOOOOO range in Bytes() : " + range);
-        return service.getVideo(title);
-    }
-
-
 
 
     public static void main(String[] args) {
