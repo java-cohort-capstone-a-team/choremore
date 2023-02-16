@@ -6,14 +6,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-@Service("emailService")
+@Service
 public class EmailService {
 
     @Autowired
     public JavaMailSender emailSender;
 
-    @Value("${spring.mail.from}")
-    private String from;
+    private String from = "noreply@choremore.net";
 
     public Boolean prepareAndSend(String to, String subject, String body) {
 
