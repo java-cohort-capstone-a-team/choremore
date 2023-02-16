@@ -5,6 +5,11 @@
 
 <th:block th:replace="~{partials/header.html :: header}"></th:block>
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Josefin+Sans&display=swap');
+</style>
+
+
 <body>
 
 <th:block th:replace="~{partials/homenav.html :: navbar}"></th:block>
@@ -73,6 +78,8 @@
                 </div>
             </div>
             <!-- Jumbotron -->
+            <video th:src="@{video/}" type="" width="720px" height="480px" controls preload="none" >
+            </video>
         </div>
 
         <div class="container-fluid" style="margin-top: 15px">
