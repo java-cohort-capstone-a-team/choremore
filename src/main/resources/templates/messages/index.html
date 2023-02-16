@@ -76,7 +76,7 @@
                                 <div class="modal fade" th:id="${item.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <form th:action="@{/editmsg}" th:method="POST"  th:object="${message}">
-                                            <input type="hidden" th:value="${item.child.id}" name="childid" />
+                                            <input type="hidden" th:value="${item.child.id}" name="childid" required />
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <p class="fw-bold">Edit Message</p>
@@ -87,11 +87,11 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="edittitle" class="form-label">Edit title</label>
-                                                        <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}">
+                                                        <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="editbody" class="form-label">Edit body</label>
-                                                        <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5"></textarea>
+                                                        <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -130,11 +130,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Enter a title for your post</label>
-                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title">
+                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title" required>
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Enter post here</label>
-                        <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5"></textarea>
+                        <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

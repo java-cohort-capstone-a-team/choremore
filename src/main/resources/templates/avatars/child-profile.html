@@ -116,11 +116,11 @@
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="edittitle" class="form-label">Edit title</label>
-                                                    <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}">
+                                                    <input th:field="*{title}" name="title" type="text" class="form-control" id="edittitle" th:placeholder="${item.title}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="editbody" class="form-label">Edit body</label>
-                                                    <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5"></textarea>
+                                                    <textarea th:field="*{body}" name="body" class="form-control" id="editbody" th:placeholder="${item.body}" rows="5" required></textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

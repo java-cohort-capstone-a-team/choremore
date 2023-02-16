@@ -1,24 +1,29 @@
 package com.capstone.choremore.controller;
 
 import com.capstone.choremore.models.*;
+import com.capstone.choremore.repositories.UserRepo;
+import com.capstone.choremore.services.EmailService;
 import com.capstone.choremore.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userServ;
+
+    @Autowired
+    private UserRepo userDao;
 
     @GetMapping("/create-avatar")
     public String childAvatarForm(Model model) {
@@ -102,6 +107,24 @@ public class UserController {
         return "users/sign-up";
 
     }
+
+//    @GetMapping("/check-username")
+//    @ResponseBody
+//    public ResponseEntity<Map<String, Boolean>> checkUsername(@RequestParam String username) {
+//        Map<String, Boolean> response = new HashMap<>();
+//        boolean exists = userDao.existsByUsername(username);
+//        response.put("exists", exists);
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @GetMapping("/check-email")
+//    @ResponseBody
+//    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
+//        Map<String, Boolean> response = new HashMap<>();
+//        boolean exists = userDao.existsByEmail(email);
+//        response.put("exists", exists);
+//        return ResponseEntity.ok(response);
+//    }
 
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user, Model model, HttpServletRequest request) throws ServletException {

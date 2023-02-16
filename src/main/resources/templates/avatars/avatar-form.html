@@ -2,7 +2,79 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:replace="~{partials/header.html :: header}"></th:block>
+<!--<th:block th:replace="~{partials/header.html :: header}"></th:block>-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/index.js"></script>
+    <style>
+
+        :root {
+            --color-one: #dd6e42;
+            --color-two: #e8dab2;
+            --color-three: #4f6d7a;
+            --color-four: #c0d6df;
+            --color-five: #eaeaea;
+        }
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        button:focus{
+            outline: none;
+        }
+
+        /*.mainDiv{*/
+        /*    position: absolute;*/
+        /*    top: 50%;*/
+        /*    left: 50%;*/
+        /*    transform: translate(-50%, -50%);*/
+        /*    width: 600px;*/
+        /*    max-width: 80%;*/
+        /*    height: 200px;*/
+        /*}*/
+
+        .mainDiv > button{
+            background: #dd6e42;
+            padding: 14px 25px;
+            border: none;
+            font-size: 16px;
+            color: #dd6e42;
+            cursor: pointer;
+        }
+
+        .mainDiv > button:hover{
+            background: #dd6e42;
+        }
+
+        .mainDiv > .progressDiv{
+            width: 100%;
+            height: 30px;
+            background: #dd6e42;
+        }
+
+        .mainDiv > .progressDiv > #progress{
+            width: 0%;
+            height: 30px;
+            background: #dd6e42;
+        }
+
+        .mainDiv > h2{
+            font-family: sans-serif;
+            color: #dd6e42;
+        }
+
+    </style>
+</head>
 
 <body>
 
@@ -14,10 +86,10 @@
         <div class="row mb-3">
             <div class="mb-3">
                 <div>
-                    <input type="file" name="image" accept="image/*" class="form-control-file">
+                    <input type="file" name="image" accept="image/*" class="form-control-file" required>
                 </div>
                 <label class="fw-bold">Select a class:</label>
-                <select class="form-select" name="class_type" aria-label="Disabled select example">
+                <select class="form-select" name="class_type" aria-label="Disabled select example" required>
                     <option selected disabled>Select user</option>
                     <option value="fairy">Fairy</option>
                     <option value="mage">Mage</option>
@@ -28,13 +100,67 @@
             </div>
         </div>
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="btn" type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-warning" aria-current="page" href="/child-profile">Skip to profile</a>
             </div>
     </form>
+
+    <div class="progressDiv mt-4">
+        <div style="background: #dd6e42" id="progress" class="progress"></div>
+    </div><br><br>
+    <h2 id="h2">0%</h2>
+
 </div>
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
+
+<script>
+
+    const button = document.getElementById("btn");
+    const progress = document.getElementById("progress");
+    const h2 = document.getElementById("h2");
+    let i = 0;
+    let x = 100;
+
+    progress.style.width = '0%';
+
+
+    button.onclick = function() {
+
+        if (progress.style.width === '0%') {
+            setInterval(speed, 70);
+
+            function speed(){
+
+                if (i < 100) {
+                    i++;
+                    h2.innerHTML = i + '%';
+                    progress.style.width = i + '%';
+                }
+
+            }
+        }
+
+        else{
+            setInterval(sss, 20);
+
+            function sss(){
+
+                if (x > 0) {
+                    x--;
+                    h2.innerHTML = x + '%';
+                    progress.style.width = x + '%';
+                }
+
+            }
+
+
+        }
+
+
+    }
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>

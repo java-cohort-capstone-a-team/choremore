@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BattleReop extends JpaRepository<Battle, Long> {
 
+    Battle findBattleByOp1_Id(long id);
+
 }

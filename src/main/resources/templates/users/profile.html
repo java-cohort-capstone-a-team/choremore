@@ -104,19 +104,19 @@
                                                     <label for="edittitle" class="form-label">Edit title</label>
                                                     <input th:field="*{title}" name="title" type="text"
                                                            class="form-control" id="edittitle"
-                                                           th:placeholder="${item.title}">
+                                                           th:placeholder="${item.title}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="editbody" class="form-label">Edit body</label>
                                                     <textarea th:field="*{body}" name="body" class="form-control"
                                                               id="editbody" th:placeholder="${item.body}"
-                                                              rows="5"></textarea>
+                                                              rows="5" required></textarea>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="fw-bold">Select a users to assign a chore
                                                         to:</label>
                                                     <select class="form-select" name="option"
-                                                            aria-label="Disabled select example">
+                                                            aria-label="Disabled select example" required>
                                                         <option selected disabled>Select user</option>
                                                         <div th:each="item : ${avatars}">
                                                             <option th:value="${item.child.id}"
@@ -128,7 +128,7 @@
                                                     <label for="value" class="form-label">Enter value on scale
                                                         1-5</label>
                                                     <input th:field="*{value}" type="range" class="value form-range"
-                                                           min="1" max="5" id="value">
+                                                           min="1" max="5" id="value" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -195,15 +195,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Enter title</label>
-                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title">
+                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title" required>
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Enter chore here</label>
-                        <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5"></textarea>
+                        <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="fw-bold">Select a users to assign a chore to:</label>
-                        <select class="form-select" name="option" aria-label="Disabled select example">
+                        <select class="form-select" name="option" aria-label="Disabled select example" required>
                             <option selected disabled>Select user</option>
                             <div th:each="item : ${avatars}">
                                 <option th:value="${item.child.id}" th:text="${item.child.getUsername()}" />
@@ -212,7 +212,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="value" class="form-label">Enter difficulty value(1 - 5)</label>
-                        <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value">
+                        <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -226,7 +226,7 @@
 
 <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
+        <form id="registration-form" onsubmit="validateForm()" th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
             <div class="modal-content">
                 <div class="modal-header">
                     <p class="fw-bold">Create child</p>
@@ -240,16 +240,20 @@
                             Invalid Username
                         </div>
                         <label for="username" class="form-label">Enter username</label>
-                        <input type="text" placeholder="username" name="username" class="form-control" id="username" th:field="*{username}" />
+                        <input type="text" placeholder="username" name="username" class="form-control" id="username" th:field="*{username}" required />
+                        <span id="username-error" style="color: red;"></span>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Enter password</label>
-                        <input type="password" placeholder="password" class="form-control" name="password" id="password" th:field="*{password}" />
+                        <input type="password" placeholder="password" class="form-control" name="password" id="password" th:field="*{password}" required />
+                        <div id="password-requirements">
+                            Password must contain at least 1 capital letter, 1 number, be at least 8 characters, and no more than 16 characters.
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button id="modalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </form>
@@ -257,6 +261,104 @@
 </div>
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
+
+<script>
+
+    function validateForm() {
+
+        const username = document.getElementById("username").value;
+        const isUsernameTaken = checkUsername(username);
+        const usernameError = document.getElementById("username-error");
+        const dismissModal = document.getElementById("modalBtn");
+
+        if (isUsernameTaken) {
+
+            usernameError.style.display = "block";
+
+            return false;
+
+        } else {
+
+            usernameError.style.display = "none";
+            dismissModal.setAttribute("data-bs-dismiss", "modal");
+
+        }
+
+        return true;
+
+    }
+
+    function checkUsername(username) {
+
+        return fetch(`/check-username?username=${username}`).then(function(response) {
+            return response.json().then(function(data) {
+                return data.exists;
+
+            });
+
+        });
+
+    }
+
+    const registrationForm = document.getElementById('registration-form');
+    const usernameInput = document.getElementById('username');
+    const usernameError = document.getElementById('username-error');
+
+    registrationForm.addEventListener('submit', function(event) {
+
+        event.preventDefault();
+
+        const username = usernameInput.value;
+
+        Promise.all([checkUsername(username)]).then(function(results) {
+
+            const usernameExists = results[0];
+
+            if (usernameExists) {
+
+                usernameError.textContent = 'Username already taken.';
+
+            } else {
+
+                usernameError.textContent = '';
+
+            }
+
+            if (!usernameExists) {
+
+                registrationForm.submit();
+
+            }
+
+        });
+
+    });
+
+    const passwordInput = document.getElementById("password");
+    const passwordRequirements = document.getElementById("password-requirements");
+
+    passwordInput.addEventListener("input", function() {
+
+        const password = passwordInput.value;
+        const hasCapital = /[A-Z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const isLengthValid = password.length >= 8 && password.length <= 16;
+
+        if (hasCapital && hasNumber && isLengthValid) {
+
+            passwordInput.setCustomValidity("");
+            passwordRequirements.style.color = "green";
+
+        } else {
+
+            passwordInput.setCustomValidity("Invalid password");
+            passwordRequirements.style.color = "red";
+
+        }
+
+    });
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

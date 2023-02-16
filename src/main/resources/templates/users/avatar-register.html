@@ -12,20 +12,25 @@
   <h4 class="fw-semibold">Set up your child account!</h4>
   <h5>This will be your child's login information</h5>
   <h5>*Hint* use a different username/password than what you used for your parent account</h5>
-  <form th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
+  <h5>You will need to give this username and password to your child</h5>
+  <form id="registration-form" onsubmit="validateForm()" th:action="@{/avatar-creation}" th:method="POST" th:object="${user}">
     <div class="row mb-3">
       <div style="color: red" th:if="${param.error}">
         Invalid Username
       </div>
       <label for="username" class="col-sm-2 col-form-label">Username</label>
       <div class="col-sm-10">
-        <input type="text" name="username" class="form-control" id="username" th:field="*{username}" />
+        <input type="text" name="username" class="form-control" id="username" th:field="*{username}" required />
+        <span id="username-error" style="color: red;"></span>
       </div>
     </div>
     <div class="row mb-3">
       <label for="password" class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" name="password" id="password" th:field="*{password}" />
+        <input type="password" class="form-control" name="password" id="password" th:field="*{password}" required />
+      </div>
+      <div id="password-requirements">
+        Password must contain at least 1 capital letter, 1 number, be at least 8 characters, and no more than 16 characters.
       </div>
     </div>
     <!--        <div class="row mb-3">-->
@@ -44,6 +49,102 @@
 </div>
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
+
+<script>
+
+  function validateForm() {
+
+    const username = document.getElementById("username").value;
+    const isUsernameTaken = checkUsername(username);
+    const usernameError = document.getElementById("username-error");
+
+    if (isUsernameTaken) {
+
+      usernameError.style.display = "block";
+
+      return false;
+
+    } else {
+
+      usernameError.style.display = "none";
+
+    }
+
+    return true;
+
+  }
+
+  function checkUsername(username) {
+
+    return fetch(`/check-username?username=${username}`).then(function(response) {
+      return response.json().then(function(data) {
+        return data.exists;
+
+      });
+
+    });
+
+  }
+
+  const registrationForm = document.getElementById('registration-form');
+  const usernameInput = document.getElementById('username');
+  const usernameError = document.getElementById('username-error');
+
+  registrationForm.addEventListener('submit', function(event) {
+
+    event.preventDefault();
+
+    const username = usernameInput.value;
+
+    Promise.all([checkUsername(username)]).then(function(results) {
+
+      const usernameExists = results[0];
+
+      if (usernameExists) {
+
+        usernameError.textContent = 'Username already taken.';
+
+      } else {
+
+        usernameError.textContent = '';
+
+      }
+
+      if (!usernameExists) {
+
+        registrationForm.submit();
+
+      }
+
+    });
+
+  });
+
+  const passwordInput = document.getElementById("password");
+  const passwordRequirements = document.getElementById("password-requirements");
+
+  passwordInput.addEventListener("input", function() {
+
+    const password = passwordInput.value;
+    const hasCapital = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const isLengthValid = password.length >= 8 && password.length <= 16;
+
+    if (hasCapital && hasNumber && isLengthValid) {
+
+      passwordInput.setCustomValidity("");
+      passwordRequirements.style.color = "green";
+
+    } else {
+
+      passwordInput.setCustomValidity("Invalid password");
+      passwordRequirements.style.color = "red";
+
+    }
+
+  });
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>

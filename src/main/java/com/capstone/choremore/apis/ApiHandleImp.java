@@ -9,6 +9,7 @@ import okhttp3.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +61,24 @@ public class ApiHandleImp {
         }
 
     }
+
+//    public String mailCall() throws IOException {
+//
+//        OkHttpClient client = new OkHttpClient().newBuilder()
+//                .build();
+//        MediaType mediaType = MediaType.parse("application/json");
+//        RequestBody body = RequestBody.create(mediaType, "{\"from\":{\"email\":\"mailtrap@choremore.net\",\"name\":\"Mailtrap Test\"},\"to\":[{\"email\":\"jmkrsak@gmail.com\"}],\"subject\":\"You are awesome!\",\"text\":\"Congrats for sending test email with Mailtrap!\",\"category\":\"Integration Test\"}");
+//        Request request = new Request.Builder()
+//                .url("https://send.api.mailtrap.io/api/send")
+//                .method("POST", body)
+//                .addHeader("Authorization", "Bearer 9aef97ff4a960c0fe573ccb49ed2eaf6")
+//                .addHeader("Content-Type", "application/json")
+//                .build();
+//        Response response = client.newCall(request).execute();
+//
+//        return response.body().string();
+//
+//    }
 
     public static void main(String[] args) throws Exception {
 
