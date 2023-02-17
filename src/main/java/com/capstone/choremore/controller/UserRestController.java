@@ -151,6 +151,7 @@ public class UserRestController {
                 child.setPassword(passwordEncoder.encode(newPassword));
 
                 childrensRecords.put(child.getUsername(), newPassword);
+                userDao.save(child);
 
             });
 
@@ -162,8 +163,12 @@ public class UserRestController {
 
 
 
+
+
             user.setPassword(passwordEncoder.encode(newPassword));
-            emailDao.prepareAndSend(email.email, "Choremore Records", "Here is your username and password: " + user.getUsername() + " " + newPassword + "and your children's usernames and new passwords are: " + sb.toString());
+            userDao.save(user);
+
+            emailDao.prepareAndSend(email.email, "Choremore Records", "Here is your username and password: " + user.getUsername() + " - " + newPassword + " and your children's usernames and new passwords are: " + sb.toString());
 
             Map<String, String> response = new HashMap<>();
 
