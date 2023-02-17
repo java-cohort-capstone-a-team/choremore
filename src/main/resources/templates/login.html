@@ -187,6 +187,9 @@
 
 <script>
 
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("email-error");
+
     const token = document.getElementsByName("_csrf")[0].getAttribute("content")
     const recoverIt = new bootstrap.Modal('#recovery', {
         keyboard: false
@@ -268,8 +271,6 @@
 
     }
 
-    const emailInput = document.getElementById("email");
-    const emailError = document.getElementById("email-error");
 
     function getRecovery() {
 
