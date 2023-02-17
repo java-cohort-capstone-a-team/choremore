@@ -162,11 +162,11 @@ public class UserRestController {
 
             response.put("status", "success");
 
-            return "success";
+            return "{\"success\":\"true\"}";
 
         } catch (Exception e) {
 
-            return "error";
+            return "{\"success\":\"false\"}";
 
         }
 
