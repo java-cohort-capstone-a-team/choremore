@@ -115,12 +115,6 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.soulwing</groupId>
-            <artifactId>uuid-maven-plugin</artifactId>
-            <version>1.0.0</version>
-            <type>maven-plugin</type>
-        </dependency>
     </dependencies>
 
     <build>
