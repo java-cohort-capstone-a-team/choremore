@@ -146,9 +146,9 @@ public class UserRestController {
 
                 String newPassword = makeNewPassword(10);
 
-                String encryptedV = newPassword;
 
-                child.setPassword(passwordEncoder.encode(encryptedV));
+
+                child.setPassword(passwordEncoder.encode(newPassword));
 
                 childrensRecords.put(child.getUsername(), newPassword);
 
@@ -158,7 +158,12 @@ public class UserRestController {
 
             childrensRecords.forEach((k, v) -> sb.append(k + " -" + v));
 
-            emailDao.prepareAndSend(email.email, "Choremore Records", "Here is your username and password: " + user.getUsername() + " " + user.getPassword() + "and your children's usernames and new passwords are: " + sb.toString());
+            String newPassword = makeNewPassword(10);
+
+
+
+            user.setPassword(passwordEncoder.encode(newPassword));
+            emailDao.prepareAndSend(email.email, "Choremore Records", "Here is your username and password: " + user.getUsername() + " " + newPassword + "and your children's usernames and new passwords are: " + sb.toString());
 
             Map<String, String> response = new HashMap<>();
 
