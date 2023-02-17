@@ -111,7 +111,6 @@ public class UserServiceImp implements UserService {
         long id = user.getId();
 
         List<User> allUsers = userDao.findAll();
-
         List<User> myChildren = new ArrayList<>();
 
         for (User usr : allUsers) {

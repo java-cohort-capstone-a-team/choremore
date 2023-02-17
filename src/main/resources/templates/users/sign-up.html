@@ -211,6 +211,7 @@
     function checkEmail(email) {
 
         return fetch(`/api/check-email?email=${email}`).then(function(response) {
+
             return response.json().then(function(data) {
                 return data.exists;
 
