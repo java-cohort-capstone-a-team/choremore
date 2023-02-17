@@ -4,7 +4,6 @@
 
 <th:block th:replace="~{partials/header.html :: header}"></th:block>
 
-
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
@@ -51,7 +50,7 @@
             </div>
         </div>
         <div class="col-12 col-md-8" style="height: 600px">
-            <div class="overflow-auto mh-100">
+            <div class="overflow-auto mh-100 overflow-x-hidden">
                 <div class="scroll-bg">
                     <h2 class="card-title text-center">Opponents</h2>
                     <div class="container row">
@@ -64,6 +63,9 @@
                                 <div class="container-fluid">
                                     <img class="responsive img-thumbnail" style="border-radius: 50%;" width="100%" height="auto" th:src="'data:image/jpeg;base64,'+${item.imageString}"/>
                                 </div>
+                            </div>
+                            <div class="px-0 mx-0 d-flex justify-content-center card-body child" th:hp="${item.hp}" th:strength="${item.strength}" th:defense="${item.defense}" th:classType="${item.classType}">
+                                <canvas class="px-0 mx-0 myChart"></canvas>
                             </div>
                             <div class="container footer pb-3">
                                 <form th:action="@{/battle}" th:method="POST" class="d-flex justify-content-center">
@@ -78,7 +80,111 @@
     </div>
 </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    let children = document.getElementsByClassName('child');
+    // let str = document.getElementsByClassName('str');
+    // let hp = document.getElementsByClassName('hp');
+    // let def = document.getElementsByClassName('def');
+    // let classType = document.getElementsByClassName('classType');
+    // let classColor;
+    // let max;
+    // let xStr;
+    // let xHp;
+
+    Array.from(children).forEach(child => {
+
+        // const item = child.getAttribute("item");
+        // console.log(item);
+
+        let hp = child.getAttribute("hp");
+
+        let str = child.getAttribute("strength");
+
+        let def = child.getAttribute("defense");
+
+        let classType = child.getAttribute("classType");
+
+        let bgClassColor;
+        let classColor;
+
+        let canvas = child.getElementsByClassName('myChart')[0];
+
+        if (classType === "warrior") {
+            classColor = "blue"
+            bgClassColor = "rgba(0, 0, 255, 0.4)";
+        } else if (classType === "mage") {
+            classColor = "red"
+            bgClassColor = "rgba(255, 0, 0, 0.4)";
+        } else if (classType === "fairy") {
+            classColor = "green"
+            bgClassColor = "rgba(0, 128, 0, 0.4)"
+        } else if (classType === "undead") {
+            classColor = "purple"
+            bgClassColor = "rgba(128, 0, 128, 0.4)"
+        } else if (classType === "dwarf") {
+            classColor = "maroon"
+            bgClassColor = "rgba(128, 0, 0, 0.4)"
+        }
+
+        console.log(bgClassColor);
+
+        let max = Math.max(hp, str, def);
+
+        const data = {
+            labels: [
+                'HP',
+                'Strength',
+                'Defense',
+            ],
+            datasets: [{
+                label: classType.toString(),
+                data: [hp, str, def],
+                fill: true,
+                backgroundColor: bgClassColor,
+                borderColor: classColor,
+                pointBackgroundColor: classColor,
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: classType
+            }]
+        };
+
+        const ctx = canvas.getContext('2d');
+
+        new Chart(ctx, {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: false
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: max
+                    }
+                },
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            },
+        });
+
+    })
+
+
+
+</script>
+
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>

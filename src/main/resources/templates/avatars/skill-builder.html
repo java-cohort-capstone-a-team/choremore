@@ -115,17 +115,23 @@
     let hp = document.getElementById('hp');
     let def = document.getElementById('def');
     let classType = document.getElementById('classType');
+    let bgClassColor = "";
 
     if (classType.value === "warrior") {
         classType = "blue"
+        bgClassColor = "rgba(0, 0, 255, 0.4)";
     } else if (classType.value === "mage") {
         classType = "red"
+        bgClassColor = "rgba(255, 0, 0, 0.4)";
     } else if (classType.value === "fairy") {
         classType = "green"
+        bgClassColor = "rgba(0, 128, 0, 0.4)"
     } else if (classType.value === "undead") {
         classType = "purple"
+        bgClassColor = "rgba(128, 0, 128, 0.4)"
     } else if (classType.value === "dwarf") {
-        classType = "brown"
+        classType = "maroon"
+        bgClassColor = "rgba(128, 0, 0, 0.4)"
     }
 
     let max = Math.max(hp.value, str.value, def.value);
@@ -140,7 +146,7 @@
             label: 'Stat Build',
             data: [hp.value, str.value, def.value],
             fill: true,
-            backgroundColor: 'rgba(236,78,78,0.66)',
+            backgroundColor: bgClassColor,
             borderColor: classType,
             pointBackgroundColor: classType,
             pointBorderColor: '#fff',

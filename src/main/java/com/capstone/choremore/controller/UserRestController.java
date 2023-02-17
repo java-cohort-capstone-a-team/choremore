@@ -98,22 +98,20 @@ public class UserRestController {
     private static class EmailVarRes {
 
         Boolean status;
-        int code;
+        String code;
 
     }
 
     @RequestMapping(path = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, consumes =MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public EmailVarRes verifyEmail(@RequestBody EmailVarReq email) {
+    public EmailVarRes verifyEmail(@RequestBody EmailVarReq email, @RequestParam String code) {
 
-        int theCode = email.email.length();
-
-        emailDao.prepareAndSend(email.email, "Choremore Verification Code", "Your verification code is: " + theCode);
+        emailDao.prepareAndSend(email.email, "Choremore Verification Code", "Your verification code is: " + code);
 
         Map<String, String> response = new HashMap<>();
 
         response.put("status", "success");
 
-        return new EmailVarRes(true, theCode);
+        return new EmailVarRes(true, code);
 
     }
 
@@ -155,7 +153,7 @@ public class UserRestController {
 
             StringBuilder sb = new StringBuilder();
 
-            childrensRecords.forEach((k, v) -> sb.append(k + " - " + v));
+            childrensRecords.forEach((k, v) -> sb.append(" - " + k + " - " + v + " -"));
 
             String newPassword = makeNewPassword(10);
 
