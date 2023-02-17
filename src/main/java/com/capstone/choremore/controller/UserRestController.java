@@ -1,6 +1,5 @@
 package com.capstone.choremore.controller;
 
-import org.soulwing.maven.uuid.UuidMojo;
 import com.capstone.choremore.models.User;
 import com.capstone.choremore.repositories.AvatarRepo;
 import com.capstone.choremore.repositories.UserRepo;
