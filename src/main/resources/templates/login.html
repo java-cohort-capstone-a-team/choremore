@@ -104,102 +104,66 @@
             </div>
         </div>
 
-        <div class="container-fluid mt-4">
-            <div class="p-4 shadow-4 rounded-3 w-100" style="background-color: hsl(0, 0%, 94%);">
-                <h2>Welcome To ChoreMore!</h2>
-                <video class="w-100" th:src="@{video/final-walkthrough}" type="" controls preload="none">
-                </video>
-                <div class="row">
-                    <label for="create-account">Don't have an account? Click here to create one.</label>
-                    <a href="/sign-up">
-                        <button id="create-account" class="btn btn-warning">Create an account</button>
-                    </a>
-                    <a class="link-primary" data-bs-toggle="modal" data-bs-target="#recovery">You have a lot to keep track of,
-                        click here to recover your accounts </a>
-                </div>
-            </div>
+        <div class="d-flex flex-row-reverse">
+
+
+        </div>
+
+        <h1 class="text-center">Welcome to ChoreMore!</h1>
+        <div class="d-flex align-items-end flex-column">
+
+            <label for="create-account">Don't have an account? Click here to create one.</label>
+            <a href="/sign-up">
+                <button id="create-account" class="btn btn-warning">Create an account</button>
+            </a>
+            <a class="link-primary" data-bs-toggle="modal" data-bs-target="#recovery">Forgot Password</a>
+
         </div>
 
         <div class="card-container container-fluid">
             <h5 class="card-title mt-1">Parent</h5>
             <div class="row">
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/accounts1.jpeg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newaccounts.png}" alt="Card image">
 
-                            <li class="list-group-item">- Create a main account for yourself</li>
-
-                            <li class="list-group-item">- Create a subaccount for child/children</li>
-
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/assign.jpg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newassign.png}" alt="Card image">
 
-                            <li class="list-group-item">- Assign chores/task to child/children</li>
-
-                            <li class="list-group-item">- Assign Battle Point worth with each chore</li>
-
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/mon.jpeg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newmon.png}" alt="Card image">
 
-                            <li class="list-group-item">
-                                - Monitor what your child/children are posting on the message board
-                            </li>
-
-                        </div>
                     </div>
                 </div>
 
-                <h5 class="card-title mt-1">Children</h5>
+                <h5 class="card-title mt-3">Children</h5>
 
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/complete1.jpeg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newcomplete.png}" alt="Card image">
 
-                            <li class="list-group-item">- Complete chores</li>
-
-                            <li class="list-group-item">- Earn battle points</li>
-
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/avatar.jpg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newavatar.png}" alt="Card image">
 
-                            <li class="list-group-item">- Create a card Avatar</li>
-
-                            <li class="list-group-item">- Build and level up skills</li>
-
-                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-4 card-wrap">
+                <div class="col-sm-4">
                     <div class="card mt-3">
-                        <img class="card-img-top img img-thumbnail" th:src="@{/img/board.jpeg}" alt="Card image cap">
-                        <div class="card-body">
+                        <img class="card-img" th:src="@{/img/newboard.png}" alt="Card image">
 
-                            <li class="list-group-item">- Battle Other Players</li>
-
-                            <li class="list-group-item">- Interact On The Message Board</li>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -207,23 +171,19 @@
     </div>
 </div>
 
+<div class="container-fluid mt-4">
+    <div class="p-4 shadow-4 rounded-3 w-100" style="background-color: hsl(0, 0%, 94%);">
+        <h3>Need help, we have a walk through for you!</h3>
+        <video class="w-100" th:src="@{video/final-walkthrough}" type="" controls preload="none">
+        </video>
+
+    </div>
+</div>
+
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
 
 
-<script>
-    const cards = document.querySelectorAll('.card');
-    let maxHeight = 0;
 
-    cards.forEach(card => {
-        if (card.offsetHeight > maxHeight) {
-            maxHeight = card.offsetHeight;
-        }
-    });
-
-    cards.forEach(card => {
-        card.style.height = `${maxHeight}px`;
-    });
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

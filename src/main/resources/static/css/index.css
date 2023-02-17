@@ -30,7 +30,7 @@
     font-weight: bold;
 }
 
-.card-title {
+.card-title, .text-center {
     color: var(--color-one);
     font-weight: bold;
 }
@@ -80,7 +80,7 @@ body, html {
 [data-tooltip]:hover:after {
     opacity: 1;
     transition: all 0.2s ease 0.5s;
-    transition-delay: 3s;
+    transition-delay: 1s;
     visibility: visible;
     z-index: 99999;
 }
@@ -158,11 +158,11 @@ body, html {
     transform: translateY(-50%);
 }
 
-.card-img-top {
-    width: 100%;
-    height: 20vw;
-    object-fit: cover;
-}
+/*.card-img {*/
+/*    width: 100%;*/
+/*    height: 30vw;*/
+/*    object-fit: cover;*/
+/*}*/
 
 
 /*general font*/
