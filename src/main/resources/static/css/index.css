@@ -201,3 +201,18 @@ h5, h2, button label{
     margin-right: 10px;
 }
 
+label[for="create-account"] {
+    margin-bottom: 3px;
+}
+
+p.fw-bold {
+    margin: 0;
+}
+
+div.mb-3 > label.fw-bold {
+    margin-bottom: 8px;
+}
+
+input.form-control-file {
+    margin-bottom: 8px;
+}

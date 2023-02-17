@@ -83,7 +83,7 @@
 <div class="container" style="padding-top: 90px; padding-bottom: 90px; height: 760px">
     <h4 class="fw-semibold">Upload a profile image and select a class-type</h4>
     <form th:action="@{/avatarbuilder}" method="POST" th:object="${avatar}" enctype="multipart/form-data">
-        <div class="row mb-3">
+        <div class="row">
             <div class="mb-3">
                 <div>
                     <input type="file" name="image" accept="image/*" class="form-control-file" required>
@@ -99,10 +99,10 @@
                 </select>
             </div>
         </div>
-            <div class="d-flex justify-content-between">
-                <button id="btn" type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-warning" aria-current="page" href="/child-profile">Skip to profile</a>
-            </div>
+        <div class="d-flex justify-content-between">
+            <button id="btn" type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-warning" aria-current="page" href="/child-profile">Skip to profile</a>
+        </div>
     </form>
 
     <div class="progressDiv mt-4">

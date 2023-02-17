@@ -45,7 +45,7 @@
                             </div>
                             <div class="container footer pb-3">
                                 <form class="d-flex justify-content-center" th:action="@{/deletechildPro}" th:method="POST">
-<!--                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-50 avatar" data-tooltip="Delete Sub-Account"><i class="bi bi-trash-fill"></i></button>-->
+                                    <!--                                    <button name="button" th:value="${item.id}" type="submit" class="btn btn-danger w-50 avatar" data-tooltip="Delete Sub-Account"><i class="bi bi-trash-fill"></i></button>-->
                                 </form>
                             </div>
                         </div>
@@ -196,25 +196,31 @@
                     </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Enter title</label>
-                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="title" required>
+                        <input th:field="*{title}" name="title" type="text" class="form-control" id="title" placeholder="Title" required>
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Enter chore here</label>
                         <textarea th:field="*{body}" name="body" class="form-control" id="body" rows="5" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="fw-bold">Select a users to assign a chore to:</label>
+                        <label class="fw-bold">Select a user to assign a chore to:</label>
                         <select class="form-select" name="option" aria-label="Disabled select example" required>
-                            <option selected disabled>Select user</option>
+                            <option selected disabled>Select User</option>
                             <div th:each="item : ${avatars}">
                                 <option th:value="${item.child.id}" th:text="${item.child.getUsername()}" />
                             </div>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="value" class="form-label">Enter difficulty value(1 - 5)</label>
-                        <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value" required>
+                        <label for="value" class="form-label">Enter Difficulty Value (1 - 5) : <span id="value-tooltip"></span></label>
+                        <input th:field="*{value}" type="range" class="value form-range" min="1" max="5" id="value" oninput="showValue(this.value)">
                     </div>
+                    <script>
+                        function showValue(value) {
+                            var tooltip = document.getElementById("value-tooltip");
+                            tooltip.innerHTML = value;
+                        }
+                    </script>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit Post</button>
