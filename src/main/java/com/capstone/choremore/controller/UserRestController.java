@@ -89,6 +89,7 @@ public class UserRestController {
     private static class EmailVarReq {
 
         String email;
+        String code;
 
     }
 
@@ -103,15 +104,15 @@ public class UserRestController {
     }
 
     @RequestMapping(path = "/verify-email", produces = MediaType.APPLICATION_JSON_VALUE, consumes =MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public EmailVarRes verifyEmail(@RequestBody EmailVarReq email, @RequestParam String code) {
+    public EmailVarRes verifyEmail(@RequestBody EmailVarReq email) {
 
-        emailDao.prepareAndSend(email.email, "Choremore Verification Code", "Your verification code is: " + code);
+        emailDao.prepareAndSend(email.email, "Choremore Verification Code", "Your verification code is: " + email.code);
 
         Map<String, String> response = new HashMap<>();
 
         response.put("status", "success");
 
-        return new EmailVarRes(true, code);
+        return new EmailVarRes(true, email.code);
 
     }
 
