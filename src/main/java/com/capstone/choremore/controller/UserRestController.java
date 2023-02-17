@@ -10,10 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,13 +155,9 @@ public class UserRestController {
 
             StringBuilder sb = new StringBuilder();
 
-            childrensRecords.forEach((k, v) -> sb.append(k + " -" + v));
+            childrensRecords.forEach((k, v) -> sb.append(k + " - " + v));
 
             String newPassword = makeNewPassword(10);
-
-
-
-
 
             user.setPassword(passwordEncoder.encode(newPassword));
             userDao.save(user);
