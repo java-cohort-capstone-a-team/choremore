@@ -279,27 +279,23 @@
     }
 
 
-    function getRecovery() {
+    async function getRecovery() {
 
         const email = emailInput.value;
 
-        Promise.then(checkEmail(email)).then(function(results) {
+        const exists = await checkEmail(email)
+        if (exists) {
 
-            const emailExists = results;
+            emailError.style.display = "none";
 
-            if (emailExists === true) {
+            sendUsersInfo();
 
-                emailError.style.display = "none";
+        } else {
 
-                sendUsersInfo();
+            emailError.style.display = "block";
 
-            } else {
+        }
 
-                emailError.style.display = "block";
-
-            }
-
-        })
 
     }
 
