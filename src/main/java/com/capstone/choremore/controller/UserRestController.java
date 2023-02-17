@@ -146,7 +146,9 @@ public class UserRestController {
 
                 String newPassword = makeNewPassword(10);
 
-                child.setPassword(passwordEncoder.encode(newPassword));
+                String encryptedV = newPassword;
+
+                child.setPassword(passwordEncoder.encode(encryptedV));
 
                 childrensRecords.put(child.getUsername(), newPassword);
 
