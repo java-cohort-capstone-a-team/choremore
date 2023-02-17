@@ -76,6 +76,7 @@
                 </form>
             </div>
         </div>
+
         <div class="modal fade" id="recovery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -86,12 +87,13 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Enter Email</label>
                                     <input id="email" type="email" name="email" class="form-control"
-                                           placeholder="email" required />
+                                           placeholder="email" required/>
                                     <span id="email-error" style="color: red;"></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="send-email" type="submit" onclick="sendIt()" class="btn btn-primary">Check Email
+                                <button id="send-email" type="submit" onclick="sendIt()" class="btn btn-primary">Check
+                                    Email
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
@@ -101,6 +103,7 @@
                 </div>
             </div>
         </div>
+
         <div class="container-fluid mt-4">
             <div class="p-4 shadow-4 rounded-3 w-100" style="background-color: hsl(0, 0%, 94%);">
                 <h2>Welcome To ChoreMore!</h2>
@@ -111,70 +114,91 @@
                     <a href="/sign-up">
                         <button id="create-account" class="btn btn-warning">Create an account</button>
                     </a>
-                    <a type="button" data-bs-toggle="modal" data-bs-target="#recovery">You have a lot to keep track of, click here to recover your accounts </a>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#recovery">You have a lot to keep track of,
+                        click here to recover your accounts </a>
                 </div>
             </div>
         </div>
+
         <div class="card-container">
-            <h5 class="card-title mt-1" style="margin-bottom: 5px">Parent</h5>
+            <h5 class="card-title mt-1">Parent</h5>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/accounts1.jpeg}" alt="Card image cap">
                         <div class="card-body">
+
                             <li class="list-group-item">- Create a main account for yourself</li>
+
                             <li class="list-group-item">- Create a subaccount for child/children</li>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 d-flex align-items">
+
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/assign.jpg}" alt="Card image cap">
                         <div class="card-body">
+
                             <li class="list-group-item">- Assign chores/task to child/children</li>
+
                             <li class="list-group-item">- Assign Battle Point worth with each chore</li>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/mon.jpeg}" alt="Card image cap">
                         <div class="card-body">
-                            <li class="list-group-item">- Monitor what your child/children are post on the message
-                                board
+
+                            <li class="list-group-item">
+                                - Monitor what your child/children are posting on the message board
                             </li>
-                            <br>
+
                         </div>
                     </div>
                 </div>
-                <h5 class="card-title" style="margin-bottom: 5px">Children</h5>
-                <div class="col-sm-4">
+
+                <h5 class="card-title mt-1">Children</h5>
+
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/complete1.jpeg}" alt="Card image cap">
                         <div class="card-body">
+
                             <li class="list-group-item">- Complete chores</li>
+
                             <li class="list-group-item">- Earn battle points</li>
-                            <br>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/avatar.jpg}" alt="Card image cap">
                         <div class="card-body">
+
                             <li class="list-group-item">- Create a card Avatar</li>
+
                             <li class="list-group-item">- Build and level up skills</li>
-                            <li class="list-group-item">- Tak on other players in the battle arena</li>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 d-flex align-items-stretch">
+
+                <div class="col-sm-4 card-wrap">
                     <div class="card mt-3">
                         <img class="card-img-top" th:src="@{/img/board.jpeg}" alt="Card image cap">
                         <div class="card-body">
-                            <li class="list-group-item">- Interact with other players on the message board</li>
-                            <br>
-                            <br>
+
+                            <li class="list-group-item">- Battle Other Players</li>
+
+                            <li class="list-group-item">- Interact On The Message Board</li>
+
                         </div>
                     </div>
                 </div>
@@ -184,6 +208,22 @@
 </div>
 
 <th:block th:replace="~{partials/footer.html :: footer}"></th:block>
+
+
+<script>
+    const cards = document.querySelectorAll('.card');
+    let maxHeight = 0;
+
+    cards.forEach(card => {
+        if (card.offsetHeight > maxHeight) {
+            maxHeight = card.offsetHeight;
+        }
+    });
+
+    cards.forEach(card => {
+        card.style.height = `${maxHeight}px`;
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
